@@ -1,27 +1,5497 @@
 [
-  {"id":"s01","name":"The Reading Room","area":"Mananchira","pricePerHour":250,"capacity":8,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Study tables","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.9,"photoUrl":"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"],"description":"A sunlit, book-lined room tucked beside the heart of town. Settle in for a focused study session, a small reading circle, or a quiet afternoon with your ideas.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm"],"Sunday":["9am-5pm"]},"verified":true,"lastUpdated":"2026-10-21","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sat 10am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.9},"resources":{"desks":8,"whiteboard":true,"projector":false,"powerSockets":12,"printerAccess":true,"powerBackup":true,"soundproof":false,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"50 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.8},"nearby":[{"type":"restaurant","name":"Paragon Restaurant","walkingMinutes":4,"distanceMeters":300},{"type":"cafe","name":"Kozhikode Coffee House","walkingMinutes":3,"distanceMeters":220},{"type":"washroom","name":"Mananchira public washroom","walkingMinutes":2,"distanceMeters":150},{"type":"atm","name":"Federal Bank ATM","walkingMinutes":3,"distanceMeters":210},{"type":"print shop","name":"City Prints","walkingMinutes":5,"distanceMeters":380},{"type":"bus stop","name":"Mananchira Bus Stop","walkingMinutes":2,"distanceMeters":160}]},
-  {"id":"s02","name":"Coconut Grove Studio","area":"Nadakkavu","pricePerHour":600,"capacity":18,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Meeting-style","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"],"description":"A bright, modern studio with room to spread out. Bring a team together for a workshop, planning day, or a meeting that deserves more than a video call.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm","2pm-6pm"],"Wednesday":["9am-1pm"],"Thursday":["9am-1pm","2pm-6pm"],"Friday":["9am-1pm"],"Saturday":["10am-2pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-20","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sun 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.8},"resources":{"desks":18,"whiteboard":true,"projector":true,"powerSockets":24,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"100 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.8},"nearby":[{"type":"restaurant","name":"Hotel Paragon","walkingMinutes":4,"distanceMeters":310},{"type":"cafe","name":"Café Coffee Day","walkingMinutes":3,"distanceMeters":240},{"type":"washroom","name":"Nadakkavu public washroom","walkingMinutes":5,"distanceMeters":400},{"type":"atm","name":"SBI ATM","walkingMinutes":2,"distanceMeters":160},{"type":"pharmacy","name":"MedPlus Nadakkavu","walkingMinutes":4,"distanceMeters":290},{"type":"bus stop","name":"Nadakkavu Bus Stop","walkingMinutes":2,"distanceMeters":170}]},
-  {"id":"s03","name":"Seaside Thinkspace","area":"West Hill","pricePerHour":450,"capacity":12,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":false},"seatingType":"Workshop tables","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.7,"photoUrl":"https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"],"description":"A calm upstairs room with sea breezes and generous tables. Good for small workshops, collaborative study, and the kind of conversations that need a little space.","availability":{"Monday":["10am-2pm"],"Tuesday":["10am-2pm"],"Wednesday":["10am-2pm"],"Thursday":["10am-2pm"],"Friday":["10am-2pm"],"Saturday":["9am-1pm","2pm-6pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-19","safety":{"cctv":true,"wellLit":true,"securedEntry":false,"femaleHostOrStaff":true,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.5},"resources":{"desks":12,"whiteboard":true,"projector":true,"powerSockets":16,"printerAccess":false,"powerBackup":true,"soundproof":false,"lockers":false,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"75 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":false,"cleanlinessRating":4.6},"nearby":[{"type":"restaurant","name":"Sea Queen Restaurant","walkingMinutes":5,"distanceMeters":400},{"type":"cafe","name":"Brewberrys Café","walkingMinutes":4,"distanceMeters":320},{"type":"washroom","name":"West Hill public washroom","walkingMinutes":4,"distanceMeters":300},{"type":"atm","name":"Canara Bank ATM","walkingMinutes":3,"distanceMeters":210},{"type":"print shop","name":"Quick Copy Centre","walkingMinutes":6,"distanceMeters":450},{"type":"bus stop","name":"West Hill Bus Stop","walkingMinutes":3,"distanceMeters":230}]},
-  {"id":"s04","name":"The Green Verandah","area":"Vellimadukunnu","pricePerHour":350,"capacity":10,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Verandah lounge","atmosphere":"outdoor","indoorOutdoor":"outdoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"],"description":"A leafy, covered verandah where the afternoon light does half the hosting. Gather your group for a slow brainstorm, a book club, or a little fresh-air focus.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm"],"Sunday":["9am-5pm"]},"verified":true,"lastUpdated":"2026-10-22","safety":{"cctv":false,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sat 9am-1pm","busyArea":false,"nearPublicTransport":false,"ownerIdVerified":true,"safetyRating":4.7},"resources":{"desks":10,"whiteboard":true,"projector":false,"powerSockets":8,"printerAccess":false,"powerBackup":false,"soundproof":false,"lockers":false,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"40 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.7},"nearby":[{"type":"restaurant","name":"Malabar Kitchen","walkingMinutes":4,"distanceMeters":300},{"type":"cafe","name":"Garden Brew Café","walkingMinutes":3,"distanceMeters":230},{"type":"washroom","name":"Vellimadukunnu public washroom","walkingMinutes":6,"distanceMeters":450},{"type":"atm","name":"South Indian Bank ATM","walkingMinutes":5,"distanceMeters":380},{"type":"pharmacy","name":"Care Pharmacy","walkingMinutes":4,"distanceMeters":320},{"type":"bus stop","name":"Vellimadukunnu Stop","walkingMinutes":7,"distanceMeters":520}]},
-  {"id":"s05","name":"Paper & Pine Workshop","area":"Palayam","pricePerHour":500,"capacity":16,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Workshop tables","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.9,"photoUrl":"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"],"description":"A thoughtfully set-up workshop room made for sharing ideas and making things together. Everything is in reach, with a print shop and good coffee just outside.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm","2pm-6pm"],"Wednesday":["9am-1pm","2pm-6pm"],"Thursday":["9am-1pm"],"Friday":["9am-1pm"],"Saturday":["10am-2pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-18","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":false,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.6},"resources":{"desks":16,"whiteboard":true,"projector":true,"powerSockets":20,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"100 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.9},"nearby":[{"type":"restaurant","name":"Sagar Restaurant","walkingMinutes":3,"distanceMeters":210},{"type":"cafe","name":"The Coffee Bean","walkingMinutes":4,"distanceMeters":310},{"type":"washroom","name":"Palayam public washroom","walkingMinutes":3,"distanceMeters":240},{"type":"atm","name":"Axis Bank ATM","walkingMinutes":2,"distanceMeters":140},{"type":"print shop","name":"Palayam Print House","walkingMinutes":1,"distanceMeters":80},{"type":"bus stop","name":"Palayam Bus Stand","walkingMinutes":3,"distanceMeters":220}]},
-  {"id":"s06","name":"Monsoon Meeting Loft","area":"Eranhipalam","pricePerHour":750,"capacity":20,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Meeting-style","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"],"description":"A polished, rain-friendly loft for focused team time. The fast Wi-Fi, flexible meeting layout, and proper presentation kit make it easy to get straight to work.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm","2pm-6pm"],"Wednesday":["9am-1pm","2pm-6pm"],"Thursday":["9am-1pm","2pm-6pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm"],"Sunday":[]},"verified":true,"lastUpdated":"2026-10-20","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sat 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.9},"resources":{"desks":20,"whiteboard":true,"projector":true,"powerSockets":28,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"150 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.8},"nearby":[{"type":"restaurant","name":"M-Grill","walkingMinutes":5,"distanceMeters":390},{"type":"cafe","name":"Café 17","walkingMinutes":3,"distanceMeters":230},{"type":"washroom","name":"Eranhipalam public washroom","walkingMinutes":6,"distanceMeters":470},{"type":"atm","name":"ICICI ATM","walkingMinutes":2,"distanceMeters":150},{"type":"pharmacy","name":"Wellcare Pharmacy","walkingMinutes":3,"distanceMeters":220},{"type":"bus stop","name":"Eranhipalam Bus Stop","walkingMinutes":2,"distanceMeters":170}]},
-  {"id":"s07","name":"Blue Door Study Nook","area":"Kallai","pricePerHour":180,"capacity":6,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":false,"stepFreeAccess":false},"seatingType":"Study tables","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.6,"photoUrl":"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"],"description":"An easy-on-the-budget nook for independent study, exam prep, or a quiet catch-up. Bring your notes, find your seat, and let the afternoon settle in.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm","2pm-6pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-17","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Mon-Fri 2pm-4pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.7},"resources":{"desks":6,"whiteboard":false,"projector":false,"powerSockets":10,"printerAccess":true,"powerBackup":false,"soundproof":false,"lockers":true,"drinkingWater":true,"teaCoffee":false,"wifiSpeed":"40 Mbps"},"washroom":{"onSite":true,"separateForWomen":false,"accessible":false,"cleanlinessRating":4.4},"nearby":[{"type":"restaurant","name":"Kallai Meals Corner","walkingMinutes":3,"distanceMeters":210},{"type":"cafe","name":"Daily Grind Café","walkingMinutes":5,"distanceMeters":380},{"type":"washroom","name":"Kallai public washroom","walkingMinutes":3,"distanceMeters":220},{"type":"atm","name":"Bank of Baroda ATM","walkingMinutes":3,"distanceMeters":200},{"type":"print shop","name":"Kallai Copy Point","walkingMinutes":2,"distanceMeters":140},{"type":"bus stop","name":"Kallai Bus Stop","walkingMinutes":3,"distanceMeters":240}]},
-  {"id":"s08","name":"Harbour Light Hall","area":"Beypore","pricePerHour":900,"capacity":45,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Lecture rows","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.7,"photoUrl":"https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"],"description":"A breezy, generous hall near the harbour, ready for talks, classes, and celebrations. A full presentation setup and easy entry make hosting feel simple.","availability":{"Monday":["9am-1pm"],"Tuesday":["9am-1pm","2pm-6pm"],"Wednesday":["9am-1pm"],"Thursday":["9am-1pm","2pm-6pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm","2pm-6pm"],"Sunday":["9am-1pm","2pm-6pm"]},"verified":true,"lastUpdated":"2026-10-22","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.7},"resources":{"desks":45,"whiteboard":true,"projector":true,"powerSockets":32,"printerAccess":false,"powerBackup":true,"soundproof":false,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"100 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.7},"nearby":[{"type":"restaurant","name":"Beypore Coast Kitchen","walkingMinutes":4,"distanceMeters":310},{"type":"cafe","name":"Harbour Brew","walkingMinutes":3,"distanceMeters":220},{"type":"washroom","name":"Beypore beach public washroom","walkingMinutes":5,"distanceMeters":400},{"type":"atm","name":"Kerala Bank ATM","walkingMinutes":4,"distanceMeters":300},{"type":"pharmacy","name":"Beypore Medicals","walkingMinutes":5,"distanceMeters":380},{"type":"bus stop","name":"Beypore Bus Stand","walkingMinutes":4,"distanceMeters":320}]},
-  {"id":"s09","name":"Citrus Courtyard","area":"Chevayur","pricePerHour":400,"capacity":14,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Courtyard tables","atmosphere":"outdoor","indoorOutdoor":"outdoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85"],"description":"A sunny courtyard with just enough shade and plenty of room for conversation. Gather for a casual workshop, a creative meetup, or a fresh-air study group.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm"],"Wednesday":["9am-1pm","2pm-6pm"],"Thursday":["9am-1pm"],"Friday":["9am-1pm","2pm-6pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-21","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sun 9am-1pm","busyArea":true,"nearPublicTransport":false,"ownerIdVerified":true,"safetyRating":4.8},"resources":{"desks":14,"whiteboard":true,"projector":true,"powerSockets":10,"printerAccess":false,"powerBackup":true,"soundproof":false,"lockers":false,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"60 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.9},"nearby":[{"type":"restaurant","name":"Chevayur Kitchen","walkingMinutes":4,"distanceMeters":320},{"type":"cafe","name":"Citrus Cup Café","walkingMinutes":2,"distanceMeters":150},{"type":"washroom","name":"Chevayur public washroom","walkingMinutes":5,"distanceMeters":390},{"type":"atm","name":"HDFC ATM","walkingMinutes":4,"distanceMeters":300},{"type":"stationery","name":"Bright Pages Stationery","walkingMinutes":5,"distanceMeters":350},{"type":"bus stop","name":"Chevayur Junction Stop","walkingMinutes":6,"distanceMeters":450}]},
-  {"id":"s10","name":"The Corner Classroom","area":"Thondayad","pricePerHour":300,"capacity":20,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Lecture rows","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.7,"photoUrl":"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85"],"description":"A welcoming learning room with a proper board, projector, and flexible chairs. Great for a peer-led class, study circle, or skills-sharing afternoon.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-19","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Wed 2pm-6pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.6},"resources":{"desks":20,"whiteboard":true,"projector":true,"powerSockets":20,"printerAccess":true,"powerBackup":true,"soundproof":false,"lockers":true,"drinkingWater":true,"teaCoffee":false,"wifiSpeed":"80 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.7},"nearby":[{"type":"restaurant","name":"Thondayad Food Court","walkingMinutes":4,"distanceMeters":290},{"type":"cafe","name":"Mug & Leaf Café","walkingMinutes":5,"distanceMeters":370},{"type":"washroom","name":"Thondayad public washroom","walkingMinutes":4,"distanceMeters":300},{"type":"atm","name":"SBI ATM Thondayad","walkingMinutes":2,"distanceMeters":150},{"type":"print shop","name":"Metro Digital Prints","walkingMinutes":3,"distanceMeters":220},{"type":"bus stop","name":"Thondayad Junction","walkingMinutes":3,"distanceMeters":210}]},
-  {"id":"s11","name":"Palm & Chalk Rooftop","area":"Puthiyara","pricePerHour":550,"capacity":22,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":false},"seatingType":"Rooftop lounge","atmosphere":"outdoor","indoorOutdoor":"outdoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"],"description":"A rooftop hideaway with room for a lively gathering under the open sky. Best for golden-hour talks, community meetups, and ideas that need fresh air.","availability":{"Monday":["4pm-9pm"],"Tuesday":["4pm-9pm"],"Wednesday":["4pm-9pm"],"Thursday":["4pm-9pm"],"Friday":["4pm-9pm"],"Saturday":["9am-1pm","4pm-9pm"],"Sunday":["9am-1pm","4pm-9pm"]},"verified":true,"lastUpdated":"2026-10-22","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":false,"womenOnlyHours":"Sun 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.5},"resources":{"desks":22,"whiteboard":true,"projector":false,"powerSockets":16,"printerAccess":false,"powerBackup":true,"soundproof":false,"lockers":false,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"60 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":false,"cleanlinessRating":4.6},"nearby":[{"type":"restaurant","name":"Puthiyara Spice House","walkingMinutes":3,"distanceMeters":210},{"type":"cafe","name":"Rooftop Roast Café","walkingMinutes":4,"distanceMeters":300},{"type":"washroom","name":"Puthiyara public washroom","walkingMinutes":5,"distanceMeters":380},{"type":"atm","name":"Federal Bank ATM","walkingMinutes":3,"distanceMeters":200},{"type":"pharmacy","name":"Health First Pharmacy","walkingMinutes":4,"distanceMeters":290},{"type":"bus stop","name":"Puthiyara Bus Stop","walkingMinutes":2,"distanceMeters":140}]},
-  {"id":"s12","name":"Little Lantern Cafe Room","area":"Mavoor Road","pricePerHour":420,"capacity":10,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Cafe tables","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.7,"photoUrl":"https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"],"description":"A tucked-away cafe room with coffee on hand and a friendly hum beyond the door. A lovely change of scene for a small team, club, or creative catch-up.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm","2pm-6pm"],"Wednesday":["9am-1pm","2pm-6pm"],"Thursday":["9am-1pm","2pm-6pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-16","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.7},"resources":{"desks":10,"whiteboard":true,"projector":false,"powerSockets":12,"printerAccess":false,"powerBackup":false,"soundproof":false,"lockers":false,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"50 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.5},"nearby":[{"type":"restaurant","name":"Mavoor Meals","walkingMinutes":4,"distanceMeters":310},{"type":"cafe","name":"The Daily Cup","walkingMinutes":1,"distanceMeters":70},{"type":"washroom","name":"Mavoor Road public washroom","walkingMinutes":5,"distanceMeters":380},{"type":"atm","name":"Axis Bank ATM","walkingMinutes":2,"distanceMeters":130},{"type":"print shop","name":"Quick Print Mavoor","walkingMinutes":4,"distanceMeters":300},{"type":"bus stop","name":"Mavoor Road Bus Stop","walkingMinutes":2,"distanceMeters":150}]},
-  {"id":"s13","name":"Malabar Makers Room","area":"Kottooli","pricePerHour":480,"capacity":15,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Workshop tables","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"],"description":"A maker-minded room with flexible tables, dependable kit, and a host who knows the neighbourhood. Set up a hands-on session, a class, or a team jam.","availability":{"Monday":["9am-1pm"],"Tuesday":["9am-1pm","2pm-6pm"],"Wednesday":["9am-1pm"],"Thursday":["9am-1pm","2pm-6pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-21","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sat 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.9},"resources":{"desks":15,"whiteboard":true,"projector":true,"powerSockets":20,"printerAccess":true,"powerBackup":true,"soundproof":false,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"100 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.9},"nearby":[{"type":"restaurant","name":"Kottooli Kitchen","walkingMinutes":3,"distanceMeters":220},{"type":"cafe","name":"Craft & Coffee","walkingMinutes":4,"distanceMeters":310},{"type":"washroom","name":"Kottooli public washroom","walkingMinutes":5,"distanceMeters":380},{"type":"atm","name":"Canara Bank ATM","walkingMinutes":2,"distanceMeters":150},{"type":"stationery","name":"Page & Pen Stationery","walkingMinutes":4,"distanceMeters":320},{"type":"bus stop","name":"Kottooli Junction Stop","walkingMinutes":3,"distanceMeters":200}]},
-  {"id":"s14","name":"Quiet Hours Study Hall","area":"Medical College","pricePerHour":220,"capacity":24,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Study tables","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.7,"photoUrl":"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"],"description":"An affordable, spacious study hall where quiet is part of the welcome. Spread out with your books, meet a study partner, or stay for a long afternoon of focus.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm","2pm-6pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-18","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Mon-Fri 2pm-6pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.8},"resources":{"desks":24,"whiteboard":true,"projector":false,"powerSockets":30,"printerAccess":true,"powerBackup":true,"soundproof":false,"lockers":true,"drinkingWater":true,"teaCoffee":false,"wifiSpeed":"75 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.8},"nearby":[{"type":"restaurant","name":"College Canteen","walkingMinutes":3,"distanceMeters":200},{"type":"cafe","name":"Campus Brew","walkingMinutes":4,"distanceMeters":300},{"type":"washroom","name":"Medical College public washroom","walkingMinutes":3,"distanceMeters":210},{"type":"atm","name":"SBI ATM Medical College","walkingMinutes":2,"distanceMeters":140},{"type":"print shop","name":"Student Copy Centre","walkingMinutes":2,"distanceMeters":120},{"type":"bus stop","name":"Medical College Bus Stop","walkingMinutes":3,"distanceMeters":220}]},
-  {"id":"s15","name":"The Assembly Room","area":"Govindapuram","pricePerHour":650,"capacity":30,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Meeting-style","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"],"description":"A roomy, comfortable gathering place for team sessions, community talks, and shared plans. Practical meeting tools come with a warm, un-stuffy feel.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm"],"Wednesday":["9am-1pm","2pm-6pm"],"Thursday":["9am-1pm"],"Friday":["9am-1pm","2pm-6pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-20","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.8},"resources":{"desks":30,"whiteboard":true,"projector":true,"powerSockets":30,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"120 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.8},"nearby":[{"type":"restaurant","name":"Govindapuram Lunch House","walkingMinutes":4,"distanceMeters":290},{"type":"cafe","name":"Urban Bean Café","walkingMinutes":3,"distanceMeters":230},{"type":"washroom","name":"Govindapuram public washroom","walkingMinutes":5,"distanceMeters":390},{"type":"atm","name":"HDFC ATM","walkingMinutes":2,"distanceMeters":150},{"type":"pharmacy","name":"Wellness Pharmacy","walkingMinutes":4,"distanceMeters":300},{"type":"bus stop","name":"Govindapuram Bus Stop","walkingMinutes":3,"distanceMeters":220}]},
-  {"id":"s16","name":"The Mango Tree Room","area":"Feroke","pricePerHour":320,"capacity":12,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Garden tables","atmosphere":"quiet","indoorOutdoor":"outdoor","rating":4.6,"photoUrl":"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"],"description":"A peaceful garden room under the mango trees, with shade, water, and space to breathe. Host a book club, a small class, or an unhurried study group.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm","2pm-6pm"]},"verified":true,"lastUpdated":"2026-10-17","safety":{"cctv":false,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sun 9am-1pm","busyArea":false,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.5},"resources":{"desks":12,"whiteboard":true,"projector":false,"powerSockets":8,"printerAccess":false,"powerBackup":false,"soundproof":false,"lockers":false,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"40 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.7},"nearby":[{"type":"restaurant","name":"Feroke Family Kitchen","walkingMinutes":4,"distanceMeters":300},{"type":"cafe","name":"Riverbend Café","walkingMinutes":5,"distanceMeters":380},{"type":"washroom","name":"Feroke public washroom","walkingMinutes":5,"distanceMeters":400},{"type":"atm","name":"Kerala Gramin Bank ATM","walkingMinutes":3,"distanceMeters":210},{"type":"stationery","name":"Feroke Paper House","walkingMinutes":4,"distanceMeters":310},{"type":"bus stop","name":"Feroke Bus Stand","walkingMinutes":4,"distanceMeters":300}]},
-  {"id":"s17","name":"North Beach Commons","area":"Vellayil","pricePerHour":700,"capacity":25,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Meeting-style","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.9,"photoUrl":"https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"],"description":"A comfortable, well-equipped meeting space near the coast. Fast Wi-Fi, power that stays on, and thoughtful hosting make full-team days feel easy.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm","2pm-6pm"],"Wednesday":["9am-1pm"],"Thursday":["9am-1pm","2pm-6pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-22","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Fri 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.9},"resources":{"desks":25,"whiteboard":true,"projector":true,"powerSockets":30,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"150 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.9},"nearby":[{"type":"restaurant","name":"Vellayil Seafood Kitchen","walkingMinutes":4,"distanceMeters":300},{"type":"cafe","name":"North Shore Coffee","walkingMinutes":2,"distanceMeters":140},{"type":"washroom","name":"Vellayil beach public washroom","walkingMinutes":5,"distanceMeters":370},{"type":"atm","name":"South Indian Bank ATM","walkingMinutes":3,"distanceMeters":210},{"type":"pharmacy","name":"Beach Road Pharmacy","walkingMinutes":5,"distanceMeters":390},{"type":"bus stop","name":"Vellayil Bus Stop","walkingMinutes":3,"distanceMeters":230}]},
-  {"id":"s18","name":"Sandalwood Seminar Room","area":"Nadakkavu","pricePerHour":800,"capacity":40,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Lecture rows","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"],"description":"A calm seminar room with clear sightlines, a bright projector, and plenty of seats. Bring a lecture, a panel, or an all-hands session together in one place.","availability":{"Monday":["9am-1pm"],"Tuesday":["9am-1pm"],"Wednesday":["9am-1pm"],"Thursday":["9am-1pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm"],"Sunday":[]},"verified":true,"lastUpdated":"2026-10-19","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.8},"resources":{"desks":40,"whiteboard":true,"projector":true,"powerSockets":36,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"120 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.8},"nearby":[{"type":"restaurant","name":"Nadakkavu Lunch Room","walkingMinutes":3,"distanceMeters":220},{"type":"cafe","name":"Cafe Corner Nadakkavu","walkingMinutes":4,"distanceMeters":310},{"type":"washroom","name":"Nadakkavu public washroom","walkingMinutes":5,"distanceMeters":380},{"type":"atm","name":"SBI ATM","walkingMinutes":2,"distanceMeters":150},{"type":"print shop","name":"Copy Corner","walkingMinutes":3,"distanceMeters":210},{"type":"bus stop","name":"Nadakkavu Bus Stop","walkingMinutes":2,"distanceMeters":170}]},
-  {"id":"s19","name":"Rain Tree Reading Nook","area":"Kozhikode Beach","pricePerHour":280,"capacity":7,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":false,"stepFreeAccess":true},"seatingType":"Lounge seating","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"],"description":"A gentle little reading nook close to the beach, with soft chairs, good light, and no pressure to rush. Settle in to study or share a quiet conversation.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-21","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sat 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.9},"resources":{"desks":7,"whiteboard":false,"projector":false,"powerSockets":10,"printerAccess":false,"powerBackup":true,"soundproof":false,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"60 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.9},"nearby":[{"type":"restaurant","name":"Beachside Meals","walkingMinutes":3,"distanceMeters":210},{"type":"cafe","name":"Sea Breeze Coffee","walkingMinutes":2,"distanceMeters":140},{"type":"washroom","name":"Kozhikode Beach public washroom","walkingMinutes":3,"distanceMeters":230},{"type":"atm","name":"Federal Bank ATM","walkingMinutes":4,"distanceMeters":290},{"type":"pharmacy","name":"Beach Medicals","walkingMinutes":5,"distanceMeters":380},{"type":"bus stop","name":"Beach Road Bus Stop","walkingMinutes":3,"distanceMeters":220}]},
-  {"id":"s20","name":"Common Ground Cafe Corner","area":"SM Street","pricePerHour":350,"capacity":8,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Cafe tables","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.6,"photoUrl":"https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"],"description":"A bright cafe corner with just the right amount of buzz. Meet a friend, host a tiny planning session, or find a new spot for your everyday work.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm","2pm-6pm"],"Wednesday":["9am-1pm","2pm-6pm"],"Thursday":["9am-1pm","2pm-6pm"],"Friday":["9am-1pm","2pm-6pm"],"Saturday":["9am-1pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-18","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.7},"resources":{"desks":8,"whiteboard":true,"projector":false,"powerSockets":10,"printerAccess":false,"powerBackup":false,"soundproof":false,"lockers":false,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"50 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.6},"nearby":[{"type":"restaurant","name":"Salkara SM Street","walkingMinutes":3,"distanceMeters":200},{"type":"cafe","name":"Common Ground Coffee","walkingMinutes":0,"distanceMeters":20},{"type":"washroom","name":"SM Street public washroom","walkingMinutes":4,"distanceMeters":300},{"type":"atm","name":"Canara Bank ATM","walkingMinutes":2,"distanceMeters":130},{"type":"print shop","name":"City Copy House","walkingMinutes":3,"distanceMeters":210},{"type":"bus stop","name":"SM Street Bus Stop","walkingMinutes":3,"distanceMeters":220}]},
-  {"id":"s21","name":"The Blue Bench Meeting Room","area":"Karanthur","pricePerHour":520,"capacity":16,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Meeting-style","atmosphere":"quiet","indoorOutdoor":"indoor","rating":4.7,"photoUrl":"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"],"description":"A focused, no-fuss room with a proper meeting table and a reliable setup. Make space for a planning session, mentoring circle, or a small team off-site.","availability":{"Monday":["9am-1pm","2pm-6pm"],"Tuesday":["9am-1pm"],"Wednesday":["9am-1pm","2pm-6pm"],"Thursday":["9am-1pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm"],"Sunday":[]},"verified":true,"lastUpdated":"2026-10-20","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":false,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.6},"resources":{"desks":16,"whiteboard":true,"projector":true,"powerSockets":20,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"100 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.7},"nearby":[{"type":"restaurant","name":"Karanthur Lunch House","walkingMinutes":4,"distanceMeters":320},{"type":"cafe","name":"Blue Bench Café","walkingMinutes":3,"distanceMeters":220},{"type":"washroom","name":"Karanthur public washroom","walkingMinutes":5,"distanceMeters":370},{"type":"atm","name":"Kerala Bank ATM","walkingMinutes":3,"distanceMeters":230},{"type":"pharmacy","name":"Karanthur Pharmacy","walkingMinutes":4,"distanceMeters":310},{"type":"bus stop","name":"Karanthur Bus Stop","walkingMinutes":3,"distanceMeters":220}]},
-  {"id":"s22","name":"Cloud Nine Lecture Room","area":"Kuttichira","pricePerHour":850,"capacity":55,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Lecture rows","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"],"description":"A spacious lecture room for talks worth travelling to. Bright projection, accessible entry, and a welcoming neighbourhood make larger gatherings feel personal.","availability":{"Monday":["9am-1pm"],"Tuesday":["9am-1pm"],"Wednesday":["9am-1pm","2pm-6pm"],"Thursday":["9am-1pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm","2pm-6pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-22","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":null,"busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.8},"resources":{"desks":55,"whiteboard":true,"projector":true,"powerSockets":40,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"150 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.8},"nearby":[{"type":"restaurant","name":"Kuttichira Kitchen","walkingMinutes":3,"distanceMeters":210},{"type":"cafe","name":"Old Town Coffee","walkingMinutes":4,"distanceMeters":300},{"type":"washroom","name":"Kuttichira public washroom","walkingMinutes":4,"distanceMeters":290},{"type":"atm","name":"SBI ATM Kuttichira","walkingMinutes":2,"distanceMeters":140},{"type":"stationery","name":"Town Pages Stationery","walkingMinutes":5,"distanceMeters":380},{"type":"bus stop","name":"Kuttichira Bus Stop","walkingMinutes":3,"distanceMeters":230}]},
-  {"id":"s23","name":"Little Fern Community Room","area":"Elathur","pricePerHour":300,"capacity":14,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Community tables","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.7,"photoUrl":"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"],"description":"A friendly neighbourhood room where local groups meet, learn, and make plans. Flexible furniture, a helpful host, and a little tea make it easy to settle in.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm","2pm-6pm"],"Sunday":["9am-1pm"]},"verified":true,"lastUpdated":"2026-10-19","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sat 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.8},"resources":{"desks":14,"whiteboard":true,"projector":false,"powerSockets":14,"printerAccess":true,"powerBackup":true,"soundproof":false,"lockers":false,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"60 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.8},"nearby":[{"type":"restaurant","name":"Elathur Family Restaurant","walkingMinutes":4,"distanceMeters":300},{"type":"cafe","name":"Fern & Foam Café","walkingMinutes":3,"distanceMeters":220},{"type":"washroom","name":"Elathur public washroom","walkingMinutes":5,"distanceMeters":370},{"type":"atm","name":"Canara Bank ATM","walkingMinutes":3,"distanceMeters":210},{"type":"print shop","name":"Elathur Quick Prints","walkingMinutes":5,"distanceMeters":380},{"type":"bus stop","name":"Elathur Bus Stop","walkingMinutes":3,"distanceMeters":230}]},
-  {"id":"s24","name":"The Study Garden","area":"Kozhikode Beach","pricePerHour":200,"capacity":10,"amenities":{"wifi":true,"charging":true,"ac":false,"fans":true,"projector":false,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Garden tables","atmosphere":"quiet","indoorOutdoor":"outdoor","rating":4.8,"photoUrl":"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85"],"description":"An easygoing garden study spot close to the sea. Affordable, quiet, and surrounded by leafy shade—just right for a long afternoon with books and friends.","availability":{"Monday":["2pm-6pm"],"Tuesday":["2pm-6pm"],"Wednesday":["2pm-6pm"],"Thursday":["2pm-6pm"],"Friday":["2pm-6pm"],"Saturday":["9am-1pm","2pm-6pm"],"Sunday":["9am-1pm","2pm-6pm"]},"verified":true,"lastUpdated":"2026-10-21","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sat-Sun 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":4.9},"resources":{"desks":10,"whiteboard":true,"projector":false,"powerSockets":12,"printerAccess":true,"powerBackup":true,"soundproof":false,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"75 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":4.9},"nearby":[{"type":"restaurant","name":"Beachside Meals","walkingMinutes":4,"distanceMeters":300},{"type":"cafe","name":"Sea Breeze Coffee","walkingMinutes":3,"distanceMeters":210},{"type":"washroom","name":"Beach public washroom","walkingMinutes":2,"distanceMeters":150},{"type":"atm","name":"Federal Bank ATM","walkingMinutes":4,"distanceMeters":290},{"type":"print shop","name":"Beach Road Prints","walkingMinutes":5,"distanceMeters":380},{"type":"bus stop","name":"Beach Road Bus Stop","walkingMinutes":3,"distanceMeters":220}]},
-  {"id":"s25","name":"Lanternlight Event Room","area":"Palazhi","pricePerHour":1000,"capacity":60,"amenities":{"wifi":true,"charging":true,"ac":true,"fans":true,"projector":true,"whiteboard":true,"stepFreeAccess":true},"seatingType":"Event hall","atmosphere":"lively","indoorOutdoor":"indoor","rating":4.9,"photoUrl":"https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85","gallery":["https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"],"description":"A beautiful, flexible hall for the big idea, the community gathering, or the celebration you've been planning. Full AV, kind hosting, and space to make it yours.","availability":{"Monday":["9am-1pm"],"Tuesday":["9am-1pm"],"Wednesday":["9am-1pm"],"Thursday":["9am-1pm"],"Friday":["9am-1pm"],"Saturday":["9am-1pm","2pm-6pm"],"Sunday":["9am-1pm","2pm-6pm"]},"verified":true,"lastUpdated":"2026-10-22","safety":{"cctv":true,"wellLit":true,"securedEntry":true,"femaleHostOrStaff":true,"womenOnlyHours":"Sun 9am-1pm","busyArea":true,"nearPublicTransport":true,"ownerIdVerified":true,"safetyRating":5},"resources":{"desks":60,"whiteboard":true,"projector":true,"powerSockets":48,"printerAccess":true,"powerBackup":true,"soundproof":true,"lockers":true,"drinkingWater":true,"teaCoffee":true,"wifiSpeed":"200 Mbps"},"washroom":{"onSite":true,"separateForWomen":true,"accessible":true,"cleanlinessRating":5},"nearby":[{"type":"restaurant","name":"Palazhi Table","walkingMinutes":3,"distanceMeters":220},{"type":"cafe","name":"Lantern Café","walkingMinutes":2,"distanceMeters":140},{"type":"washroom","name":"Palazhi public washroom","walkingMinutes":5,"distanceMeters":380},{"type":"atm","name":"HDFC ATM Palazhi","walkingMinutes":3,"distanceMeters":210},{"type":"pharmacy","name":"Palazhi Pharmacy","walkingMinutes":4,"distanceMeters":300},{"type":"bus stop","name":"Palazhi Junction Stop","walkingMinutes":4,"distanceMeters":290}]}
+  {
+    "id": "s01",
+    "name": "The Reading Room",
+    "area": "Mananchira",
+    "pricePerHour": 250,
+    "capacity": 8,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Study tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.9,
+    "photoUrl": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A sunlit, book-lined room tucked beside the heart of town. Settle in for a focused study session, a small reading circle, or a quiet afternoon with your ideas.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-5pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-21",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat 10am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.9,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 8,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 12,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "50 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Paragon Restaurant",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Kozhikode Coffee House",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Mananchira public washroom",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Federal Bank ATM",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "City Prints",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Mananchira Bus Stop",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Mananchira",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s02",
+    "name": "Coconut Grove Studio",
+    "area": "Nadakkavu",
+    "pricePerHour": 600,
+    "capacity": 18,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Meeting-style",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A bright, modern studio with room to spread out. Bring a team together for a workshop, planning day, or a meeting that deserves more than a video call.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "10am-2pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-20",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sun 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.8,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 18,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 24,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "100 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Hotel Paragon",
+        "walkingMinutes": 4,
+        "distanceMeters": 310
+      },
+      {
+        "type": "cafe",
+        "name": "Café Coffee Day",
+        "walkingMinutes": 3,
+        "distanceMeters": 240
+      },
+      {
+        "type": "washroom",
+        "name": "Nadakkavu public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 400
+      },
+      {
+        "type": "atm",
+        "name": "SBI ATM",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      },
+      {
+        "type": "pharmacy",
+        "name": "MedPlus Nadakkavu",
+        "walkingMinutes": 4,
+        "distanceMeters": 290
+      },
+      {
+        "type": "bus stop",
+        "name": "Nadakkavu Bus Stop",
+        "walkingMinutes": 2,
+        "distanceMeters": 170
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Nadakkavu",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s03",
+    "name": "Seaside Thinkspace",
+    "area": "West Hill",
+    "pricePerHour": 450,
+    "capacity": 12,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": false
+    },
+    "seatingType": "Workshop tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.7,
+    "photoUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A calm upstairs room with sea breezes and generous tables. Good for small workshops, collaborative study, and the kind of conversations that need a little space.",
+    "availability": {
+      "Monday": [
+        "10am-2pm"
+      ],
+      "Tuesday": [
+        "10am-2pm"
+      ],
+      "Wednesday": [
+        "10am-2pm"
+      ],
+      "Thursday": [
+        "10am-2pm"
+      ],
+      "Friday": [
+        "10am-2pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-19",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": false,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.5,
+      "womenFriendly": false,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 12,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 16,
+      "printerAccess": false,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "75 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": false,
+      "cleanlinessRating": 4.6
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Sea Queen Restaurant",
+        "walkingMinutes": 5,
+        "distanceMeters": 400
+      },
+      {
+        "type": "cafe",
+        "name": "Brewberrys Café",
+        "walkingMinutes": 4,
+        "distanceMeters": 320
+      },
+      {
+        "type": "washroom",
+        "name": "West Hill public washroom",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "atm",
+        "name": "Canara Bank ATM",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Quick Copy Centre",
+        "walkingMinutes": 6,
+        "distanceMeters": 450
+      },
+      {
+        "type": "bus stop",
+        "name": "West Hill Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "West Hill",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s04",
+    "name": "The Green Verandah",
+    "area": "Vellimadukunnu",
+    "pricePerHour": 350,
+    "capacity": 10,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Verandah lounge",
+    "atmosphere": "outdoor",
+    "indoorOutdoor": "outdoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A leafy, covered verandah where the afternoon light does half the hosting. Gather your group for a slow brainstorm, a book club, or a little fresh-air focus.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-5pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-22",
+    "safety": {
+      "cctv": false,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat 9am-1pm",
+      "busyArea": false,
+      "nearPublicTransport": false,
+      "ownerIdVerified": true,
+      "safetyRating": 4.7,
+      "womenFriendly": false,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 10,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 8,
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "40 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Malabar Kitchen",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Garden Brew Café",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      },
+      {
+        "type": "washroom",
+        "name": "Vellimadukunnu public washroom",
+        "walkingMinutes": 6,
+        "distanceMeters": 450
+      },
+      {
+        "type": "atm",
+        "name": "South Indian Bank ATM",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "pharmacy",
+        "name": "Care Pharmacy",
+        "walkingMinutes": 4,
+        "distanceMeters": 320
+      },
+      {
+        "type": "bus stop",
+        "name": "Vellimadukunnu Stop",
+        "walkingMinutes": 7,
+        "distanceMeters": 520
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Vellimadukunnu",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s05",
+    "name": "Paper & Pine Workshop",
+    "area": "Palayam",
+    "pricePerHour": 500,
+    "capacity": 16,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Workshop tables",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.9,
+    "photoUrl": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A thoughtfully set-up workshop room made for sharing ideas and making things together. Everything is in reach, with a print shop and good coffee just outside.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "10am-2pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-18",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": false,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.6,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 16,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 20,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "100 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.9
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Sagar Restaurant",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "cafe",
+        "name": "The Coffee Bean",
+        "walkingMinutes": 4,
+        "distanceMeters": 310
+      },
+      {
+        "type": "washroom",
+        "name": "Palayam public washroom",
+        "walkingMinutes": 3,
+        "distanceMeters": 240
+      },
+      {
+        "type": "atm",
+        "name": "Axis Bank ATM",
+        "walkingMinutes": 2,
+        "distanceMeters": 140
+      },
+      {
+        "type": "print shop",
+        "name": "Palayam Print House",
+        "walkingMinutes": 1,
+        "distanceMeters": 80
+      },
+      {
+        "type": "bus stop",
+        "name": "Palayam Bus Stand",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Palayam",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s06",
+    "name": "Monsoon Meeting Loft",
+    "area": "Eranhipalam",
+    "pricePerHour": 750,
+    "capacity": 20,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Meeting-style",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A polished, rain-friendly loft for focused team time. The fast Wi-Fi, flexible meeting layout, and proper presentation kit make it easy to get straight to work.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": []
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-20",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.9,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 20,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 28,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "150 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "M-Grill",
+        "walkingMinutes": 5,
+        "distanceMeters": 390
+      },
+      {
+        "type": "cafe",
+        "name": "Café 17",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      },
+      {
+        "type": "washroom",
+        "name": "Eranhipalam public washroom",
+        "walkingMinutes": 6,
+        "distanceMeters": 470
+      },
+      {
+        "type": "atm",
+        "name": "ICICI ATM",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "pharmacy",
+        "name": "Wellcare Pharmacy",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "bus stop",
+        "name": "Eranhipalam Bus Stop",
+        "walkingMinutes": 2,
+        "distanceMeters": 170
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Eranhipalam",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s07",
+    "name": "Blue Door Study Nook",
+    "area": "Kallai",
+    "pricePerHour": 180,
+    "capacity": 6,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": false,
+      "stepFreeAccess": false
+    },
+    "seatingType": "Study tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.6,
+    "photoUrl": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "An easy-on-the-budget nook for independent study, exam prep, or a quiet catch-up. Bring your notes, find your seat, and let the afternoon settle in.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-17",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Mon-Fri 2pm-4pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.7,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 6,
+      "whiteboard": false,
+      "projector": false,
+      "powerSockets": 10,
+      "printerAccess": true,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": false,
+      "wifiSpeed": "40 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": false,
+      "accessible": false,
+      "cleanlinessRating": 4.4
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Kallai Meals Corner",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "cafe",
+        "name": "Daily Grind Café",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "washroom",
+        "name": "Kallai public washroom",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "atm",
+        "name": "Bank of Baroda ATM",
+        "walkingMinutes": 3,
+        "distanceMeters": 200
+      },
+      {
+        "type": "print shop",
+        "name": "Kallai Copy Point",
+        "walkingMinutes": 2,
+        "distanceMeters": 140
+      },
+      {
+        "type": "bus stop",
+        "name": "Kallai Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 240
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Kallai",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions"
+      ]
+    }
+  },
+  {
+    "id": "s08",
+    "name": "Harbour Light Hall",
+    "area": "Beypore",
+    "pricePerHour": 900,
+    "capacity": 45,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lecture rows",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.7,
+    "photoUrl": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A breezy, generous hall near the harbour, ready for talks, classes, and celebrations. A full presentation setup and easy entry make hosting feel simple.",
+    "availability": {
+      "Monday": [
+        "9am-1pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-22",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.7,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 45,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 32,
+      "printerAccess": false,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "100 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Beypore Coast Kitchen",
+        "walkingMinutes": 4,
+        "distanceMeters": 310
+      },
+      {
+        "type": "cafe",
+        "name": "Harbour Brew",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Beypore beach public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 400
+      },
+      {
+        "type": "atm",
+        "name": "Kerala Bank ATM",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "pharmacy",
+        "name": "Beypore Medicals",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Beypore Bus Stand",
+        "walkingMinutes": 4,
+        "distanceMeters": 320
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Beypore",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s09",
+    "name": "Citrus Courtyard",
+    "area": "Chevayur",
+    "pricePerHour": 400,
+    "capacity": 14,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Courtyard tables",
+    "atmosphere": "outdoor",
+    "indoorOutdoor": "outdoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A sunny courtyard with just enough shade and plenty of room for conversation. Gather for a casual workshop, a creative meetup, or a fresh-air study group.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-21",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sun 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": false,
+      "ownerIdVerified": true,
+      "safetyRating": 4.8,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 14,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 10,
+      "printerAccess": false,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "60 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.9
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Chevayur Kitchen",
+        "walkingMinutes": 4,
+        "distanceMeters": 320
+      },
+      {
+        "type": "cafe",
+        "name": "Citrus Cup Café",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "washroom",
+        "name": "Chevayur public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 390
+      },
+      {
+        "type": "atm",
+        "name": "HDFC ATM",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "stationery",
+        "name": "Bright Pages Stationery",
+        "walkingMinutes": 5,
+        "distanceMeters": 350
+      },
+      {
+        "type": "bus stop",
+        "name": "Chevayur Junction Stop",
+        "walkingMinutes": 6,
+        "distanceMeters": 450
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Chevayur",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s10",
+    "name": "The Corner Classroom",
+    "area": "Thondayad",
+    "pricePerHour": 300,
+    "capacity": 20,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lecture rows",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.7,
+    "photoUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A welcoming learning room with a proper board, projector, and flexible chairs. Great for a peer-led class, study circle, or skills-sharing afternoon.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-19",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Wed 2pm-6pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.6,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 20,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 20,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": false,
+      "wifiSpeed": "80 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Thondayad Food Court",
+        "walkingMinutes": 4,
+        "distanceMeters": 290
+      },
+      {
+        "type": "cafe",
+        "name": "Mug & Leaf Café",
+        "walkingMinutes": 5,
+        "distanceMeters": 370
+      },
+      {
+        "type": "washroom",
+        "name": "Thondayad public washroom",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "atm",
+        "name": "SBI ATM Thondayad",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "print shop",
+        "name": "Metro Digital Prints",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "bus stop",
+        "name": "Thondayad Junction",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Thondayad",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s11",
+    "name": "Palm & Chalk Rooftop",
+    "area": "Puthiyara",
+    "pricePerHour": 550,
+    "capacity": 22,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": false
+    },
+    "seatingType": "Rooftop lounge",
+    "atmosphere": "outdoor",
+    "indoorOutdoor": "outdoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A rooftop hideaway with room for a lively gathering under the open sky. Best for golden-hour talks, community meetups, and ideas that need fresh air.",
+    "availability": {
+      "Monday": [
+        "4pm-9pm"
+      ],
+      "Tuesday": [
+        "4pm-9pm"
+      ],
+      "Wednesday": [
+        "4pm-9pm"
+      ],
+      "Thursday": [
+        "4pm-9pm"
+      ],
+      "Friday": [
+        "4pm-9pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "4pm-9pm"
+      ],
+      "Sunday": [
+        "9am-1pm",
+        "4pm-9pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-22",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": false,
+      "womenOnlyHours": "Sun 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.5,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 22,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 16,
+      "printerAccess": false,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "60 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": false,
+      "cleanlinessRating": 4.6
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Puthiyara Spice House",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "cafe",
+        "name": "Rooftop Roast Café",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "washroom",
+        "name": "Puthiyara public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "atm",
+        "name": "Federal Bank ATM",
+        "walkingMinutes": 3,
+        "distanceMeters": 200
+      },
+      {
+        "type": "pharmacy",
+        "name": "Health First Pharmacy",
+        "walkingMinutes": 4,
+        "distanceMeters": 290
+      },
+      {
+        "type": "bus stop",
+        "name": "Puthiyara Bus Stop",
+        "walkingMinutes": 2,
+        "distanceMeters": 140
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Puthiyara",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s12",
+    "name": "Little Lantern Cafe Room",
+    "area": "Mavoor Road",
+    "pricePerHour": 420,
+    "capacity": 10,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Cafe tables",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.7,
+    "photoUrl": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A tucked-away cafe room with coffee on hand and a friendly hum beyond the door. A lovely change of scene for a small team, club, or creative catch-up.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-16",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.7,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 10,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 12,
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "50 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.5
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Mavoor Meals",
+        "walkingMinutes": 4,
+        "distanceMeters": 310
+      },
+      {
+        "type": "cafe",
+        "name": "The Daily Cup",
+        "walkingMinutes": 1,
+        "distanceMeters": 70
+      },
+      {
+        "type": "washroom",
+        "name": "Mavoor Road public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "atm",
+        "name": "Axis Bank ATM",
+        "walkingMinutes": 2,
+        "distanceMeters": 130
+      },
+      {
+        "type": "print shop",
+        "name": "Quick Print Mavoor",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "bus stop",
+        "name": "Mavoor Road Bus Stop",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Mavoor Road",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s13",
+    "name": "Malabar Makers Room",
+    "area": "Kottooli",
+    "pricePerHour": 480,
+    "capacity": 15,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Workshop tables",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A maker-minded room with flexible tables, dependable kit, and a host who knows the neighbourhood. Set up a hands-on session, a class, or a team jam.",
+    "availability": {
+      "Monday": [
+        "9am-1pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-21",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.9,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 15,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 20,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "100 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.9
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Kottooli Kitchen",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "cafe",
+        "name": "Craft & Coffee",
+        "walkingMinutes": 4,
+        "distanceMeters": 310
+      },
+      {
+        "type": "washroom",
+        "name": "Kottooli public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "atm",
+        "name": "Canara Bank ATM",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "stationery",
+        "name": "Page & Pen Stationery",
+        "walkingMinutes": 4,
+        "distanceMeters": 320
+      },
+      {
+        "type": "bus stop",
+        "name": "Kottooli Junction Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 200
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Kottooli",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s14",
+    "name": "Quiet Hours Study Hall",
+    "area": "Medical College",
+    "pricePerHour": 220,
+    "capacity": 24,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Study tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.7,
+    "photoUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "An affordable, spacious study hall where quiet is part of the welcome. Spread out with your books, meet a study partner, or stay for a long afternoon of focus.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-18",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Mon-Fri 2pm-6pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.8,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 24,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 30,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": false,
+      "wifiSpeed": "75 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "College Canteen",
+        "walkingMinutes": 3,
+        "distanceMeters": 200
+      },
+      {
+        "type": "cafe",
+        "name": "Campus Brew",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "washroom",
+        "name": "Medical College public washroom",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "atm",
+        "name": "SBI ATM Medical College",
+        "walkingMinutes": 2,
+        "distanceMeters": 140
+      },
+      {
+        "type": "print shop",
+        "name": "Student Copy Centre",
+        "walkingMinutes": 2,
+        "distanceMeters": 120
+      },
+      {
+        "type": "bus stop",
+        "name": "Medical College Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Medical College",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s15",
+    "name": "The Assembly Room",
+    "area": "Govindapuram",
+    "pricePerHour": 650,
+    "capacity": 30,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Meeting-style",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A roomy, comfortable gathering place for team sessions, community talks, and shared plans. Practical meeting tools come with a warm, un-stuffy feel.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-20",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.8,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 30,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 30,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "120 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Govindapuram Lunch House",
+        "walkingMinutes": 4,
+        "distanceMeters": 290
+      },
+      {
+        "type": "cafe",
+        "name": "Urban Bean Café",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      },
+      {
+        "type": "washroom",
+        "name": "Govindapuram public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 390
+      },
+      {
+        "type": "atm",
+        "name": "HDFC ATM",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "pharmacy",
+        "name": "Wellness Pharmacy",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "bus stop",
+        "name": "Govindapuram Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Govindapuram",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s16",
+    "name": "The Mango Tree Room",
+    "area": "Feroke",
+    "pricePerHour": 320,
+    "capacity": 12,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Garden tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "outdoor",
+    "rating": 4.6,
+    "photoUrl": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A peaceful garden room under the mango trees, with shade, water, and space to breathe. Host a book club, a small class, or an unhurried study group.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-17",
+    "safety": {
+      "cctv": false,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sun 9am-1pm",
+      "busyArea": false,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.5,
+      "womenFriendly": false,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 12,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 8,
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "40 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Feroke Family Kitchen",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Riverbend Café",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "washroom",
+        "name": "Feroke public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 400
+      },
+      {
+        "type": "atm",
+        "name": "Kerala Gramin Bank ATM",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "stationery",
+        "name": "Feroke Paper House",
+        "walkingMinutes": 4,
+        "distanceMeters": 310
+      },
+      {
+        "type": "bus stop",
+        "name": "Feroke Bus Stand",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Feroke",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s17",
+    "name": "North Beach Commons",
+    "area": "Vellayil",
+    "pricePerHour": 700,
+    "capacity": 25,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Meeting-style",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.9,
+    "photoUrl": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A comfortable, well-equipped meeting space near the coast. Fast Wi-Fi, power that stays on, and thoughtful hosting make full-team days feel easy.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-22",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Fri 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.9,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 25,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 30,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "150 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.9
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Vellayil Seafood Kitchen",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "North Shore Coffee",
+        "walkingMinutes": 2,
+        "distanceMeters": 140
+      },
+      {
+        "type": "washroom",
+        "name": "Vellayil beach public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 370
+      },
+      {
+        "type": "atm",
+        "name": "South Indian Bank ATM",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "pharmacy",
+        "name": "Beach Road Pharmacy",
+        "walkingMinutes": 5,
+        "distanceMeters": 390
+      },
+      {
+        "type": "bus stop",
+        "name": "Vellayil Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Vellayil",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s18",
+    "name": "Sandalwood Seminar Room",
+    "area": "Nadakkavu",
+    "pricePerHour": 800,
+    "capacity": 40,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lecture rows",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A calm seminar room with clear sightlines, a bright projector, and plenty of seats. Bring a lecture, a panel, or an all-hands session together in one place.",
+    "availability": {
+      "Monday": [
+        "9am-1pm"
+      ],
+      "Tuesday": [
+        "9am-1pm"
+      ],
+      "Wednesday": [
+        "9am-1pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": []
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-19",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.8,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 40,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 36,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "120 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Nadakkavu Lunch Room",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "cafe",
+        "name": "Cafe Corner Nadakkavu",
+        "walkingMinutes": 4,
+        "distanceMeters": 310
+      },
+      {
+        "type": "washroom",
+        "name": "Nadakkavu public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "atm",
+        "name": "SBI ATM",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "print shop",
+        "name": "Copy Corner",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "bus stop",
+        "name": "Nadakkavu Bus Stop",
+        "walkingMinutes": 2,
+        "distanceMeters": 170
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Nadakkavu",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s19",
+    "name": "Rain Tree Reading Nook",
+    "area": "Kozhikode Beach",
+    "pricePerHour": 280,
+    "capacity": 7,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": false,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lounge seating",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A gentle little reading nook close to the beach, with soft chairs, good light, and no pressure to rush. Settle in to study or share a quiet conversation.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-21",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.9,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 7,
+      "whiteboard": false,
+      "projector": false,
+      "powerSockets": 10,
+      "printerAccess": false,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "60 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.9
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Beachside Meals",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "cafe",
+        "name": "Sea Breeze Coffee",
+        "walkingMinutes": 2,
+        "distanceMeters": 140
+      },
+      {
+        "type": "washroom",
+        "name": "Kozhikode Beach public washroom",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      },
+      {
+        "type": "atm",
+        "name": "Federal Bank ATM",
+        "walkingMinutes": 4,
+        "distanceMeters": 290
+      },
+      {
+        "type": "pharmacy",
+        "name": "Beach Medicals",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Beach Road Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Kozhikode Beach",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions"
+      ]
+    }
+  },
+  {
+    "id": "s20",
+    "name": "Common Ground Cafe Corner",
+    "area": "SM Street",
+    "pricePerHour": 350,
+    "capacity": 8,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Cafe tables",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.6,
+    "photoUrl": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A bright cafe corner with just the right amount of buzz. Meet a friend, host a tiny planning session, or find a new spot for your everyday work.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-18",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.7,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 8,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 10,
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "50 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.6
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Salkara SM Street",
+        "walkingMinutes": 3,
+        "distanceMeters": 200
+      },
+      {
+        "type": "cafe",
+        "name": "Common Ground Coffee",
+        "walkingMinutes": 0,
+        "distanceMeters": 20
+      },
+      {
+        "type": "washroom",
+        "name": "SM Street public washroom",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "atm",
+        "name": "Canara Bank ATM",
+        "walkingMinutes": 2,
+        "distanceMeters": 130
+      },
+      {
+        "type": "print shop",
+        "name": "City Copy House",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "bus stop",
+        "name": "SM Street Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "SM Street",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s21",
+    "name": "The Blue Bench Meeting Room",
+    "area": "Karanthur",
+    "pricePerHour": 520,
+    "capacity": 16,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Meeting-style",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": 4.7,
+    "photoUrl": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A focused, no-fuss room with a proper meeting table and a reliable setup. Make space for a planning session, mentoring circle, or a small team off-site.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": []
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-20",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": false,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.6,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 16,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 20,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "100 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Karanthur Lunch House",
+        "walkingMinutes": 4,
+        "distanceMeters": 320
+      },
+      {
+        "type": "cafe",
+        "name": "Blue Bench Café",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Karanthur public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 370
+      },
+      {
+        "type": "atm",
+        "name": "Kerala Bank ATM",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      },
+      {
+        "type": "pharmacy",
+        "name": "Karanthur Pharmacy",
+        "walkingMinutes": 4,
+        "distanceMeters": 310
+      },
+      {
+        "type": "bus stop",
+        "name": "Karanthur Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Karanthur",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s22",
+    "name": "Cloud Nine Lecture Room",
+    "area": "Kuttichira",
+    "pricePerHour": 850,
+    "capacity": 55,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lecture rows",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A spacious lecture room for talks worth travelling to. Bright projection, accessible entry, and a welcoming neighbourhood make larger gatherings feel personal.",
+    "availability": {
+      "Monday": [
+        "9am-1pm"
+      ],
+      "Tuesday": [
+        "9am-1pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-22",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.8,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 55,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 40,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "150 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Kuttichira Kitchen",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "cafe",
+        "name": "Old Town Coffee",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "washroom",
+        "name": "Kuttichira public washroom",
+        "walkingMinutes": 4,
+        "distanceMeters": 290
+      },
+      {
+        "type": "atm",
+        "name": "SBI ATM Kuttichira",
+        "walkingMinutes": 2,
+        "distanceMeters": 140
+      },
+      {
+        "type": "stationery",
+        "name": "Town Pages Stationery",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Kuttichira Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Kuttichira",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s23",
+    "name": "Little Fern Community Room",
+    "area": "Elathur",
+    "pricePerHour": 300,
+    "capacity": 14,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Community tables",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.7,
+    "photoUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A friendly neighbourhood room where local groups meet, learn, and make plans. Flexible furniture, a helpful host, and a little tea make it easy to settle in.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-19",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.8,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 14,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 14,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "60 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Elathur Family Restaurant",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Fern & Foam Café",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Elathur public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 370
+      },
+      {
+        "type": "atm",
+        "name": "Canara Bank ATM",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Elathur Quick Prints",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Elathur Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 230
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Elathur",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s24",
+    "name": "The Study Garden",
+    "area": "Kozhikode Beach",
+    "pricePerHour": 200,
+    "capacity": 10,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Garden tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "outdoor",
+    "rating": 4.8,
+    "photoUrl": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "An easygoing garden study spot close to the sea. Affordable, quiet, and surrounded by leafy shade—just right for a long afternoon with books and friends.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-21",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat-Sun 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 4.9,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 10,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 12,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "75 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.9
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Beachside Meals",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Sea Breeze Coffee",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "washroom",
+        "name": "Beach public washroom",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Federal Bank ATM",
+        "walkingMinutes": 4,
+        "distanceMeters": 290
+      },
+      {
+        "type": "print shop",
+        "name": "Beach Road Prints",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Beach Road Bus Stop",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Kozhikode Beach",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "s25",
+    "name": "Lanternlight Event Room",
+    "area": "Palazhi",
+    "pricePerHour": 1000,
+    "capacity": 60,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Event hall",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": 4.9,
+    "photoUrl": "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "A beautiful, flexible hall for the big idea, the community gathering, or the celebration you've been planning. Full AV, kind hosting, and space to make it yours.",
+    "availability": {
+      "Monday": [
+        "9am-1pm"
+      ],
+      "Tuesday": [
+        "9am-1pm"
+      ],
+      "Wednesday": [
+        "9am-1pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-22",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sun 9am-1pm",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": 5,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 60,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 48,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "200 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 5
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Palazhi Table",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "cafe",
+        "name": "Lantern Café",
+        "walkingMinutes": 2,
+        "distanceMeters": 140
+      },
+      {
+        "type": "washroom",
+        "name": "Palazhi public washroom",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "atm",
+        "name": "HDFC ATM Palazhi",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "pharmacy",
+        "name": "Palazhi Pharmacy",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "bus stop",
+        "name": "Palazhi Junction Stop",
+        "walkingMinutes": 4,
+        "distanceMeters": 290
+      }
+    ],
+    "district": "Kozhikode",
+    "town": "Kozhikode",
+    "locality": "Palazhi",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-01",
+    "name": "Demo Community Space - Malappuram",
+    "area": "Sample locality",
+    "pricePerHour": 350,
+    "capacity": 10,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Verandah lounge",
+    "atmosphere": "outdoor",
+    "indoorOutdoor": "outdoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Malappuram. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-5pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": false,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": false,
+      "nearPublicTransport": false,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": false,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 10,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 8,
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "40 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Malappuram",
+    "town": "Malappuram",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-02",
+    "name": "Demo Community Space - Ernakulam",
+    "area": "Sample locality",
+    "pricePerHour": 750,
+    "capacity": 20,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Meeting-style",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Ernakulam. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": []
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat 10am-2pm (demo)",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 20,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 28,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "150 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Ernakulam",
+    "town": "Kochi",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-03",
+    "name": "Demo Community Space - Thiruvananthapuram",
+    "area": "Sample locality",
+    "pricePerHour": 900,
+    "capacity": 45,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lecture rows",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Thiruvananthapuram. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "9am-1pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": true
+    },
+    "resources": {
+      "desks": 45,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 32,
+      "printerAccess": false,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "100 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Thiruvananthapuram",
+    "town": "Thiruvananthapuram",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-04",
+    "name": "Demo Community Space - Thrissur",
+    "area": "Sample locality",
+    "pricePerHour": 300,
+    "capacity": 20,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lecture rows",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Thrissur. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 20,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 20,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": false,
+      "wifiSpeed": "80 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Thrissur",
+    "town": "Thrissur",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-05",
+    "name": "Demo Community Space - Kannur",
+    "area": "Sample locality",
+    "pricePerHour": 420,
+    "capacity": 10,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Cafe tables",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Kannur. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 10,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 12,
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "50 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.5
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Kannur",
+    "town": "Kannur",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-06",
+    "name": "Demo Community Space - Palakkad",
+    "area": "Sample locality",
+    "pricePerHour": 220,
+    "capacity": 24,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Study tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Palakkad. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": "Sat 10am-2pm (demo)",
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 24,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 30,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": false,
+      "wifiSpeed": "75 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Palakkad",
+    "town": "Palakkad",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-07",
+    "name": "Demo Community Space - Kottayam",
+    "area": "Sample locality",
+    "pricePerHour": 320,
+    "capacity": 12,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Garden tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "outdoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Kottayam. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": false,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": false,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": false,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 12,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 8,
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "40 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.7
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Kottayam",
+    "town": "Kottayam",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-08",
+    "name": "Demo Community Space - Alappuzha",
+    "area": "Sample locality",
+    "pricePerHour": 800,
+    "capacity": 40,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lecture rows",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Alappuzha. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "9am-1pm"
+      ],
+      "Tuesday": [
+        "9am-1pm"
+      ],
+      "Wednesday": [
+        "9am-1pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": []
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 40,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 36,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "120 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Alappuzha",
+    "town": "Alappuzha",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-09",
+    "name": "Demo Community Space - Wayanad",
+    "area": "Sample locality",
+    "pricePerHour": 350,
+    "capacity": 8,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Cafe tables",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Wayanad. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": true
+    },
+    "resources": {
+      "desks": 8,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 10,
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "50 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.6
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Wayanad",
+    "town": "Wayanad",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-10",
+    "name": "Demo Community Space - Kasaragod",
+    "area": "Sample locality",
+    "pricePerHour": 850,
+    "capacity": 55,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Lecture rows",
+    "atmosphere": "lively",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Kasaragod. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "9am-1pm"
+      ],
+      "Tuesday": [
+        "9am-1pm"
+      ],
+      "Wednesday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "9am-1pm"
+      ],
+      "Friday": [
+        "9am-1pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 55,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 40,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": true,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "150 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Kasaragod",
+    "town": "Kasaragod",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-11",
+    "name": "Demo Community Space - Pathanamthitta",
+    "area": "Sample locality",
+    "pricePerHour": 200,
+    "capacity": 10,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Garden tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "outdoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Pathanamthitta. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 10,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 12,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "75 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.9
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Pathanamthitta",
+    "town": "Pathanamthitta",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-12",
+    "name": "Demo Community Space - Idukki",
+    "area": "Sample locality",
+    "pricePerHour": 250,
+    "capacity": 8,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": true
+    },
+    "seatingType": "Study tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Idukki. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "2pm-6pm"
+      ],
+      "Tuesday": [
+        "2pm-6pm"
+      ],
+      "Wednesday": [
+        "2pm-6pm"
+      ],
+      "Thursday": [
+        "2pm-6pm"
+      ],
+      "Friday": [
+        "2pm-6pm"
+      ],
+      "Saturday": [
+        "9am-1pm"
+      ],
+      "Sunday": [
+        "9am-5pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": true,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": true,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 8,
+      "whiteboard": true,
+      "projector": false,
+      "powerSockets": 12,
+      "printerAccess": true,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": true,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "50 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": true,
+      "cleanlinessRating": 4.8
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Idukki",
+    "town": "Idukki",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  },
+  {
+    "id": "demo-13",
+    "name": "Demo Community Space - Kollam",
+    "area": "Sample locality",
+    "pricePerHour": 450,
+    "capacity": 12,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": true,
+      "whiteboard": true,
+      "stepFreeAccess": false
+    },
+    "seatingType": "Workshop tables",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "indoor",
+    "rating": null,
+    "photoUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85"
+    ],
+    "description": "Illustrative sample listing for Kollam. This is not a real venue or address; the details are provided only to demonstrate Kerala-wide search.",
+    "availability": {
+      "Monday": [
+        "10am-2pm"
+      ],
+      "Tuesday": [
+        "10am-2pm"
+      ],
+      "Wednesday": [
+        "10am-2pm"
+      ],
+      "Thursday": [
+        "10am-2pm"
+      ],
+      "Friday": [
+        "10am-2pm"
+      ],
+      "Saturday": [
+        "9am-1pm",
+        "2pm-6pm"
+      ],
+      "Sunday": [
+        "9am-1pm"
+      ]
+    },
+    "verified": false,
+    "lastUpdated": "2026-10-23",
+    "safety": {
+      "cctv": true,
+      "wellLit": true,
+      "securedEntry": false,
+      "femaleHostOrStaff": true,
+      "womenOnlyHours": null,
+      "busyArea": true,
+      "nearPublicTransport": true,
+      "ownerIdVerified": true,
+      "safetyRating": null,
+      "womenFriendly": false,
+      "womenOnly": false
+    },
+    "resources": {
+      "desks": 12,
+      "whiteboard": true,
+      "projector": true,
+      "powerSockets": 16,
+      "printerAccess": false,
+      "powerBackup": true,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true,
+      "wifiSpeed": "75 Mbps"
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": true,
+      "accessible": false,
+      "cleanlinessRating": 4.6
+    },
+    "nearby": [
+      {
+        "type": "restaurant",
+        "name": "Demo restaurant (sample)",
+        "walkingMinutes": 4,
+        "distanceMeters": 300
+      },
+      {
+        "type": "cafe",
+        "name": "Demo cafe (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 220
+      },
+      {
+        "type": "washroom",
+        "name": "Demo public washroom (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 150
+      },
+      {
+        "type": "atm",
+        "name": "Demo ATM (sample)",
+        "walkingMinutes": 3,
+        "distanceMeters": 210
+      },
+      {
+        "type": "print shop",
+        "name": "Demo print shop (sample)",
+        "walkingMinutes": 5,
+        "distanceMeters": 380
+      },
+      {
+        "type": "bus stop",
+        "name": "Demo bus stop (sample)",
+        "walkingMinutes": 2,
+        "distanceMeters": 160
+      }
+    ],
+    "district": "Kollam",
+    "town": "Kollam",
+    "locality": "Sample locality",
+    "isDemo": true,
+    "categories": {
+      "student": [
+        "study-session",
+        "online-classes",
+        "group-study",
+        "project-work",
+        "exam-preparation",
+        "reading-research"
+      ],
+      "professional": [
+        "remote-work",
+        "individual-work",
+        "interviews",
+        "team-meetings",
+        "client-meetings",
+        "business-discussions",
+        "workshops"
+      ]
+    }
+  }
 ]
