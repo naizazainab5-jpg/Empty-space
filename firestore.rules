@@ -1,0 +1,193 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    function ownsSubmission(submissionId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/owner_submissions/$(submissionId))
+        && get(/databases/$(database)/documents/owner_submissions/$(submissionId)).data.ownerUid == request.auth.uid;
+    }
+
+    function ownsApprovedSpace(spaceId) {
+      return ownsSubmission(spaceId)
+        && get(/databases/$(database)/documents/owner_submissions/$(spaceId)).data.status == 'approved';
+    }
+
+    function approvedSpace(spaceId) {
+      return exists(/databases/$(database)/documents/spaces/$(spaceId))
+        && get(/databases/$(database)/documents/spaces/$(spaceId)).data.status == 'approved';
+    }
+
+    function validSubmissionFields() {
+      return request.resource.data.keys().hasOnly([
+        'name', 'description', 'spaceType', 'category', 'permittedActivities',
+        'state', 'district', 'locality', 'address', 'latitude', 'longitude',
+        'capacity', 'pricePerHour', 'amenities', 'resources', 'seatingType',
+        'atmosphere', 'indoorOutdoor', 'images', 'photoUrl', 'openingHours',
+        'availability', 'safety', 'washroom', 'ownerUid', 'ownerEmail',
+        'status', 'submittedAt', 'updatedAt', 'reviewerNote', 'reviewedAt'
+      ]);
+    }
+
+    match /users/{userId} {
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == userId);
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly([
+          'uid', 'email', 'displayName', 'accountType', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.accountType == 'owner';
+      allow update: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName', 'updatedAt'])
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.accountType == resource.data.accountType;
+      allow delete: if isAdmin();
+    }
+
+    match /spaces/{spaceId} {
+      allow read: if resource.data.status == 'approved';
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin()
+        || (ownsApprovedSpace(spaceId)
+          && request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['availability', 'availabilitySource', 'availabilityUpdatedAt', 'lastUpdated'])
+          && request.resource.data.status == resource.data.status);
+    }
+
+    match /owner_submissions/{submissionId} {
+      allow read: if isAdmin() || (signedIn() && resource.data.ownerUid == request.auth.uid);
+      allow create: if signedIn()
+        && request.auth.token.email_verified == true
+        && validSubmissionFields()
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.ownerEmail == request.auth.token.email
+        && request.resource.data.spaceType == 'private'
+        && request.resource.data.status == 'pending'
+        && !request.resource.data.keys().hasAny(['reviewerNote', 'reviewedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 3000
+        && request.resource.data.district is string
+        && request.resource.data.locality is string
+        && request.resource.data.address is string
+        && request.resource.data.latitude is number
+        && request.resource.data.latitude >= -90
+        && request.resource.data.latitude <= 90
+        && request.resource.data.longitude is number
+        && request.resource.data.longitude >= -180
+        && request.resource.data.longitude <= 180
+        && request.resource.data.capacity is number
+        && request.resource.data.capacity > 0
+        && request.resource.data.pricePerHour is number
+        && request.resource.data.pricePerHour >= 0
+        && request.resource.data.amenities is map
+        && request.resource.data.resources is map
+        && request.resource.data.availability is map
+        && request.resource.data.safety is map
+        && request.resource.data.washroom is map
+        && request.resource.data.submittedAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if (isAdmin()
+        && !(resource.data.ownerUid == request.auth.uid && request.resource.data.status == 'approved'))
+        || (signedIn()
+          && resource.data.ownerUid == request.auth.uid
+          && resource.data.status in ['pending', 'approved']
+          && request.resource.data.status == resource.data.status
+          && request.resource.data.ownerUid == resource.data.ownerUid
+          && request.resource.data.ownerEmail == resource.data.ownerEmail
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            'name', 'description', 'pricePerHour', 'openingHours',
+            'availability', 'updatedAt'
+          ])
+          && request.resource.data.updatedAt == request.time);
+      allow delete: if isAdmin();
+    }
+
+    match /bookings/{bookingId} {
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.customerUid == request.auth.uid)
+        || ownsApprovedSpace(resource.data.spaceId);
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly([
+          'spaceId', 'customerUid', 'startAt', 'endAt', 'hours',
+          'totalPrice', 'status', 'createdAt'
+        ])
+        && request.resource.data.customerUid == request.auth.uid
+        && request.resource.data.status == 'pending_owner_confirmation'
+        && request.resource.data.createdAt == request.time
+        && approvedSpace(request.resource.data.spaceId);
+      allow update: if isAdmin()
+        || (ownsApprovedSpace(resource.data.spaceId)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+          && request.resource.data.status in ['confirmed', 'rejected', 'cancelled']);
+      allow delete: if isAdmin();
+    }
+
+    match /availability_records/{submissionId} {
+      allow read: if isAdmin() || (ownsSubmission(submissionId)
+        && resource.data.ownerUid == request.auth.uid);
+      allow create: if signedIn()
+        && ownsApprovedSpace(submissionId)
+        && request.resource.data.keys().hasOnly([
+          'submissionId', 'ownerUid', 'availability', 'openingHours', 'source', 'updatedAt'
+        ])
+        && request.resource.data.submissionId == submissionId
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.source == 'owner-declared'
+        && request.resource.data.updatedAt == request.time;
+      allow update: if signedIn()
+        && ownsApprovedSpace(submissionId)
+        && resource.data.ownerUid == request.auth.uid
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['availability', 'openingHours', 'updatedAt'])
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    match /crowd_reports/{reportId} {
+      allow read: if resource.data.keys().hasOnly(['spaceId', 'observation', 'observedAt']);
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /space_verification_records/{recordId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /report_flags/{flagId} {
+      allow read: if isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['spaceId', 'reason', 'details', 'reviewStatus', 'createdAt'])
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() <= 100
+        && request.resource.data.details is string
+        && request.resource.data.details.size() <= 1000
+        && request.resource.data.reviewStatus == 'new'
+        && request.resource.data.createdAt == request.time
+        && approvedSpace(request.resource.data.spaceId);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['reviewStatus', 'reviewerNote', 'reviewedAt'])
+        && request.resource.data.reviewStatus == 'reviewed';
+      allow delete: if isAdmin();
+    }
+
+    match /public_places/{placeId} {
+      allow read: if resource.data.sourceStatus == 'active';
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

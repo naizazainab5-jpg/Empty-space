@@ -1,0 +1,37 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "crowd_reports",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "spaceId", "order": "ASCENDING" },
+        { "fieldPath": "observedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "public_places",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "sourceStatus", "order": "ASCENDING" },
+        { "fieldPath": "lastCheckedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "owner_submissions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "ownerUid", "order": "ASCENDING" },
+        { "fieldPath": "submittedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "owner_submissions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "submittedAt", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
