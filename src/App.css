@@ -416,6 +416,38 @@ body { min-width: 320px; font-size: var(--body-copy); line-height: 1.55; }
 .portal-public-place-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid #edf0eb; }.portal-public-place-row strong, .portal-public-place-row small { display: block; }.portal-public-place-row strong { color: #52695a; font-size: 10px; }.portal-public-place-row small { margin-top: 4px; color: #89968c; font-size: 8px; }
 .portal-public-place-row button:disabled { opacity: .5; }
 .portal-availability-form .portal-check-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.proposal-main { max-width: 1080px; }
+.proposal-header .header-action { text-decoration: none; }
+.proposal-form { display: grid; gap: 18px; }
+.proposal-section { min-width: 0; margin: 0; padding: 18px; border: 1px solid #edf0eb; border-radius: 5px; }
+.proposal-section > legend { padding: 0 7px; color: #75847a; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+.proposal-section .portal-check-group { margin-top: 15px; }
+.proposal-section .portal-form-grid { margin-top: 5px; }
+.proposal-section input, .proposal-section select, .proposal-section textarea { width: 100%; min-width: 0; padding: 10px 11px; color: #405747; background: #fcfcfa; border: 1px solid #e2e8e1; border-radius: 4px; font-size: 12px; font-weight: 400; letter-spacing: 0; }
+.proposal-type { margin: 12px 0 0; padding: 14px; border: 1px solid #e8ece5; border-radius: 4px; }
+.proposal-type > legend { padding: 0 5px; color: #75847a; font-size: 9px; font-weight: 700; letter-spacing: .8px; }
+.proposal-type-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.proposal-type .space-type-choice { min-height: 70px; }
+.proposal-help { display: flex; align-items: flex-start; gap: 8px; margin: 12px 0 0; color: #7a887f; font-size: 10px; line-height: 1.65; }
+.proposal-help svg { flex: 0 0 auto; margin-top: 2px; color: #5d8064; }
+.proposal-booking-toggle { display: flex; align-items: flex-start; gap: 9px; margin-top: 15px; color: #526a58; font-size: 11px; }
+.proposal-booking-toggle input { width: auto; margin-top: 3px; accent-color: #4c7757; }
+.proposal-evidence-label { display: grid; gap: 7px; color: #75847a; font-size: 9px; font-weight: 700; letter-spacing: .5px; }
+.proposal-privacy { display: flex; gap: 9px; margin-top: 13px; padding: 12px; color: #627769; background: #f5f5ef; border-radius: 4px; font-size: 10px; line-height: 1.6; }
+.proposal-privacy svg { flex: 0 0 auto; color: #55785d; }
+.proposal-submit-note { margin: -9px 0 0; color: #7c8a80; font-size: 10px; text-align: center; }
+.proposal-form .portal-error ul { margin-bottom: 0; }
+.admin-portal-nav { display: flex; gap: 8px; margin: 18px 0; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.admin-portal-nav button { padding: 9px 12px; color: #65756a; background: #f2f4ef; border: 1px solid #e2e8e0; border-radius: 4px; font-size: 10px; cursor: pointer; }
+.admin-portal-nav button.active { color: #fff; background: var(--green); border-color: var(--green); }
+.proposal-review-criteria { margin: 12px 0; padding: 12px; color: #617466; background: #f4f6f0; border: 1px solid #e5ebe1; border-radius: 4px; font-size: 10px; line-height: 1.6; }
+.proposal-review-criteria p { margin: 5px 0 0; }
+.proposal-review-evidence { display: grid; gap: 7px; margin-top: 12px; color: #607367; font-size: 10px; overflow-wrap: anywhere; }
+.proposal-review-evidence a { color: #4e7758; }
+.proposal-review-history { display: grid; gap: 8px; margin-top: 12px; padding: 12px; background: #f6f7f3; border-radius: 4px; }
+.proposal-review-history > div { display: grid; gap: 4px; color: #627466; font-size: 10px; }
+.proposal-review-history small { color: #86938a; font-size: 9px; }
+.proposal-review-history p { margin: 0; }
 .card-image-placeholder, .gallery-photo-placeholder { display: grid; place-items: center; width: 100%; height: 100%; color: #77877a; background: #edf1e9; font-size: 10px; }
 .gallery-photo-placeholder { min-height: 220px; }
 .crowd-status { display: inline-flex; padding: 8px 12px; color: #637550; background: #f2f5ec; border-radius: 20px; font-size: 11px; }
@@ -428,4 +460,7 @@ body { min-width: 320px; font-size: var(--body-copy); line-height: 1.55; }
   .portal-section-heading { align-items: flex-start; }.portal-submission-top { flex-direction: column; }
   .portal-review-actions { justify-content: flex-start; }.portal-notice { flex-direction: column; gap: 4px; }
   .portal-availability-form .portal-check-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proposal-section { padding: 13px; }.proposal-type-options { grid-template-columns: 1fr; }.admin-portal-nav { overflow-x: auto; }
+  .portal-review-actions { flex-wrap: wrap; }.portal-review-actions > button { flex: 1 1 42%; }
+  .proposal-main { width: min(100% - 24px, 1080px); }.proposal-header .header-action { padding: 8px 9px; font-size: 10px; }
 }

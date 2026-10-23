@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test:rules": "firebase emulators:exec --project demo-emptyspace --only auth,firestore \"node --test tests/firestore.rules.test.js tests/firebase-auth.test.js\""
+    "test:rules": "firebase emulators:exec --project demo-emptyspace --only auth,firestore,functions \"node --test tests/firestore.rules.test.js tests/firebase-auth.test.js tests/space-submission-criteria.test.js tests/space-submissions.integration.test.js\""
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

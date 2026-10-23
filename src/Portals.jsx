@@ -18,6 +18,8 @@ import {
   createOwnerProfile,
   getAdminApprovedSpaces,
   getAdminPublicPlaces,
+  getSpaceSubmissionsForReview,
+  getSpaceSubmissionReviewHistory,
   getOwnSubmissions,
   getPendingSubmissions,
   getReportFlags,
@@ -25,6 +27,7 @@ import {
   removePublicPlace,
   reviewSubmission,
   reviewReportFlag,
+  reviewSpaceSubmission,
   saveOwnerAvailability,
   submitOwnerProperty,
   updatePendingSubmission,
@@ -110,6 +113,7 @@ function AuthCard({ onAuthenticated, error, setError, allowRegistration }) {
         await sendEmailVerification(result.user)
         setFormMode('signin')
         setError('Account created. Check your inbox and verify your email before sending a property for review.')
+        await onAuthenticated?.(result.user)
       } else {
         const credential = await signInWithEmailAndPassword(auth, email, password)
         await onAuthenticated?.(credential.user)
@@ -208,20 +212,28 @@ function OwnerPropertyForm({ user, onSubmitted }) {
 
   async function submit(event) {
     event.preventDefault()
+    const formElement = event.currentTarget
     setBusy(true)
     setError('')
     setSuccess('')
     try {
-      const listing = listingFromForm(new FormData(event.currentTarget))
+      const listing = listingFromForm(new FormData(formElement))
+      if (!listing.name || !listing.description || !listing.category || !listing.district
+        || !listing.locality || !listing.address || !listing.openingHours) {
+        throw new Error('Complete all required property and location details.')
+      }
       if (!listing.permittedActivities.length) throw new Error('Choose at least one permitted activity.')
       if (!Object.keys(listing.availability).length || !Object.values(listing.availability).flat().length) {
         throw new Error('Choose at least one available day and enter the free hours.')
       }
-      if (!Number.isFinite(listing.latitude) || !Number.isFinite(listing.longitude)) {
-        throw new Error('Enter a valid latitude and longitude.')
+      if (!Number.isFinite(listing.latitude) || listing.latitude < -90 || listing.latitude > 90
+        || !Number.isFinite(listing.longitude) || listing.longitude < -180 || listing.longitude > 180) {
+        throw new Error('Enter valid property coordinates copied from a map pin.')
       }
+      if (!Number.isFinite(listing.capacity) || listing.capacity < 1) throw new Error('Capacity must be at least one person.')
+      if (!Number.isFinite(listing.pricePerHour) || listing.pricePerHour < 0) throw new Error('Enter a valid hourly price (zero is allowed).')
       await submitOwnerProperty(user, listing)
-      event.currentTarget.reset()
+      formElement.reset()
       setSuccess('Your submission is pending review. An administrator must review it before it appears publicly.')
       await onSubmitted()
     } catch (submissionError) {
@@ -234,7 +246,7 @@ function OwnerPropertyForm({ user, onSubmitted }) {
   return <section className="portal-card">
     <div className="portal-section-heading"><div><span className="eyebrow">PRIVATE PROPERTY SUBMISSION</span><h2>List a space for review</h2></div><span className="pending-pill">Pending until approved</span></div>
     {!user.emailVerified && <div className="portal-notice"><strong>Verify your email first.</strong><span>Firebase sent a verification link when you registered. Refresh this page after verifying your address.</span></div>}
-    <p className="portal-muted">Your owner account is identified by Firebase UID <code>{user.uid}</code>. Your exact address and coordinates stay in the restricted owner submission; the public listing uses only the locality and district. Owner-provided features are not treated as verified.</p>
+    <p className="portal-muted">Your owner account is identified by Firebase UID <code>{user.uid}</code>. Enter coordinates copied from a map pin; they are stored with your private submission and are not published. Your exact address also remains private. Owner-provided features are not treated as verified.</p>
     <form className="owner-property-form" onSubmit={submit}>
       <div className="portal-form-grid">
         <label>PROPERTY NAME<input name="name" maxLength="120" required /></label>
@@ -243,8 +255,8 @@ function OwnerPropertyForm({ user, onSubmitted }) {
         <label>DISTRICT<select name="district" defaultValue="" required><option value="" disabled>Select a district</option>{districts.map((district) => <option key={district}>{district}</option>)}</select></label>
         <label>LOCALITY<input name="locality" required /></label>
         <label className="portal-wide-field">PRIVATE STREET ADDRESS<input name="address" required autoComplete="street-address" /></label>
-        <label>LATITUDE<input name="latitude" type="number" min="-90" max="90" step="any" required /></label>
-        <label>LONGITUDE<input name="longitude" type="number" min="-180" max="180" step="any" required /></label>
+        <label>PROPERTY LATITUDE<input name="latitude" type="number" min="-90" max="90" step="any" placeholder="From a map pin" required /></label>
+        <label>PROPERTY LONGITUDE<input name="longitude" type="number" min="-180" max="180" step="any" placeholder="From a map pin" required /></label>
         <label>CAPACITY<input name="capacity" type="number" min="1" max="1000" required /></label>
         <label>PRICE PER HOUR (₹)<input name="pricePerHour" type="number" min="0" step="1" required /></label>
         <label>SEATING TYPE<select name="seatingType" defaultValue="" required><option value="" disabled>Select seating</option>{['Classroom', 'Meeting style', 'Cafe style', 'Flexible', 'Floor seating', 'Other'].map((item) => <option key={item}>{item}</option>)}</select></label>
@@ -299,7 +311,12 @@ export function OwnerPortal() {
   }, [])
 
   useEffect(() => {
-    if (authReady && !user && location.pathname !== '/owner') navigate('/owner', { replace: true })
+    if (authReady && !user && location.pathname !== '/owner') {
+      navigate('/owner', {
+        replace: true,
+        state: { returnTo: location.pathname },
+      })
+    }
   }, [authReady, location.pathname, navigate, user])
 
   const refresh = useCallback(async () => {
@@ -333,13 +350,19 @@ export function OwnerPortal() {
     }
   }
 
+  const listingPath = location.state?.returnTo === '/owner/list-space' ? '/owner/list-space' : '/owner'
+  const completeOwnerSignIn = () => navigate(listingPath, { replace: true, state: null })
+  const listingRequested = location.pathname === '/owner/list-space'
+    || location.state?.returnTo === '/owner/list-space'
+
   if (!authReady) return <PortalShell eyebrow="OWNER PORTAL" title="Loading your secure portal"><div className="portal-card">Checking Firebase Authentication…</div></PortalShell>
   if (!user) return <PortalShell eyebrow="OWNER PORTAL" title="Your space, thoughtfully shared">
     {!firebaseConfigured && <FirebaseNotice />}
-    <AuthCard onAuthenticated={() => {}} error={error} setError={setError} allowRegistration />
+    {listingRequested && <div className="portal-notice"><strong>Sign in or create an owner account to list a space.</strong><span>After authentication, you will return to the private property submission form.</span></div>}
+    <AuthCard onAuthenticated={completeOwnerSignIn} error={error} setError={setError} allowRegistration />
   </PortalShell>
 
-  return <PortalShell eyebrow="OWNER PORTAL · PRIVATE" title="Manage your spaces" user={user} onSignOut={logout}>
+  return <PortalShell eyebrow="OWNER PORTAL · PRIVATE" title={listingRequested ? 'List your space' : 'Manage your spaces'} user={user} onSignOut={logout}>
     {!firebaseConfigured && <FirebaseNotice />}
     {error && <p className={error.startsWith('Account created') ? 'portal-success' : 'portal-error'} role="status">{error}</p>}
     {portalError && <p className="portal-error" role="alert">{portalError}</p>}
@@ -424,11 +447,14 @@ function SubmissionCard({ submission, user, onChanged }) {
 }
 
 export function AdminPortal() {
+  const location = useLocation()
+  const navigate = useNavigate()
   const [user, setUser] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [authReady, setAuthReady] = useState(!auth)
   const [error, setError] = useState('')
   const [pending, setPending] = useState([])
+  const [spaceProposals, setSpaceProposals] = useState([])
   const [approvedSpaces, setApprovedSpaces] = useState([])
   const [publicPlaces, setPublicPlaces] = useState([])
   const [reportFlags, setReportFlags] = useState([])
@@ -470,13 +496,15 @@ export function AdminPortal() {
     let active = true
     Promise.all([
       getPendingSubmissions(),
+      getSpaceSubmissionsForReview(),
       getAdminApprovedSpaces(),
       getAdminPublicPlaces(),
       getReportFlags(),
       getVerificationRecords(),
-    ]).then(([submissions, spaces, places, flags, verifications]) => {
+    ]).then(([submissions, proposals, spaces, places, flags, verifications]) => {
       if (!active) return
       setPending(submissions)
+      setSpaceProposals(proposals)
       setApprovedSpaces(spaces)
       setPublicPlaces(places)
       setReportFlags(flags)
@@ -493,6 +521,7 @@ export function AdminPortal() {
     try {
       await signOut(auth)
       setPending([])
+      setSpaceProposals([])
       setApprovedSpaces([])
       setPublicPlaces([])
       setReportFlags([])
@@ -512,6 +541,18 @@ export function AdminPortal() {
 
   return <PortalShell eyebrow="INTERNAL · ADMINISTRATOR" title="Review and data quality" user={user} onSignOut={logout}>
     <div className="portal-notice"><ShieldCheck size={18} /><span>Administrator access comes from a Firebase custom claim. Property approval does not mark a property independently verified.</span></div>
+    <nav className="admin-portal-nav" aria-label="Administrator review sections">
+      <button className={location.pathname === '/admin' ? 'active' : ''} onClick={() => navigate('/admin')}>Owner listings</button>
+      <button className={location.pathname.startsWith('/admin/submissions') ? 'active' : ''} onClick={() => navigate('/admin/submissions')}>Public proposals ({spaceProposals.length})</button>
+    </nav>
+    {location.pathname.startsWith('/admin/submissions') && <section className="portal-card">
+      <div className="portal-section-heading"><div><span className="eyebrow">PUBLIC SUBMISSIONS · PRIVATE REVIEW</span><h2>Space proposals <small>({spaceProposals.filter((item) => ['pending', 'needs_changes'].includes(item.reviewStatus)).length} to review)</small></h2></div><button className="outline-button" onClick={() => { setLoading(true); setError(''); setRefreshKey((key) => key + 1) }} disabled={loading}><RefreshCw size={14} /> Refresh</button></div>
+      <p className="portal-muted">Passing automated checks only confirms basic field consistency. Inspect the evidence and independently verify existence, access permission, occupancy claims, safety, and any legal requirements.</p>
+      {loading ? <p className="portal-muted">Loading submitted proposals…</p> : !spaceProposals.length ? <p className="portal-muted">No proposals have been submitted.</p> : <div className="portal-submission-list">{spaceProposals.map((proposal) => ['pending', 'needs_changes'].includes(proposal.reviewStatus)
+        ? <SpaceProposalReview key={proposal.id} proposal={proposal} onReviewed={() => setRefreshKey((key) => key + 1)} setFeedback={setFeedback} />
+        : <ReviewedSpaceProposal key={proposal.id} proposal={proposal} />)}</div>}
+    </section>}
+    {location.pathname === '/admin' && <>
     <section className="portal-card">
       <div className="portal-section-heading"><div><span className="eyebrow">OWNER SUBMISSIONS</span><h2>Pending review <small>({pending.length})</small></h2></div><button className="outline-button" onClick={() => { setLoading(true); setError(''); setRefreshKey((key) => key + 1) }} disabled={loading}><RefreshCw size={14} /> Refresh</button></div>
       {loading ? <p className="portal-muted">Loading administrator queue…</p> : !pending.length ? <p className="portal-muted">There are no pending submissions.</p> : <div className="portal-submission-list">{pending.map((submission) => <AdminSubmission key={submission.id} submission={submission} currentAdminUid={user.uid} onReviewed={() => setRefreshKey((key) => key + 1)} setFeedback={setFeedback} />)}</div>}
@@ -534,7 +575,92 @@ export function AdminPortal() {
     </section>
     {feedback && <p className="portal-success" role="status">{feedback}</p>}
     {error && <p className="portal-error" role="alert">{error}</p>}
+    </>}
   </PortalShell>
+}
+
+function SpaceProposalReview({ proposal, onReviewed, setFeedback }) {
+  const [reviewNotes, setReviewNotes] = useState('')
+  const [duplicateAcknowledged, setDuplicateAcknowledged] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
+
+  async function review(decision) {
+    setBusy(true)
+    setError('')
+    try {
+      const result = await reviewSpaceSubmission(
+        proposal.id,
+        decision,
+        reviewNotes,
+        duplicateAcknowledged,
+      )
+      setFeedback(result.published
+        ? `${proposal.name} was approved and published.`
+        : `${proposal.name}: ${result.reviewStatus}.`)
+      onReviewed()
+    } catch (reviewError) {
+      setError(reviewError.message || 'Could not review the proposal.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const criteria = proposal.criteriaCheck || { passed: false, errors: ['No automated criteria result was saved.'], warnings: [] }
+  return <article className="portal-submission">
+    <div className="portal-submission-top"><div><h3>{proposal.name}</h3><p>{proposal.category} · {proposal.spaceType} · {proposal.locality}, {proposal.district}</p><p>Submission {proposal.id} · {proposal.submitterUid ? `User ${proposal.submitterUid}` : 'Anonymous submitter'}</p></div><span className={`submission-status ${proposal.reviewStatus}`}>{proposal.reviewStatus.replaceAll('_', ' ')}</span></div>
+    <p className="portal-muted">{proposal.description}</p>
+    <p className="portal-muted">Private address: {proposal.address} · Coordinates: {proposal.latitude}, {proposal.longitude}</p>
+    <p className="portal-muted">Access: {proposal.accessInformation} · Permitted activities: {(proposal.permittedActivities || []).join(', ') || 'Not supplied'}</p>
+    <p className="portal-muted">Availability was last confirmed {proposal.lastConfirmedAt || 'on an unknown date'}; submitter-declared only.</p>
+    <div className="proposal-review-criteria">
+      <strong>Automatic criteria: {criteria.passed ? 'Basic checks passed' : 'Needs correction'}</strong>
+      {[...(criteria.errors || []), ...(criteria.warnings || [])].map((item) => <p key={item}>{item}</p>)}
+      {criteria.humanVerificationRequired && <p>Human verification required; automated checks do not establish that the property exists, is empty, safe, or legally available.</p>}
+    </div>
+    {proposal.evidenceUrls?.length > 0 && <div className="proposal-review-evidence"><strong>Evidence links (review only)</strong>{proposal.evidenceUrls.map((url) => <a key={url} href={url} target="_blank" rel="noreferrer">{url}</a>)}</div>}
+    <label className="portal-standalone-label">Review notes or reason<textarea rows="2" maxLength="2000" value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} /></label>
+    {proposal.possibleDuplicate && <label className="proposal-booking-toggle"><input type="checkbox" checked={duplicateAcknowledged} onChange={(event) => setDuplicateAcknowledged(event.target.checked)} /> I checked the duplicate warning and confirm this is a distinct property.</label>}
+    <div className="portal-review-actions">
+      <button className="outline-button" onClick={() => review('flag_duplicate')} disabled={busy}>{busy ? 'Saving…' : 'Flag possible duplicate'}</button>
+      <button className="outline-button" onClick={() => review('needs_changes')} disabled={busy}>{busy ? 'Saving…' : 'Request changes'}</button>
+      <button className="outline-button" onClick={() => review('rejected')} disabled={busy}>{busy ? 'Saving…' : 'Reject'}</button>
+      <button className="primary-button" onClick={() => review('approved')} disabled={busy || !criteria.passed || (proposal.possibleDuplicate && !duplicateAcknowledged)}>{busy ? 'Publishing…' : 'Approve and publish'}<Check size={15} /></button>
+    </div>
+    {error && <p className="portal-error" role="alert">{error}</p>}
+  </article>
+}
+
+function ReviewedSpaceProposal({ proposal }) {
+  const [expanded, setExpanded] = useState(false)
+  const [history, setHistory] = useState([])
+  const [error, setError] = useState('')
+  const [loadingHistory, setLoadingHistory] = useState(false)
+
+  async function toggleHistory() {
+    if (expanded) {
+      setExpanded(false)
+      return
+    }
+    setLoadingHistory(true)
+    setError('')
+    try {
+      setHistory(await getSpaceSubmissionReviewHistory(proposal.id))
+      setExpanded(true)
+    } catch (loadError) {
+      setError(loadError.message || 'Review history could not be loaded.')
+    } finally {
+      setLoadingHistory(false)
+    }
+  }
+
+  return <article className="portal-submission">
+    <div className="portal-submission-top"><div><h3>{proposal.name}</h3><p>{proposal.locality}, {proposal.district} · Submission {proposal.id}</p></div><span className={`submission-status ${proposal.reviewStatus}`}>{proposal.reviewStatus.replaceAll('_', ' ')}</span></div>
+    {proposal.reviewNotes && <p className="portal-muted">Latest reviewer note: {proposal.reviewNotes}</p>}
+    <button className="portal-text-button" onClick={toggleHistory} disabled={loadingHistory}>{loadingHistory ? 'Loading history…' : expanded ? 'Hide review history' : 'View review history'}</button>
+    {expanded && <div className="proposal-review-history">{history.length ? history.map((entry) => <div key={entry.id}><strong>{entry.decision.replaceAll('_', ' ')}</strong><small>{entry.reviewedAt?.toDate?.().toLocaleString() || 'Review time unavailable'} · Reviewer {entry.reviewerId || 'unknown'}</small>{entry.reviewNotes && <p>{entry.reviewNotes}</p>}</div>) : <p className="portal-muted">No review events recorded.</p>}</div>}
+    {error && <p className="portal-error" role="alert">{error}</p>}
+  </article>
 }
 
 function AdminSubmission({ submission, currentAdminUid, onReviewed, setFeedback }) {

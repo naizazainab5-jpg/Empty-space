@@ -57,12 +57,11 @@ service cloud.firestore {
 
     match /spaces/{spaceId} {
       allow read: if resource.data.status == 'approved';
-      allow create, delete: if isAdmin();
-      allow update: if isAdmin()
-        || (ownsApprovedSpace(spaceId)
+      allow create, delete: if false;
+      allow update: if ownsApprovedSpace(spaceId)
           && request.resource.data.diff(resource.data).affectedKeys()
             .hasOnly(['availability', 'availabilitySource', 'availabilityUpdatedAt', 'lastUpdated'])
-          && request.resource.data.status == resource.data.status);
+          && request.resource.data.status == resource.data.status;
     }
 
     match /owner_submissions/{submissionId} {
@@ -100,9 +99,7 @@ service cloud.firestore {
         && request.resource.data.washroom is map
         && request.resource.data.submittedAt == request.time
         && request.resource.data.updatedAt == request.time;
-      allow update: if (isAdmin()
-        && !(resource.data.ownerUid == request.auth.uid && request.resource.data.status == 'approved'))
-        || (signedIn()
+      allow update: if signedIn()
           && resource.data.ownerUid == request.auth.uid
           && resource.data.status in ['pending', 'approved']
           && request.resource.data.status == resource.data.status
@@ -112,8 +109,29 @@ service cloud.firestore {
             'name', 'description', 'pricePerHour', 'openingHours',
             'availability', 'updatedAt'
           ])
-          && request.resource.data.updatedAt == request.time);
-      allow delete: if isAdmin();
+          && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+      match /review_history/{reviewId} {
+        allow read: if isAdmin();
+        allow write: if false;
+      }
+    }
+
+    match /space_submissions/{submissionId} {
+      allow read: if isAdmin();
+      allow create, update, delete: if false;
+      match /review_history/{reviewId} {
+        allow read: if isAdmin();
+        allow write: if false;
+      }
+    }
+
+    match /space_submission_limits/{limitId} {
+      allow read, write: if false;
+    }
+
+    match /space_submission_dedupe/{dedupeId} {
+      allow read, write: if false;
     }
 
     match /bookings/{bookingId} {

@@ -16,6 +16,7 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore'
+import { httpsCallable } from 'firebase/functions'
 import { requireFirebase } from '../firebase.js'
 
 const collections = {
@@ -205,6 +206,33 @@ export async function getPendingSubmissions() {
   return snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
 }
 
+export async function getSpaceSubmissionsForReview() {
+  const { db } = requireFirebase()
+  const snapshot = await getDocs(query(
+    collection(db, 'space_submissions'),
+    orderBy('submittedAt', 'desc'),
+    limit(100),
+  ))
+  return snapshot.docs
+    .map((item) => ({ id: item.id, ...item.data() }))
+}
+
+export async function getSpaceSubmissionReviewHistory(submissionId) {
+  const { db } = requireFirebase()
+  const snapshot = await getDocs(query(
+    collection(db, 'space_submissions', submissionId, 'review_history'),
+    orderBy('createdAt', 'desc'),
+    limit(20),
+  ))
+  return snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+}
+
+export async function reviewSpaceSubmission(submissionId, decision, reviewNotes, duplicateAcknowledged) {
+  const { functions } = requireFirebase()
+  const review = httpsCallable(functions, 'reviewSpaceProposal')
+  return (await review({ submissionId, decision, reviewNotes, duplicateAcknowledged })).data
+}
+
 export async function getAdminApprovedSpaces() {
   const { db } = requireFirebase()
   const snapshot = await getDocs(query(
@@ -255,43 +283,9 @@ export async function reviewReportFlag(flagId, reviewerNote = '') {
 }
 
 export async function reviewSubmission(submissionId, decision, reviewerNote = '') {
-  const { db } = requireFirebase()
-  if (!['approved', 'rejected'].includes(decision)) throw new Error('Choose approve or reject.')
-  const submissionRef = doc(db, collections.submissions, submissionId)
-  const spaceRef = doc(db, collections.spaces, submissionId)
-  await runTransaction(db, async (transaction) => {
-    const snapshot = await transaction.get(submissionRef)
-    if (!snapshot.exists() || snapshot.data().status !== 'pending') {
-      throw new Error('This submission is no longer pending review.')
-    }
-    const submission = snapshot.data()
-    transaction.update(submissionRef, {
-      status: decision,
-      reviewerNote: reviewerNote.trim(),
-      reviewedAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-    })
-    if (decision === 'approved') {
-      const privateFields = new Set([
-        'ownerUid', 'ownerEmail', 'submittedAt', 'updatedAt', 'reviewerNote',
-        'reviewedAt', 'address', 'latitude', 'longitude', 'coordinates',
-      ])
-      const publicListing = Object.fromEntries(
-        Object.entries(submission).filter(([key]) => !privateFields.has(key)),
-      )
-      transaction.set(spaceRef, {
-        ...publicListing,
-        id: submissionId,
-        spaceType: 'private',
-        status: 'approved',
-        verified: false,
-        rating: null,
-        safetyRating: null,
-        availabilitySource: 'owner-declared',
-        lastUpdated: serverTimestamp(),
-      })
-    }
-  })
+  const { functions } = requireFirebase()
+  const review = httpsCallable(functions, 'reviewOwnerSubmission')
+  return (await review({ submissionId, decision, reviewerNote })).data
 }
 
 export async function submitCrowdReport(user, spaceId, observation) {

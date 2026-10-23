@@ -131,6 +131,11 @@ test('an authenticated owner can submit a verified-email pending listing, not ap
     doc(unverifiedDb, 'owner_submissions', 'unverified-listing'),
     validSubmission('unverified-owner', 'unverified@example.com'),
   ))
+
+  await assertFails(setDoc(
+    doc(environment.unauthenticatedContext().firestore(), 'owner_submissions', 'visitor-listing'),
+    validSubmission('owner-1', 'owner@example.com'),
+  ))
 })
 
 test('owners can only read and edit their own permitted pending fields', async () => {
@@ -260,7 +265,7 @@ test('private records, including flags, bookings, and verification notes, stay r
   await assertSucceeds(getDoc(doc(adminDb, 'space_verification_records', 'private-verification')))
 })
 
-test('administrators can approve another owner submission but not their own', async () => {
+test('admins cannot approve submissions or write approved listings directly from the client', async () => {
   await environment.withSecurityRulesDisabled(async (context) => {
     await setDoc(doc(context.firestore(), 'owner_submissions', 'admin-owned'), {
       ...validSubmission('admin-1', 'admin@example.com'),
@@ -277,12 +282,25 @@ test('administrators can approve another owner submission but not their own', as
     status: 'approved',
     updatedAt: serverTimestamp(),
   }))
-  await assertSucceeds(updateDoc(doc(adminDb, 'owner_submissions', 'owner-owned'), {
+  await assertFails(updateDoc(doc(adminDb, 'owner_submissions', 'owner-owned'), {
     status: 'approved',
     updatedAt: serverTimestamp(),
   }))
-  await assertSucceeds(setDoc(doc(adminDb, 'spaces', 'owner-owned'), {
+  await assertFails(setDoc(doc(adminDb, 'spaces', 'owner-owned'), {
     status: 'approved',
     name: 'Public-safe listing',
   }))
+})
+
+test('public proposals are private and clients cannot create, change, or publish them', async () => {
+  const visitorDb = environment.unauthenticatedContext().firestore()
+  const ordinaryDb = environment.authenticatedContext('ordinary', { email_verified: true }).firestore()
+  const adminDb = environment.authenticatedContext('reviewer', { admin: true }).firestore()
+  const submission = { name: 'Community studio', reviewStatus: 'pending' }
+  await assertFails(setDoc(doc(visitorDb, 'space_submissions', 'visitor-proposal'), submission))
+  await assertFails(setDoc(doc(ordinaryDb, 'space_submissions', 'owner-proposal'), submission))
+  await assertFails(setDoc(doc(adminDb, 'space_submissions', 'admin-proposal'), submission))
+  await assertFails(getDoc(doc(visitorDb, 'space_submissions', 'private-proposal')))
+  await assertFails(setDoc(doc(adminDb, 'spaces', 'client-published-space'), { status: 'approved' }))
+  await assertFails(setDoc(doc(visitorDb, 'space_submission_limits', 'visitor-ip'), { count: 1 }))
 })
