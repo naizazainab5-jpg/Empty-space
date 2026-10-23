@@ -5,7 +5,8 @@ import {
   Heart, MapPin, Menu, Minus, Plus, Printer, Search, Shield,
   ShieldCheck, SlidersHorizontal, Sparkles, Star, Wifi, X, Zap,
 } from 'lucide-react'
-import spaces from './spaces.json'
+import { auth, firebaseConfigured } from './firebase.js'
+import { createReportFlag, getApprovedSpaces, getCrowdReportSummary } from './services/firestore.js'
 import './App.css'
 
 const resourceLabels = {
@@ -71,17 +72,21 @@ const money = (value) => `₹${value.toLocaleString('en-IN')}`
 const daysAgo = (date, now) => Math.max(0, Math.floor((now - new Date(date).getTime()) / 86400000))
 const locationLabel = (space) => [space.locality || space.area, space.town, space.district].filter((value, index, list) => value && list.indexOf(value) === index).join(', ')
 
-function getLocationSuggestions(district) {
+function getLocationSuggestions(spaces, district) {
   return [...new Set(spaces
     .filter((space) => !district || (space.district || '').toLowerCase() === district.toLowerCase())
     .flatMap((space) => [space.locality, space.area, space.town, space.district])
-    .filter((value) => value && !value.toLowerCase().includes('sample')))]
+    .filter(Boolean))]
     .sort((a, b) => a.localeCompare(b))
 }
 
 function spaceCoordinates(space) {
-  const latitude = Number(space.coordinates?.latitude ?? space.latitude ?? space.coordinates?.lat)
-  const longitude = Number(space.coordinates?.longitude ?? space.longitude ?? space.coordinates?.lng)
+  const rawLatitude = space.coordinates?.latitude ?? space.latitude ?? space.coordinates?.lat
+  const rawLongitude = space.coordinates?.longitude ?? space.longitude ?? space.coordinates?.lng
+  if (rawLatitude === null || rawLatitude === undefined || rawLatitude === ''
+    || rawLongitude === null || rawLongitude === undefined || rawLongitude === '') return null
+  const latitude = Number(rawLatitude)
+  const longitude = Number(rawLongitude)
   return Number.isFinite(latitude) && latitude >= -90 && latitude <= 90
     && Number.isFinite(longitude) && longitude >= -180 && longitude <= 180
     ? { latitude, longitude }
@@ -96,13 +101,6 @@ function distanceKm(from, to) {
     + Math.cos(radians(from.latitude)) * Math.cos(radians(to.latitude)) * Math.sin(longitudeDelta / 2) ** 2
   return 6371 * 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc))
 }
-
-const coordinateListingCount = spaces.filter((space) => spaceCoordinates(space)).length
-const classifiedSpaceCount = spaces.filter((space) => ['public', 'private'].includes(space.spaceType)).length
-const restaurantCoordinateCount = spaces
-  .filter((space) => !space.isDemo)
-  .flatMap((space) => space.nearby || [])
-  .filter((item) => ['restaurant', 'cafe'].includes(item.type) && spaceCoordinates(item)).length
 
 function categoryLabel(mode, id) {
   return categoriesByMode[mode]?.find((category) => category.id === id)?.label.toLowerCase() || 'your plans'
@@ -128,8 +126,12 @@ function App() {
   const [selectedResources, setSelectedResources] = useState([])
   const [filters, setFilters] = useState([])
   const [search, setSearch] = useState({ purpose: '', people: '4', budget: '500', spaceType: 'public', state: 'Kerala', district: '', location: '', duration: '2' })
-  const locationSuggestions = useMemo(() => getLocationSuggestions(search.district), [search.district])
-  const [activeSpace, setActiveSpace] = useState(spaces[0])
+  const [approvedSpaces, setApprovedSpaces] = useState([])
+  const [listingLoading, setListingLoading] = useState(firebaseConfigured)
+  const [listingError, setListingError] = useState('')
+  const locationSuggestions = useMemo(() => getLocationSuggestions(approvedSpaces, search.district), [approvedSpaces, search.district])
+  const [activeSpace, setActiveSpace] = useState(null)
+  const [crowdReportState, setCrowdReportState] = useState({ spaceId: '', status: 'Unknown', reports: 0, error: '' })
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10))
   const [slot, setSlot] = useState('')
   const [hours, setHours] = useState(2)
@@ -140,6 +142,38 @@ function App() {
   const [notice, setNotice] = useState('')
   const [reporting, setReporting] = useState(false)
   const [reportReason, setReportReason] = useState('Inaccurate listing details')
+  const [reportError, setReportError] = useState('')
+
+  useEffect(() => {
+    let active = true
+    if (!firebaseConfigured) return undefined
+    getApprovedSpaces().then((items) => {
+      if (active) setApprovedSpaces(items)
+    }).catch((error) => {
+      if (active) setListingError(error.message || 'Approved listings could not be loaded from Firestore.')
+    }).finally(() => {
+      if (active) setListingLoading(false)
+    })
+    return () => { active = false }
+  }, [])
+
+  useEffect(() => {
+    if (!activeSpace) return undefined
+    let active = true
+    getCrowdReportSummary(activeSpace.id)
+      .then((summary) => { if (active) setCrowdReportState({ spaceId: activeSpace.id, ...summary, error: '' }) })
+      .catch((error) => {
+        if (active) {
+          setCrowdReportState({
+            spaceId: activeSpace.id,
+            status: 'Unknown',
+            reports: 0,
+            error: error.message || 'Recent crowd reports could not be loaded.',
+          })
+        }
+      })
+    return () => { active = false }
+  }, [activeSpace])
 
   useEffect(() => {
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -169,24 +203,31 @@ function App() {
     return () => window.cancelAnimationFrame(frame)
   }, [page, prefersReducedMotion, scrollToHowItWorks])
 
+  const displayedListingError = firebaseConfigured
+    ? listingError
+    : 'Firebase is not configured. Approved listings are unavailable until Firebase is set up.'
+  const currentCrowdReport = crowdReportState.spaceId === activeSpace?.id
+    ? crowdReportState
+    : { status: 'Unknown', reports: 0, error: '' }
+
   const results = useMemo(() => {
     const loweredLocation = search.location.trim().toLowerCase()
     const loweredDistrict = search.district.trim().toLowerCase()
-    return spaces.filter((space) => {
-      const listingDistrict = (space.district || 'Kozhikode').toLowerCase()
+    return approvedSpaces.filter((space) => {
+      const listingDistrict = (space.district || '').toLowerCase()
       const listingLocation = `${space.locality || space.area} ${space.town || ''} ${listingDistrict} Kerala`.toLowerCase()
       const matchesDistrict = !loweredDistrict || listingDistrict === loweredDistrict
       const matchesLocation = !loweredLocation || listingLocation.includes(loweredLocation)
       const matchesSpaceType = space.spaceType === search.spaceType
       const matchesBudget = search.spaceType !== 'private' || space.pricePerHour <= Number(search.budget || Infinity)
       const matchesPeople = space.capacity >= Number(search.people || 1)
-      const matchesDuration = Object.values(space.availability).some((slots) => slots.some((time) => slotDuration(time) >= Number(search.duration || 1)))
-      const matchesMode = !mode || Boolean(space.categories?.[mode === 'Student' ? 'student' : 'professional']?.includes(search.purpose))
+      const matchesDuration = Object.values(space.availability || {}).some((slots) => slots.some((time) => slotDuration(time) >= Number(search.duration || 1)))
+      const matchesMode = !mode || (space.permittedActivities || []).some((activity) => activity.toLowerCase().replace(/[^a-z0-9]+/g, '-') === search.purpose)
       const coordinates = spaceCoordinates(space)
       const distance = locationCoordinates && coordinates ? distanceKm(locationCoordinates, coordinates) : null
       const matchesNearby = !nearbyOnly || (distance !== null && distance <= Number(nearbyRadius))
-      const restaurantDistances = locationCoordinates && !space.isDemo
-        ? space.nearby
+      const restaurantDistances = locationCoordinates
+        ? (space.nearby || [])
           .filter((item) => ['restaurant', 'cafe'].includes(item.type))
           .map(spaceCoordinates)
           .filter(Boolean)
@@ -219,8 +260,7 @@ function App() {
       if (nearbyOnly) return distanceKm(locationCoordinates, spaceCoordinates(a)) - distanceKm(locationCoordinates, spaceCoordinates(b))
       if (filters.includes('restaurant') && locationCoordinates) {
         const restaurantDistance = (space) => {
-          if (space.isDemo) return Infinity
-          const distances = space.nearby
+          const distances = (space.nearby || [])
             .filter((item) => ['restaurant', 'cafe'].includes(item.type))
             .map(spaceCoordinates)
             .filter(Boolean)
@@ -232,7 +272,12 @@ function App() {
       if (mode === 'Student') return studentScore(a) - studentScore(b)
       return professionalScore(b) - professionalScore(a)
     })
-  }, [comfort, filters, locationCoordinates, mode, nearbyOnly, nearbyRadius, search, selectedResources])
+  }, [approvedSpaces, comfort, filters, locationCoordinates, mode, nearbyOnly, nearbyRadius, search, selectedResources])
+
+  const coordinateListingCount = approvedSpaces.filter((space) => spaceCoordinates(space)).length
+  const restaurantCoordinateCount = approvedSpaces
+    .flatMap((space) => space.nearby || [])
+    .filter((item) => ['restaurant', 'cafe'].includes(item.type) && spaceCoordinates(item)).length
 
   const toggleResource = (resource) => setSelectedResources((current) => current.includes(resource) ? current.filter((item) => item !== resource) : [...current, resource])
   const toggleFilter = (filter) => {
@@ -243,7 +288,7 @@ function App() {
         message: !locationCoordinates
           ? 'Restaurants near me needs your current location. Use the location button in search first.'
           : restaurantCoordinateCount === 0
-            ? 'Restaurant proximity is unavailable: sample nearby-place names have no verified coordinates.'
+            ? 'Restaurant proximity is unavailable because no public-place coordinates are linked to these listings.'
             : 'Restaurant results use coordinate-backed places within your selected radius.',
       })
     }
@@ -256,7 +301,7 @@ function App() {
   }
 
   function changeDistrict(district) {
-    const currentLocationIsValid = !district || getLocationSuggestions(district)
+    const currentLocationIsValid = !district || getLocationSuggestions(approvedSpaces, district)
       .some((location) => location.toLowerCase() === search.location.trim().toLowerCase())
     locationRequestId.current += 1
     setLocating(false)
@@ -344,7 +389,7 @@ function App() {
             setLocating(false)
             setLocationStatus({
               type: 'success',
-              message: 'Coordinates captured. No place-name service is configured, so choose a district and locality manually. Sample listings have no coordinates for distance matching.',
+              message: 'Coordinates captured. No place-name service is configured, so choose a district and locality manually. Approved listings do not expose exact property coordinates for proximity matching.',
             })
             return
           }
@@ -353,14 +398,14 @@ function App() {
             const resolved = await reverseGeocode(currentCoordinates)
             if (requestId !== locationRequestId.current) return
             if (resolved?.outsideKerala) {
-              setLocationStatus({ type: 'warning', message: 'Your detected location is outside Kerala. Coordinates are available, but the current sample listings cover Kerala only.' })
+              setLocationStatus({ type: 'warning', message: 'Your detected location is outside Kerala. The current listing service covers Kerala only.' })
             } else if (resolved?.location || resolved?.district) {
               const district = resolved.district || ''
               const location = resolved.location || ''
               setSearch((current) => ({ ...current, state: 'Kerala', district, location }))
               setLocationStatus({
                 type: 'success',
-                message: `Place resolved${location ? ` to ${location}` : ''}${district ? `, ${district}` : ''}. Sample spaces still need real coordinates for distance matching.`,
+                message: `Place resolved${location ? ` to ${location}` : ''}${district ? `, ${district}` : ''}. Exact property coordinates are kept private, so distance matching is unavailable.`,
               })
             } else {
               setLocationStatus({ type: 'warning', message: 'Coordinates captured, but the service did not return a Kerala locality. Choose a district and locality manually.' })
@@ -405,7 +450,7 @@ function App() {
     if (enabled && !locationCoordinates) {
       setLocationStatus({ type: 'error', message: 'Use “Use my current location” to enable distance matching. A typed place name filters by text but cannot provide coordinates.' })
     } else if (enabled && spaces.every((space) => !spaceCoordinates(space))) {
-      setLocationStatus({ type: 'error', message: 'Nearby is on, but these sample listings do not include coordinates, so no distances can be calculated yet.' })
+      setLocationStatus({ type: 'error', message: 'Nearby search needs public listing coordinates. Exact owner property coordinates are not exposed, so distance matching is unavailable.' })
     }
   }
 
@@ -468,10 +513,21 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  function submitListing(event) {
+  async function submitSpaceReport(event) {
     event.preventDefault()
-    setNotice('This is a listing-form demo. Your details were not saved or sent anywhere.')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setReportError('')
+    if (!auth?.currentUser) {
+      setReportError('Sign in through the owner portal before submitting a report. Visitor accounts are not set up yet.')
+      return
+    }
+    try {
+      const details = new FormData(event.currentTarget).get('details')
+      await createReportFlag(auth.currentUser, activeSpace.id, reportReason, String(details || ''))
+      setReporting(false)
+      setNotice('Thank you. Your report was sent to the administrator review queue.')
+    } catch (error) {
+      setReportError(error.message || 'Your report could not be submitted.')
+    }
   }
 
   function toggleSaved(id) {
@@ -479,7 +535,9 @@ function App() {
   }
 
   const selectedDay = dayNames[new Date(`${date}T12:00:00`).getDay()]
-  const availableSlots = (activeSpace.availability[selectedDay] || []).filter((time) => !bookedSlots.includes(`${activeSpace.id}:${date}:${time}`))
+  const availableSlots = activeSpace
+    ? (activeSpace.availability[selectedDay] || []).filter((time) => !bookedSlots.includes(`${activeSpace.id}:${date}:${time}`))
+    : []
   const maxBookingHours = slot ? Math.max(1, Math.min(12, slotDuration(slot))) : 12
   const dayLabel = new Date(`${date}T12:00:00`).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })
   const restaurantFilterActive = filters.includes('restaurant')
@@ -495,7 +553,7 @@ function App() {
           <button className={page === 'home' || page === 'results' ? 'nav-link active' : 'nav-link'} onClick={() => { setPage('home'); setMobileMenu(false) }}>Find a space</button>
           <button className="nav-link nav-about" onClick={navigateToHowItWorks}>How it works</button>
         </nav>
-        <button className="header-action" onClick={() => setPage('listing')}>List your space <ArrowUpRight size={15} /></button>
+        <a className="header-action" href="/owner">Owner sign in <ArrowUpRight size={15} /></a>
       </header>
 
       {page === 'home' && <main>
@@ -504,7 +562,7 @@ function App() {
             <div className="eyebrow"><span className="eyebrow-dot" /> KERALA, INDIA <span className="eyebrow-line" /> A BETTER WAY TO GATHER</div>
             <h1>There's room<br />for <em>what's next.</em></h1>
             <p className="hero-description">Discover the rooms, rooftops, and little corners already around you. Made for ideas, good company, and getting things done.</p>
-            <div className="hero-proof"><span>KERALA-WIDE SEARCH</span><span>ILLUSTRATIVE SAMPLE LISTINGS</span></div>
+            <div className="hero-proof"><span>KERALA-WIDE SEARCH</span><span>APPROVED LISTINGS ONLY</span></div>
           </div>
           <div className="hero-art" aria-label="A bright, welcoming community meeting room">
             <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85" alt="Sunlit creative meeting room with a long table" />
@@ -551,7 +609,7 @@ function App() {
               setLocationCoordinates(coordinates)
               setNearbyOnly(false)
               setSearch((current) => ({ ...current, district: '', location: '' }))
-              setLocationStatus({ type: 'warning', message: 'Map point adjusted. Choose a district or locality separately to filter Kerala sample listings.' })
+              setLocationStatus({ type: 'warning', message: 'Map point adjusted. Choose a district or locality separately; owner property coordinates remain private.' })
             }} />}</div>
             <label className="search-field duration-field"><span>DURATION</span><select aria-label="Booking duration" value={search.duration} onChange={(event) => setSearch((current) => ({ ...current, duration: event.target.value }))}><option value="1">1 hour</option><option value="2">2 hours</option><option value="3">3 hours</option><option value="4">4 hours</option><option value="6">6 hours</option></select></label>
             <button className="search-submit" type="submit" disabled={!mode || !search.purpose}><Search size={17} /><span>Find a space</span></button>
@@ -560,7 +618,7 @@ function App() {
             <label className="comfort-select"><span>SPACE PREFERENCES</span><select aria-label="Optional women-safety preference" value={comfort} onChange={(event) => setComfort(event.target.value)}><option value="">No additional women-specific requirement</option>{comfortOptions.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select></label>
             <fieldset className="amenity-preferences"><legend>OPTIONAL AMENITIES</legend><div className="amenity-options">{Object.entries(resourceLabels).map(([key, label]) => <label key={key} className={selectedResources.includes(key) ? 'selected' : ''}><input type="checkbox" checked={selectedResources.includes(key)} onChange={() => toggleResource(key)} /><span>{label}</span></label>)}</div></fieldset>
             <div className="location-preferences"><span className="location-preferences-title">LOCATION PREFERENCES</span><label className={`nearby-option ${nearbyOnly ? 'selected' : ''}`}><input type="checkbox" checked={nearbyOnly} onChange={(event) => toggleNearby(event.target.checked)} /><MapPin size={14} aria-hidden="true" /><span>Near my location</span></label><label className="nearby-radius">Within <select aria-label="Nearby search radius" value={nearbyRadius} disabled={!nearbyOnly && !filters.includes('restaurant')} onChange={(event) => setNearbyRadius(event.target.value)}><option value="5">5 km</option><option value="10">10 km</option><option value="25">25 km</option><option value="50">50 km</option></select></label><small>Distance matching needs current coordinates and real listing coordinates. No map/geocoder credentials are included.</small></div>
-            <span className="search-demo-note">Sample listings; details are illustrative.</span>
+            <span className="search-demo-note">Only administrator-approved listings appear in results. Owner-provided details are not automatically verified.</span>
           </div>
         </section>
         <section className="home-intro">
@@ -568,57 +626,71 @@ function App() {
           <p className="rotating-home-copy" aria-live="polite" aria-atomic="true"><span key={rotatingMessageIndex} className={prefersReducedMotion ? '' : 'rotating-message'}>{rotatingMessages[rotatingMessageIndex]}</span></p>
         </section>
         <section className="featured-section">
-          <div className="section-heading"><div><span className="eyebrow">ACROSS KERALA</span><h2>A few sample spaces</h2></div><button className="text-link" onClick={() => document.getElementById('guided-search')?.scrollIntoView({ behavior: 'smooth' })}>Explore all spaces <ArrowRight size={16} /></button></div>
-          <div className="featured-grid">{spaces.slice(0, 3).map((space) => <SpaceCard key={space.id} space={space} mode={mode || 'Student'} selectedResources={selectedResources} currentTime={currentTime} saved={saved.includes(space.id)} onOpen={openDetails} onSave={toggleSaved} />)}</div>
+          <div className="section-heading"><div><span className="eyebrow">ACROSS KERALA</span><h2>Spaces to explore</h2></div><button className="text-link" onClick={() => document.getElementById('guided-search')?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' })}>Explore all spaces <ArrowRight size={16} /></button></div>
+          {listingLoading ? <div className="empty-state"><span>✳</span><h2>Finding approved spaces</h2><p>Loading public-safe listings from Firestore.</p></div> : displayedListingError ? <div className="portal-notice" role="alert"><strong>Listings are unavailable</strong><span>{displayedListingError}</span></div> : approvedSpaces.length ? <div className="featured-grid">{approvedSpaces.slice(0, 3).map((space) => <SpaceCard key={space.id} space={space} mode={mode || 'Student'} selectedResources={selectedResources} currentTime={currentTime} saved={saved.includes(space.id)} onOpen={openDetails} onSave={toggleSaved} />)}</div> : <div className="empty-state"><span>✳</span><h2>No approved spaces yet</h2><p>New owner submissions stay private until an administrator approves them. OpenStreetMap places are shown separately and are not bookable listings.</p></div>}
         </section>
           <section className="how-section" id="how-it-works" ref={howItWorksRef}>
             <span className="eyebrow">A SIMPLE WAY TO MAKE A PLAN</span><h2>From your idea to <em>your somewhere.</em></h2>
             <div className="steps-grid">
-              <div><span>01</span><h3>Choose who you are and what you need</h3><p>Select Student or Working professional, then choose an activity to see relevant sample spaces.</p></div>
+              <div><span>01</span><h3>Choose who you are and what you need</h3><p>Select Student or Working professional, then choose an activity to see matching approved spaces.</p></div>
               <div><span>02</span><h3>Set your location</h3><p>Search Kerala by district and a suggested town or locality, enter a place manually, or request your current location.</p></div>
               <div><span>03</span><h3>Set your preferences</h3><p>Choose your budget, group size, duration, amenities, and optional comfort preferences.</p></div>
-              <div><span>04</span><h3>Explore matching spaces</h3><p>Compare illustrative listings and their sample amenities, availability, and safety details.</p></div>
-              <div><span>05</span><h3>Review and try a booking</h3><p>Select a listed time slot and confirm a demo booking. It stays in this session; no host is contacted and no payment is taken.</p></div>
-              <div><span>06</span><h3>Have a space to share?</h3><p>Use the listing form to preview what owners can provide. Demo submissions are not saved or sent.</p></div>
+              <div><span>04</span><h3>Explore matching spaces</h3><p>Browse administrator-approved listings. Owner-declared details are clearly distinguished from verification and recent crowd reports.</p></div>
+              <div><span>05</span><h3>Review a booking preview</h3><p>Try the booking flow. It remains in this browser session until customer sign-in and booking persistence are configured.</p></div>
+              <div><span>06</span><h3>Have a space to share?</h3><p>Sign in to the private owner portal and submit a property for administrator review.</p></div>
             </div>
           </section>
-        <OwnerCallout onClick={() => setPage('listing')} />
       </main>}
 
       {page === 'results' && <main className="page-main results-page">
         <div className="breadcrumb"><button onClick={() => setPage('home')}>Home</button><span>/</span><span>Find a space</span></div>
-        <div className="results-top"><div><span className="eyebrow">YOUR NEXT SOMEWHERE · DEMO LISTINGS</span><h1>Spaces in <em>{search.location || search.district || 'Kerala'}</em></h1><p>{results.length} sample {search.spaceType} spaces for {categoryLabel(mode, search.purpose)} · {search.people} people{search.spaceType === 'private' ? ` · up to ${money(Number(search.budget || 0))}/hr` : ''}</p></div><button className="outline-button" onClick={() => setPage('home')}><SlidersHorizontal size={16} /> Edit search</button></div>
-        {classifiedSpaceCount === 0 && <div className="demo-disclaimer"><Sparkles size={16} /><span><strong>Space type data is not available yet.</strong> None of the sample listings is identified as Public or Private, so they are not assigned to either category. Add verified <code>spaceType</code> values to listings before these results can be populated.</span></div>}
-        <div className="results-layout"><aside className="filter-panel"><div className="filter-heading"><span>MAKE IT YOURS</span><button onClick={() => setFilters([])}>Clear</button></div>{[['cctv', 'CCTV'], ['transport', 'Near public transport'], ['washroom', 'Washroom on-site'], ['restaurant', 'Restaurants near me']].map(([key, label]) => <label className="filter-option" key={key}><input type="checkbox" checked={filters.includes(key)} onChange={() => toggleFilter(key)} /><span className="custom-check"><Check size={12} /></span>{label}</label>)}{filters.includes('restaurant') && <p className="restaurant-filter-note">{!locationCoordinates ? 'Use current location to search by distance.' : restaurantCoordinateCount === 0 ? 'No verified restaurant coordinates are available in these sample listings. No sample walking times are used for this filter.' : `Showing places within ${nearbyRadius} km; coordinate-backed restaurant data required.`}</p>}<div className="filter-safety"><ShieldCheck size={18} /><span><strong>Your comfort comes first.</strong><small>Safety details are illustrative, not verified.</small></span></div></aside>
-          <div className="results-content"><div className="results-toolbar"><span>{nearbyOnly ? `Within ${nearbyRadius} km of your location` : restaurantFilterActive ? locationCoordinates ? `Restaurants within ${nearbyRadius} km of your location` : 'Restaurants near me · location required' : `Sorted for ${mode === 'Student' ? 'student needs' : 'professional needs'}`}</span><button className="results-clear" onClick={() => { setSelectedResources([]); setFilters([]); setComfort(''); setNearbyOnly(false); setSearch((current) => ({ ...current, budget: '1000', location: '', district: '', people: '1', duration: '1' })) }}>Clear filters</button></div>{results.length ? <div className="results-grid">{results.map((space) => <SpaceCard key={space.id} space={space} mode={mode} selectedResources={selectedResources} currentTime={currentTime} saved={saved.includes(space.id)} onOpen={openDetails} onSave={toggleSaved} />)}</div> : <div className="empty-state"><span>✳</span><h2>{nearbyOnly ? 'No nearby spaces found' : restaurantFilterActive ? 'No coordinate-matched restaurants' : 'No spaces just yet'}</h2><p>{nearbyOnly ? !locationCoordinates ? 'To search by distance, go back to search and use your current location. A typed town name cannot be converted to coordinates in this demo.' : coordinateListingCount === 0 ? 'No sample listings include coordinates, so distances cannot be calculated yet. Turn off Nearby and search by district or town instead.' : `No coordinate-enabled listings matched within ${nearbyRadius} km. Widen your search radius or clear the Nearby filter.` : restaurantFilterActive ? !locationCoordinates ? 'Restaurants near me needs your current location. Entering a district or town filters spaces by text but does not provide coordinates.' : restaurantCoordinateCount === 0 ? 'The sample nearby-place names and walking times are illustrative only. No verified restaurant coordinates are available to calculate distances. Clear this filter or add coordinate-backed place data.' : `No coordinate-backed restaurants were found within ${nearbyRadius} km. Widen the radius or clear the restaurant filter.` : 'Try a wider budget, another Kerala district, or fewer must-haves. These listings are illustrative demo spaces.'}</p>{nearbyOnly || restaurantFilterActive ? <div className="nearby-empty-actions">{(!locationCoordinates || (restaurantFilterActive && restaurantCoordinateCount === 0)) && <button className="primary-button" onClick={() => setPage('home')}>{locationCoordinates ? 'Edit search' : 'Choose a location'}</button>}{locationCoordinates && (coordinateListingCount > 0 || restaurantCoordinateCount > 0) && Number(nearbyRadius) < 50 ? <button className="primary-button" onClick={() => setNearbyRadius(String(Math.min(50, Number(nearbyRadius) * 2)))}>Widen radius</button> : null}<button className="outline-button" onClick={() => { setNearbyOnly(false); setFilters((current) => current.filter((filter) => filter !== 'restaurant')) }}>Clear proximity filters</button></div> : <button className="primary-button" onClick={() => { setComfort(''); setSelectedResources([]); setFilters([]); setSearch((current) => ({ ...current, budget: '1000', location: '', district: '', people: '1', duration: '1' })) }}>Relax filters</button>}</div>}</div>
+        <div className="results-top"><div><span className="eyebrow">APPROVED LISTINGS · KERALA</span><h1>Spaces in <em>{search.location || search.district || 'Kerala'}</em></h1><p>{results.length} approved {search.spaceType} spaces for {categoryLabel(mode, search.purpose)} · {search.people} people{search.spaceType === 'private' ? ` · up to ${money(Number(search.budget || 0))}/hr` : ''}</p></div><button className="outline-button" onClick={() => setPage('home')}><SlidersHorizontal size={16} /> Edit search</button></div>
+        {listingLoading && <div className="portal-notice" role="status"><strong>Loading approved listings…</strong><span>Getting public-safe records from Firestore.</span></div>}
+        {displayedListingError && <div className="portal-notice" role="alert"><strong>Listings could not be loaded</strong><span>{displayedListingError}</span></div>}
+        <div className="results-layout">
+          <aside className="filter-panel">
+            <div className="filter-heading"><span>MAKE IT YOURS</span><button onClick={() => setFilters([])}>Clear</button></div>
+            {[['cctv', 'CCTV'], ['transport', 'Near public transport'], ['washroom', 'Washroom on-site'], ['restaurant', 'Restaurants near me']].map(([key, label]) => <label className="filter-option" key={key}><input type="checkbox" checked={filters.includes(key)} onChange={() => toggleFilter(key)} /><span className="custom-check"><Check size={12} /></span>{label}</label>)}
+            {filters.includes('restaurant') && <p className="restaurant-filter-note">{!locationCoordinates ? 'Use current location to search by distance.' : restaurantCoordinateCount === 0 ? 'No verified nearby-place coordinates are linked to these listings, so this filter cannot estimate distances.' : `Showing places within ${nearbyRadius} km based on imported coordinates.`}</p>}
+            <div className="filter-safety"><ShieldCheck size={18} /><span><strong>Your comfort comes first.</strong><small>Owner-provided details are not independently verified unless explicitly marked.</small></span></div>
+          </aside>
+          <div className="results-content">
+            <div className="results-toolbar"><span>{nearbyOnly ? `Within ${nearbyRadius} km of your location` : restaurantFilterActive ? locationCoordinates ? `Restaurants within ${nearbyRadius} km of your location` : 'Restaurants near me · location required' : `Sorted for ${mode === 'Student' ? 'student needs' : 'professional needs'}`}</span><button className="results-clear" onClick={() => { setSelectedResources([]); setFilters([]); setComfort(''); setNearbyOnly(false); setSearch((current) => ({ ...current, budget: '1000', location: '', district: '', people: '1', duration: '1' })) }}>Clear filters</button></div>
+            {results.length ? <div className="results-grid">{results.map((space) => <SpaceCard key={space.id} space={space} mode={mode} selectedResources={selectedResources} currentTime={currentTime} saved={saved.includes(space.id)} onOpen={openDetails} onSave={toggleSaved} />)}</div> : <div className="empty-state">
+              <span>✳</span>
+              <h2>{listingLoading ? 'Loading approved spaces' : displayedListingError ? 'Listings are unavailable' : nearbyOnly ? 'Nearby search is unavailable' : restaurantFilterActive ? 'Nearby places are unavailable' : 'No matching spaces yet'}</h2>
+              <p>{listingLoading ? 'Results will appear when the approved Firestore listings have loaded.' : displayedListingError ? 'Fix the Firebase setup or request error shown above. The app does not substitute sample listings.' : nearbyOnly || restaurantFilterActive ? coordinateListingCount === 0 ? 'Public listing data does not include precise property coordinates, so distance matching is disabled to protect owner addresses.' : 'No coordinate-backed nearby records matched. Clear the proximity filter or use district and locality search.' : search.spaceType === 'public' ? 'There are no approved public bookable-space records yet. Imported OpenStreetMap places are kept separate and are not presented as available spaces.' : 'Try a wider budget, another Kerala district, or fewer must-haves. Owner submissions appear here only after administrator approval.'}</p>
+              {nearbyOnly || restaurantFilterActive ? <div className="nearby-empty-actions"><button className="outline-button" onClick={() => { setNearbyOnly(false); setFilters((current) => current.filter((filter) => filter !== 'restaurant')) }}>Clear proximity filters</button></div> : <button className="primary-button" onClick={() => { setComfort(''); setSelectedResources([]); setFilters([]); setSearch((current) => ({ ...current, budget: '1000', location: '', district: '', people: '1', duration: '1' })) }}>Relax filters</button>}
+            </div>}
+          </div>
         </div>
       </main>}
 
       {page === 'detail' && <main className="page-main detail-page">
         <div className="breadcrumb"><button onClick={() => setPage('results')}>Spaces</button><span>/</span><span>{locationLabel(activeSpace)}</span><span>/</span><span>{activeSpace.name}</span></div>
-        <div className="detail-title-row"><div><span className="eyebrow">{locationLabel(activeSpace).toUpperCase()} · {activeSpace.isDemo ? 'DEMO LISTING' : 'KERALA'}</span><h1>{activeSpace.name}</h1><p><MapPin size={15} /> {locationLabel(activeSpace)} {activeSpace.isDemo ? <span className="demo-note-inline">· Sample location, not a real address</span> : null}</p></div><button className={`outline-button save-detail ${saved.includes(activeSpace.id) ? 'saved' : ''}`} onClick={() => toggleSaved(activeSpace.id)}><Heart size={16} fill={saved.includes(activeSpace.id) ? 'currentColor' : 'none'} /> Save space</button></div>
-        {activeSpace.isDemo && <div className="demo-disclaimer"><Sparkles size={16} /><span><strong>Illustrative demo listing.</strong> Venue details, photos, availability, safety features, nearby places, and ratings are sample content and have not been independently verified.</span></div>}
-        <div className="gallery"><img src={activeSpace.photoUrl} alt={activeSpace.name} /><div className="gallery-side"><img src={activeSpace.gallery[0]} alt={`${activeSpace.name} interior`} /><img src={activeSpace.gallery[1]} alt={`${activeSpace.name} seating`} /></div><span className="gallery-count">01 / 03</span></div>
+        <div className="detail-title-row"><div><span className="eyebrow">{locationLabel(activeSpace).toUpperCase()} · APPROVED LISTING</span><h1>{activeSpace.name}</h1><p><MapPin size={15} /> {locationLabel(activeSpace)}</p></div><button className={`outline-button save-detail ${saved.includes(activeSpace.id) ? 'saved' : ''}`} onClick={() => toggleSaved(activeSpace.id)}><Heart size={16} fill={saved.includes(activeSpace.id) ? 'currentColor' : 'none'} /> Save space</button></div>
+        <div className="portal-notice"><strong>Approved for public listing; not independently verified.</strong><span>Owner-provided facilities, safety details, photos, and availability should be confirmed with the owner.</span></div>
+        <div className="gallery">{activeSpace.photoUrl ? <img src={activeSpace.photoUrl} alt={activeSpace.name} /> : <div className="gallery-photo-placeholder">Photos not provided by the owner</div>}<div className="gallery-side">{activeSpace.gallery.filter(Boolean).slice(0, 2).map((photo, index) => <img key={`${photo}-${index}`} src={photo} alt={`${activeSpace.name} view ${index + 1}`} />)}</div><span className="gallery-count">{activeSpace.photoUrl ? '01 / 03' : 'No photos'}</span></div>
         <div className="detail-layout"><div className="detail-content">
-          <div className="detail-highlights"><span>{activeSpace.isDemo ? <Sparkles size={17} /> : <BadgeCheck size={17} />} {activeSpace.isDemo ? 'Demo listing' : 'Verified space'}</span><span><UsersIcon /> Up to {activeSpace.capacity} people</span><span><Clock3 size={16} /> {activeSpace.seatingType} seating</span></div>
+          <div className="detail-highlights"><span>{activeSpace.verified ? <BadgeCheck size={17} /> : <Check size={17} />} {activeSpace.verified ? 'Verified space' : 'Approved listing'}</span><span><UsersIcon /> Up to {activeSpace.capacity} people</span><span><Clock3 size={16} /> {activeSpace.seatingType} seating</span></div>
           <section className="detail-section"><span className="eyebrow">A PLACE WITH POSSIBILITIES</span><h2>A little about this space</h2><p className="detail-description">{activeSpace.description}</p><div className="detail-tags"><span>{activeSpace.atmosphere}</span><span>{activeSpace.indoorOutdoor}</span>{mode === 'Student' ? <span className="study-badge">Study-friendly</span> : <span className="work-badge">Work-ready</span>}</div></section>
           <section className="detail-section"><span className="eyebrow">THE GOOD TO KNOW</span><h2>What you'll find here</h2><div className="amenities-grid">{Object.entries(activeSpace.amenities).filter(([, value]) => value).map(([key]) => <span key={key}><Check size={15} /> {key === 'wifi' ? 'Wi-Fi' : key === 'ac' ? 'Air conditioning' : key === 'fans' ? 'Fans' : key === 'charging' ? 'Charging points' : key[0].toUpperCase() + key.slice(1)}</span>)}</div><div className="resources-box"><h3>More helpful things</h3><div className="resource-detail-grid"><span><Wifi size={15} /> Wi-Fi up to {activeSpace.resources.wifiSpeed}</span><span><Zap size={15} /> {activeSpace.resources.powerSockets} power sockets</span><span><Printer size={15} /> {activeSpace.resources.printerAccess ? 'Printer access' : 'No printer access'}</span><span><Banknote size={15} /> {activeSpace.resources.powerBackup ? 'Power backup' : 'No power backup'}</span><span><Shield size={15} /> {activeSpace.resources.soundproof ? 'Soundproofed' : 'Everyday sounds'}</span><span><Coffee size={15} /> {activeSpace.resources.teaCoffee ? 'Tea & coffee' : 'Bring your own brew'}</span><span><span className="resource-number">{activeSpace.resources.desks}</span> desks</span><span><span className="resource-number">{activeSpace.resources.lockers ? '✓' : '—'}</span> Lockers</span><span><span className="resource-number">{activeSpace.resources.drinkingWater ? '✓' : '—'}</span> Drinking water</span></div></div></section>
-          <section className="detail-section"><span className="eyebrow">TIMES THAT WORK</span><h2>When it's free</h2><div className="availability-list">{Object.entries(activeSpace.availability).filter(([, times]) => times.length).map(([day, times]) => <div key={day}><strong>{day}</strong><span>{times.join(' · ')}</span></div>)}</div></section>
-          <section className="detail-section safety-section"><span className="eyebrow">YOUR COMFORT MATTERS</span><h2>Safety checklist</h2>{activeSpace.isDemo ? <p className="demo-safety-note">The features below are illustrative sample data, not verified safety claims or real reviewer feedback.</p> : activeSpace.safety.safetyRating && <div className="safety-rating"><span><Star size={19} fill="currentColor" /> {activeSpace.safety.safetyRating} <small>Women reviewers' safety rating</small></span></div>}{isWomenFriendly(activeSpace) && <span className="women-badge"><Heart size={13} /> Women-friendly features listed</span>}<div className="safety-check-grid">{[['CCTV on site', activeSpace.safety.cctv], ['Well-lit space', activeSpace.safety.wellLit], ['Secured entry', activeSpace.safety.securedEntry], ['Owner ID verified', activeSpace.safety.ownerIdVerified], ['Female host or staff', activeSpace.safety.femaleHostOrStaff], ['Busy, populated area', activeSpace.safety.busyArea], ['Near public transport', activeSpace.safety.nearPublicTransport]].map(([label, yes]) => <span key={label} className={yes ? 'yes' : 'no'}>{yes ? <Check size={15} /> : <X size={15} />}{label}</span>)}</div>{activeSpace.safety.womenOnly && <div className="women-hours"><Heart size={15} /> Women-only space (sample detail)</div>}{activeSpace.safety.womenOnlyHours && <div className="women-hours"><Heart size={15} /> Women-only hours: {activeSpace.safety.womenOnlyHours}</div>}</section>
-          <section className="detail-section washroom-section"><span className="eyebrow">THE LITTLE ESSENTIALS</span><h2>Washroom</h2>{activeSpace.isDemo && <p className="demo-safety-note">Washroom availability and cleanliness details are illustrative sample data.</p>}<div className="washroom-grid"><span><Check size={15} /> {activeSpace.washroom.onSite ? 'On-site washroom' : 'No on-site washroom'}</span><span>{activeSpace.washroom.separateForWomen ? <Check size={15} /> : <X size={15} />} Separate for women</span><span>{activeSpace.washroom.accessible ? <Check size={15} /> : <X size={15} />} Step-free accessible</span><span><Star size={15} fill="currentColor" /> {activeSpace.washroom.cleanlinessRating} cleanliness</span></div></section>
-          <section className="detail-section nearby-section"><span className="eyebrow">AROUND THE CORNER</span><h2>Nearby</h2>{activeSpace.isDemo && <p className="demo-note-inline">Sample entries only. Nearby businesses, place names, and distances have not been verified.</p>}<NearbyList space={activeSpace} /></section>
-          <button className="report-button" onClick={() => setReporting(!reporting)}><Shield size={15} /> Report this space</button>{reporting && <form className="report-form" onSubmit={(event) => { event.preventDefault(); setReporting(false); setNotice(`Thank you. Your report about "${reportReason.toLowerCase()}" was not submitted or saved; this is a demo form.`) }}><label htmlFor="report-reason">What would you like to report?</label><select id="report-reason" value={reportReason} onChange={(event) => setReportReason(event.target.value)}><option>Inaccurate listing details</option><option>Safety concern</option><option>Inappropriate content</option><option>Other</option></select><button className="primary-button" type="submit">Submit report</button></form>}
-        </div><aside className="booking-card"><div className="booking-price"><strong>{money(activeSpace.pricePerHour)}</strong><span> / hour</span></div><div className="booking-rating"><MapPin size={14} /> {activeSpace.area}<span> - Demo data</span></div><div className="booking-card-note"><BadgeCheck size={16} /> Demo booking only. No payment or host contact.</div><button className="primary-button full-button" onClick={startBooking}>Book this space <ArrowRight size={16} /></button><p className="booking-card-fine">No payment now. Demo status: pending owner confirmation. No host is contacted.</p><div className="card-last-updated"><Clock3 size={14} /> Availability updated {daysAgo(activeSpace.lastUpdated, currentTime)} days ago</div></aside></div>
+          <section className="detail-section"><span className="eyebrow">OWNER-DECLARED SCHEDULE</span><h2>When the owner says it's free</h2><p className="portal-muted">This schedule is not a live vacancy signal and does not include confirmed booking conflicts.</p><div className="availability-list">{Object.entries(activeSpace.availability || {}).filter(([, times]) => times.length).map(([day, times]) => <div key={day}><strong>{day}</strong><span>{times.join(' · ')}</span></div>)}</div>{!Object.values(activeSpace.availability || {}).some((times) => times.length) && <p className="portal-muted">No owner-declared schedule has been provided.</p>}</section>
+          <section className="detail-section"><span className="eyebrow">COMMUNITY OBSERVATIONS</span><h2>Recent crowd reports</h2><p className="crowd-status">{currentCrowdReport.error ? 'Unknown — recent reports could not be loaded.' : `${currentCrowdReport.status}${currentCrowdReport.reports ? ` · ${currentCrowdReport.reports} reports in the last hour` : ' — not enough recent reports'}`}</p><p className="portal-muted">This is community-reported information, not live occupancy data.</p></section>
+          <section className="detail-section safety-section"><span className="eyebrow">YOUR COMFORT MATTERS</span><h2>Safety checklist</h2><p className="demo-safety-note">Safety features below are owner-declared and have not been independently verified. Identity verification and reviewer ratings remain unavailable unless explicitly recorded.</p>{activeSpace.safetyRating != null && <div className="safety-rating"><span><Star size={19} fill="currentColor" /> {activeSpace.safetyRating} <small>Women reviewers' safety rating</small></span></div>}{isWomenFriendly(activeSpace) && <span className="women-badge"><Heart size={13} /> Women-friendly features verified</span>}<div className="safety-check-grid">{[['CCTV on site', activeSpace.safety.cctv], ['Well-lit space', activeSpace.safety.wellLit], ['Secured entry', activeSpace.safety.securedEntry], ['Owner ID verified', activeSpace.safety.ownerIdVerified], ['Female host or staff', activeSpace.safety.femaleHostOrStaff], ['Busy, populated area', activeSpace.safety.busyArea], ['Near public transport', activeSpace.safety.nearPublicTransport]].map(([label, yes]) => <span key={label} className={yes ? 'yes' : 'no'}>{yes ? <Check size={15} /> : <X size={15} />}{label}{yes && label !== 'Owner ID verified' ? ' · owner-declared' : ''}</span>)}</div>{activeSpace.safety.womenOnlyHours && <div className="women-hours"><Heart size={15} /> Women-only hours: {activeSpace.safety.womenOnlyHours} · owner-declared</div>}</section>
+          <section className="detail-section washroom-section"><span className="eyebrow">THE LITTLE ESSENTIALS</span><h2>Washroom</h2><p className="demo-safety-note">Washroom details are owner-declared and have not been independently verified.</p><div className="washroom-grid"><span>{activeSpace.washroom.onSite ? <Check size={15} /> : <X size={15} />} {activeSpace.washroom.onSite ? 'On-site washroom' : 'No on-site washroom'} · owner-declared</span><span>{activeSpace.washroom.separateForWomen ? <Check size={15} /> : <X size={15} />} Separate for women</span><span>{activeSpace.washroom.accessible ? <Check size={15} /> : <X size={15} />} Step-free accessible</span><span><Star size={15} fill="currentColor" /> {activeSpace.washroom.cleanlinessRating == null ? 'Not rated' : `${activeSpace.washroom.cleanlinessRating} cleanliness`}</span></div></section>
+          <section className="detail-section nearby-section"><span className="eyebrow">AROUND THE CORNER</span><h2>Nearby</h2><NearbyList space={activeSpace} /></section>
+          <button className="report-button" onClick={() => { setReporting(!reporting); setReportError('') }}><Shield size={15} /> Report this space</button>{reporting && <form className="report-form" onSubmit={submitSpaceReport}><label htmlFor="report-reason">What would you like to report?</label><select id="report-reason" value={reportReason} onChange={(event) => setReportReason(event.target.value)}><option>Inaccurate listing details</option><option>Safety concern</option><option>Inappropriate content</option><option>Other</option></select><label htmlFor="report-details">Additional details <span className="optional">(optional)</span></label><textarea id="report-details" name="details" maxLength="1000" rows="2" /><button className="primary-button" type="submit">Submit report</button>{reportError && <p className="portal-error" role="alert">{reportError}</p>}</form>}
+        </div><aside className="booking-card"><div className="booking-price"><strong>{money(activeSpace.pricePerHour)}</strong><span> / hour</span></div><div className="booking-rating"><MapPin size={14} /> {activeSpace.area}<span> · Owner-provided listing</span></div><div className="booking-card-note"><BadgeCheck size={16} /> Booking preview only. No booking request is saved or sent to the owner.</div><button className="primary-button full-button" onClick={startBooking}>Preview booking <ArrowRight size={16} /></button><p className="booking-card-fine">No payment or owner notification. Visitor sign-in is not configured.</p><div className="card-last-updated"><Clock3 size={14} /> Availability updated {daysAgo(activeSpace.lastUpdated, currentTime)} days ago</div></aside></div>
       </main>}
 
       {page === 'booking' && <main className="page-main booking-page"><button className="back-link" onClick={() => setPage('detail')}><ArrowLeft size={16} /> Back to space</button><div className="booking-page-heading"><span className="eyebrow">A GOOD PLAN, IN THE MAKING</span><h1>Book your <em>somewhere.</em></h1><p>Choose a day and time that works for you.</p></div><div className="booking-layout"><section className="booking-form-card"><label className="form-label">PICK A DAY<input className="date-input" type="date" min={minimumDate} value={date} onChange={(event) => { setDate(event.target.value); setSlot('') }} /></label><span className="form-label">FREE TIME SLOTS · {dayLabel.toUpperCase()}</span>{availableSlots.length ? <div className="slot-grid">{availableSlots.map((time) => <button key={time} className={`slot-button ${slot === time ? 'selected' : ''}`} onClick={() => { setSlot(time); setHours((current) => Math.min(current, slotDuration(time))) }}><Clock3 size={15} /> {time}</button>)}</div> : <div className="no-slots">No free slots on this day. Try another date.</div>}<label className="form-label hours-label">HOW MANY HOURS?<div className="stepper"><button aria-label="Decrease hours" onClick={() => setHours(Math.max(1, hours - 1))}><Minus size={15} /></button><strong>{hours} {hours === 1 ? 'hour' : 'hours'}</strong><button aria-label="Increase hours" disabled={hours >= maxBookingHours} onClick={() => setHours(Math.min(maxBookingHours, hours + 1))}><Plus size={15} /></button></div></label>{slot && slotEndsAfterEight(slot, hours) && <div className="late-warning"><Clock3 size={17} /><span><strong>Getting home late?</strong> This slot ends after 8pm. Please plan a safe journey back.</span></div>}<div className="trusted-share"><span className="trusted-icon"><ShieldCheck size={18} /></span><span><strong>Keep someone in the loop</strong><small>Share your booking details with a trusted contact.</small></span><button onClick={() => setNotice('Booking details ready to share with your trusted contact (mock).')}>Share <ArrowUpRight size={14} /></button></div></section><aside className="booking-summary"><span className="eyebrow">YOUR PLAN</span><div className="summary-space"><img src={activeSpace.photoUrl} alt="" /><span><strong>{activeSpace.name}</strong><small><MapPin size={12} /> {locationLabel(activeSpace)}</small></span></div><div className="summary-line"><span>Date</span><strong>{dayLabel}</strong></div><div className="summary-line"><span>Time</span><strong>{slot || 'Choose a time slot'}</strong></div><div className="summary-line"><span>Duration</span><strong>{hours} {hours === 1 ? 'hour' : 'hours'}</strong></div><div className="summary-total"><span>Total</span><strong>{money(activeSpace.pricePerHour * hours)}</strong></div><button className="primary-button full-button" onClick={confirmBooking} disabled={!slot}>Request to book <ArrowRight size={16} /></button><p className="booking-card-fine">No payment now. Your booking will be pending owner confirmation.</p></aside></div></main>}
 
       {page === 'confirmation' && booking && <main className="page-main confirmation-page"><div className="confirmation-top"><span className="confirmation-icon"><Check size={28} /></span><span className="eyebrow">YOUR PLAN IS IN MOTION</span><h1>Good things <em>start here.</em></h1><p>This sample booking is only stored in this session. No host has been contacted.</p><span className="pending-pill"><Clock3 size={14} /> Pending owner confirmation</span></div><div className="confirmation-layout"><section className="confirmed-card"><div className="summary-space"><img src={booking.space.photoUrl} alt="" /><span><strong>{booking.space.name}</strong><small><MapPin size={12} /> {locationLabel(booking.space)}</small></span></div><div className="confirmed-details"><div><span>DATE</span><strong>{new Date(`${booking.date}T12:00:00`).toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}</strong></div><div><span>TIME</span><strong>{booking.slot}</strong></div><div><span>DURATION</span><strong>{booking.hours} {booking.hours === 1 ? 'hour' : 'hours'}</strong></div><div><span>TOTAL</span><strong>{money(booking.total)}</strong></div></div><div className="trusted-share"><span className="trusted-icon"><ShieldCheck size={18} /></span><span><strong>Share with someone you trust</strong><small>Let them know where you'll be.</small></span><button onClick={() => setNotice('Booking details ready to share with your trusted contact (mock).')}>Share <ArrowUpRight size={14} /></button></div></section><aside className="safety-card"><div className="safety-card-heading"><ShieldCheck size={19} /><span><strong>Here for your peace of mind</strong><small>A few helpful things to have close.</small></span></div><div className="safety-tip"><strong>A little safety checklist</strong><p>Share your plans with someone you trust, keep your phone charged, and confirm your return trip before you go.</p></div><div className="emergency-box"><span>NEED HELP?</span><div><a href="tel:112">112 <small>Emergency</small></a><a href="tel:181">181 <small>Women's helpline</small></a></div></div><button className="location-share" onClick={() => setNotice('Live location sharing is a demo feature and is not active.') }><MapPin size={15} /> Share live location <span>MOCK</span></button></aside></div><div className="confirmation-actions"><button className="primary-button" onClick={() => setPage('home')}>Back to exploring <Compass size={16} /></button><button className="text-link" onClick={() => { setSearch((current) => ({ ...current, district: booking.space.district, location: booking.space.locality || booking.space.area })); setPage('results') }}>Find another space <ArrowRight size={15} /></button></div></main>}
 
-      {page === 'listing' && <main className="page-main listing-page"><div className="listing-hero"><span className="eyebrow">MAKE ROOM FOR SOMETHING GOOD</span><h1>Your space could<br />be someone's <em>somewhere.</em></h1><p>Share your underused room, rooftop, or little corner with people who could make something wonderful there.</p><div className="listing-stats"><span><Check size={15} /> Free to list</span><span><Check size={15} /> You choose when</span><span><Check size={15} /> Local community</span></div></div>{notice && <div className="success-notice"><Check size={17} />{notice}<button onClick={() => setNotice('')}><X size={15} /></button></div>}<form className="listing-form" onSubmit={submitListing}>      <div className="listing-form-heading"><span className="eyebrow">LET'S GET TO KNOW YOUR SPACE</span><h2>Start with the details</h2><p>Preview the details a listing could include. This demo does not save or submit them.</p></div><div className="listing-fields"><label>SPACE NAME<input required placeholder="e.g. The little library room" /></label><label>DISTRICT<select required defaultValue=""><option value="" disabled>Select a Kerala district</option>{keralaDistricts.map((district) => <option key={district} value={district}>{district}</option>)}</select></label><label>TOWN<input required placeholder="e.g. Kochi" /></label><label>LOCALITY<input required placeholder="Neighbourhood or locality" /></label><label>CAPACITY<input required type="number" min="1" placeholder="How many people?" /></label><label>PRICE PER HOUR (₹)<input required type="number" min="1" placeholder="e.g. 400" /></label><label className="wide-field">PHOTO URLS<input type="text" placeholder="Add photo links, separated by commas" /></label><label className="wide-field">TELL US ABOUT IT<textarea rows="3" placeholder="What makes your space a lovely place to meet?" /></label></div><div className="listing-subsection"><h3>What can guests use?</h3><div className="listing-checks">{['Wi-Fi', 'Charging', 'Air conditioning', 'Fans', 'Projector', 'Whiteboard', 'Step-free access'].map((item) => <label key={item}><input type="checkbox" /> {item}</label>)}</div></div><div className="listing-subsection"><h3>Helpful resources</h3><div className="listing-checks">{['Desks', 'Printer access', 'Power backup', 'Soundproofing', 'Lockers', 'Drinking water', 'Tea or coffee'].map((item) => <label key={item}><input type="checkbox" /> {item}</label>)}</div><div className="listing-fields"><label>NUMBER OF POWER SOCKETS<input type="number" min="0" placeholder="e.g. 12" /></label><label>WI-FI SPEED<input placeholder="e.g. 50 Mbps" /></label></div></div><div className="listing-subsection"><h3>When is it free?</h3><p>For now, tell us your usual availability. You'll confirm each booking request.</p><div className="listing-fields"><label>FREE DAYS<input placeholder="e.g. Monday to Friday" /></label><label>FREE HOURS<input placeholder="e.g. 2pm to 6pm" /></label><label>WOMEN-ONLY HOURS <span className="optional">(optional)</span><input placeholder="e.g. Saturdays, 10am to 2pm" /></label><label>WASHROOM<select defaultValue=""><option value="" disabled>Choose one</option><option>On-site, separate for women</option><option>On-site, shared</option><option>Not on-site</option></select></label><label>SEPARATE WASHROOM FOR WOMEN<select defaultValue=""><option value="" disabled>Choose one</option><option>Yes</option><option>No</option></select></label><label>ACCESSIBLE WASHROOM<select defaultValue=""><option value="" disabled>Choose one</option><option>Yes</option><option>No</option></select></label></div></div><div className="listing-subsection"><h3>Help guests feel comfortable</h3><div className="listing-checks">{['CCTV', 'Well-lit space', 'Secured entry', 'Female host or staff', 'Busy area', 'Near public transport', 'Owner ID verified'].map((item) => <label key={item}><input type="checkbox" /> {item}</label>)}</div></div><button className="primary-button listing-submit" type="submit">Send your space for review <ArrowRight size={16} /></button><p className="listing-disclaimer"><ShieldCheck size={14} /> Demo only: listings are not saved, submitted, or reviewed.</p></form></main>}
 
       <footer className="site-footer"><div className="footer-brand"><BrandLogo failed={logoFailed} onError={() => setLogoFailed(true)} /></div><span>More room for good things. Made for Kerala.</span><span>© 2025 EmptySpace</span></footer>
-      {notice && page !== 'listing' && <div className="toast" role="status">{notice}<button aria-label="Dismiss" onClick={() => setNotice('')}><X size={15} /></button></div>}
+      {notice && <div className="toast" role="status">{notice}<button aria-label="Dismiss" onClick={() => setNotice('')}><X size={15} /></button></div>}
     </div>
   )
 }
@@ -677,11 +749,10 @@ function BrandLogo({ failed, onError }) {
 }
 
 function SpaceCard({ space, mode, selectedResources = [], currentTime, saved, onOpen, onSave }) {
-  const womenFriendly = space.safety.womenFriendly === true
-  const venueCoordinates = !space.isDemo ? spaceCoordinates(space) : null
-  const cafe = venueCoordinates && space.nearby.find((item) => ['cafe', 'restaurant'].includes(item.type) && spaceCoordinates(item))
+  const womenFriendly = [space.safety.cctv, space.safety.wellLit, space.safety.securedEntry, space.safety.ownerIdVerified].every(Boolean)
+  const venueCoordinates = spaceCoordinates(space)
+  const cafe = venueCoordinates && (space.nearby || []).find((item) => ['cafe', 'restaurant'].includes(item.type) && spaceCoordinates(item))
   const cafeDistance = cafe ? distanceKm(venueCoordinates, spaceCoordinates(cafe)) : null
-  const sampleFood = space.isDemo && space.nearby.some((item) => ['cafe', 'restaurant'].includes(item.type))
   const requested = selectedResources.map((key) => resourceLabels[key])
   const reason = requested.length
     ? `Has your requested ${requested.join(', ')}.`
@@ -689,7 +760,22 @@ function SpaceCard({ space, mode, selectedResources = [], currentTime, saved, on
       ? `${space.atmosphere === 'quiet' ? 'A quiet spot' : 'A welcoming spot'} with ${space.amenities.wifi ? 'Wi-Fi' : 'room to focus'} and ${space.resources.powerSockets > 0 ? 'charging points' : 'space to settle in'}.`
       : `${space.amenities.ac ? 'Cool, comfortable' : 'Bright, flexible'} space with ${space.resources.powerBackup ? 'power backup' : 'reliable essentials'} for your next work session.`
   const updatedDays = daysAgo(space.lastUpdated, currentTime)
-  return <article className="space-card"><div className="card-image-wrap" onClick={() => onOpen(space)}><img src={space.photoUrl} alt={space.name} loading="lazy" /><div className="card-badges">{space.isDemo && <span className="demo-badge"><Sparkles size={12} /> Demo listing</span>}{!space.isDemo && space.verified && <span className="verified-badge"><BadgeCheck size={12} /> Verified</span>}{womenFriendly && <span className="women-badge"><Heart size={12} /> Women-friendly features (sample)</span>}</div><button className={`save-button ${saved ? 'is-saved' : ''}`} aria-label={saved ? 'Remove from saved spaces' : 'Save space'} onClick={(event) => { event.stopPropagation(); onSave(space.id) }}><Heart size={16} fill={saved ? 'currentColor' : 'none'} /></button></div><div className="card-content"><div className="card-title-row" onClick={() => onOpen(space)}><div><h3>{space.name}</h3><span className="card-location"><MapPin size={12} /> {locationLabel(space)}</span></div><span className="card-rating">{space.isDemo ? 'Demo data' : <><Star size={13} fill="currentColor" /> {space.rating}</>}</span></div><div className="card-meta"><span><UsersIcon /> {space.capacity} guests</span><span>{space.seatingType}</span><span>{space.atmosphere}</span></div><div className="card-amenities">{Object.entries(space.amenities).filter(([, value]) => value).slice(0, 4).map(([key]) => <span key={key} title={key}>{key === 'wifi' ? <Wifi size={14} /> : key === 'charging' ? <Zap size={14} /> : key === 'projector' ? <ArrowUpRight size={14} /> : <Sparkles size={14} />}</span>)}</div><p className="why-fit"><Sparkles size={13} /> {reason}</p><div className="card-local-chips">{space.washroom.onSite && <span>Washroom on-site{space.isDemo ? ' · sample' : ''}</span>}{cafe && cafeDistance !== null && <span><Coffee size={11} /> {cafe.type === 'cafe' ? 'Cafe' : 'Restaurant'} {cafeDistance.toFixed(1)} km away</span>}{sampleFood && <span><Coffee size={11} /> Nearby food · sample data</span>}{mode === 'Student' ? <span className="study-badge">Study-friendly</span> : <span className="work-badge">Work-ready</span>}</div><div className="card-footer"><span><Clock3 size={12} /> {space.isDemo ? `Sample data | Availability updated ${updatedDays} ${updatedDays === 1 ? 'day' : 'days'} ago` : `Availability updated ${updatedDays} ${updatedDays === 1 ? 'day' : 'days'} ago`}</span><strong>{money(space.pricePerHour)}<small> / hr</small></strong></div><button className="card-open-button" aria-label={`View ${space.name}`} onClick={() => onOpen(space)}>View space <ArrowRight size={14} /></button></div></article>
+  return <article className="space-card">
+    <div className="card-image-wrap" onClick={() => onOpen(space)}>
+      {space.photoUrl ? <img src={space.photoUrl} alt={space.name} loading="lazy" /> : <div className="card-image-placeholder">Photos not provided</div>}
+      <div className="card-badges">{space.verified ? <span className="verified-badge"><BadgeCheck size={12} /> Verified</span> : <span className="verified-badge"><BadgeCheck size={12} /> Approved listing</span>}{womenFriendly && <span className="women-badge"><Heart size={12} /> Women-friendly features</span>}</div>
+      <button className={`save-button ${saved ? 'is-saved' : ''}`} aria-label={saved ? 'Remove from saved spaces' : 'Save space'} onClick={(event) => { event.stopPropagation(); onSave(space.id) }}><Heart size={16} fill={saved ? 'currentColor' : 'none'} /></button>
+    </div>
+    <div className="card-content">
+      <div className="card-title-row" onClick={() => onOpen(space)}><div><h3>{space.name}</h3><span className="card-location"><MapPin size={12} /> {locationLabel(space)}</span></div><span className="card-rating">{space.rating == null ? 'Not yet rated' : <><Star size={13} fill="currentColor" /> {space.rating}</>}</span></div>
+      <div className="card-meta"><span><UsersIcon /> {space.capacity} guests</span><span>{space.seatingType}</span><span>{space.atmosphere}</span></div>
+      <div className="card-amenities">{Object.entries(space.amenities).filter(([, value]) => value).slice(0, 4).map(([key]) => <span key={key} title={key}>{key === 'wifi' ? <Wifi size={14} /> : key === 'charging' ? <Zap size={14} /> : key === 'projector' ? <ArrowUpRight size={14} /> : <Sparkles size={14} />}</span>)}</div>
+      <p className="why-fit"><Sparkles size={13} /> {reason}</p>
+      <div className="card-local-chips">{space.washroom.onSite && <span>Washroom on-site</span>}{cafe && cafeDistance !== null && <span><Coffee size={11} /> {cafe.type === 'cafe' ? 'Cafe' : 'Restaurant'} {cafeDistance.toFixed(1)} km straight-line</span>}{womenFriendly && <span className="women-badge">Women-friendly features listed</span>}{mode === 'Student' ? <span className="study-badge">Study-friendly</span> : <span className="work-badge">Work-ready</span>}</div>
+      <div className="card-footer"><span><Clock3 size={12} /> Availability updated {updatedDays} {updatedDays === 1 ? 'day' : 'days'} ago</span><strong>{money(space.pricePerHour)}<small> / hr</small></strong></div>
+      <button className="card-open-button" aria-label={`View ${space.name}`} onClick={() => onOpen(space)}>View space <ArrowRight size={14} /></button>
+    </div>
+  </article>
 }
 
 function NearbyList({ space }) {
@@ -701,20 +787,18 @@ function NearbyList({ space }) {
     ['Print & stationery', ['print shop', 'stationery']],
     ['Getting around', ['bus stop']],
   ]
-  return <div className="nearby-groups">{groups.map(([label, types]) => {
-    const items = space.nearby.filter((item) => types.includes(item.type))
+  const places = space.nearby || []
+  const venueCoordinates = spaceCoordinates(space)
+  const groupsContent = groups.map(([label, types]) => {
+    const items = places.filter((item) => types.includes(item.type))
     if (!items.length) return null
     return <div className="nearby-group" key={label}><strong>{label}</strong>{items.map((item) => {
-      const itemCoordinates = !space.isDemo ? spaceCoordinates(item) : null
-      const venueCoordinates = !space.isDemo ? spaceCoordinates(space) : null
+      const itemCoordinates = spaceCoordinates(item)
       const distance = itemCoordinates && venueCoordinates ? distanceKm(venueCoordinates, itemCoordinates) : null
-      return <span key={item.name}><span>{space.isDemo ? `${item.name} · sample` : item.name}</span><small>{space.isDemo ? 'Illustrative place; location and distance are unverified' : distance === null ? 'Distance not available' : `${distance.toFixed(1)} km straight-line`}</small></span>
+      return <span key={item.id || item.name}><span>{item.name}</span><small>{distance === null ? 'Distance not available' : `${distance.toFixed(1)} km straight-line`}</small></span>
     })}</div>
-  })}</div>
-}
-
-function OwnerCallout({ onClick }) {
-  return <section className="owner-callout"><div><span className="eyebrow">GOOD SPACE SHOULD BE SHARED</span><h2>Got a room with<br /><em>a little more to give?</em></h2><p>Give your underused space a new purpose — and help good things happen nearby.</p></div><button className="primary-button" onClick={onClick}>List your space <ArrowUpRight size={16} /></button><div className="callout-decoration">⌂</div></section>
+  })
+  return places.length ? <div className="nearby-groups">{groupsContent}</div> : <p className="portal-muted">No public-place records are linked to this listing yet. Distances are not estimated.</p>
 }
 
 function slotEndsAfterEight(slot, hours) {
