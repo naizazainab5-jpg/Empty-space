@@ -31,6 +31,21 @@ The public site keeps its existing search and visual design. Public results come
 
 Storage rules make uploaded space photos publicly readable, but only the matching signed-in owner may upload or replace files in their own `spaces/{uid}/{submissionId}/` folder. Files must be JPEG, PNG, or WebP and no larger than 5 MB. Owners can delete their own files; only an administrator can delete another owner's files. The rules do not make identity documents public or accept them as uploads.
 
+### Owner photo uploads
+
+1. Confirm that Firebase Storage is enabled and the correct bucket is in `VITE_FIREBASE_STORAGE_BUCKET`. Storage may require the Blaze plan; check the current Firebase billing and free-usage terms for your project before uploading.
+2. Deploy the Storage and Firestore rules from this repository:
+
+   ```bash
+   npx firebase-tools deploy --only storage,firestore:rules
+   ```
+
+3. Sign in at `/owner` with a verified owner account. In **List a space for review**, choose up to six JPEG, PNG, or WebP photos, each no larger than 5 MB. The app checks image content, resizes and re-encodes images to remove embedded metadata, and shows upload progress for each file.
+4. Tick **I took these photos or have permission to use them.** A photo and this confirmation are required before submission. Owners can add or remove photos on their pending submissions; administrators can enlarge the gallery before reviewing. Approved listings display the submitted photos publicly.
+5. Check **Firebase Console → Storage** for the uploaded objects and **Firestore → Data → owner_submissions** for the `photos` array and first-photo `photoUrl`. After approval, the public `spaces` document has the same photo fields.
+
+Storage rules and emulator tests are in `storage.rules` and `tests/storage.rules.test.js`. The emulator checks owner-only uploads, image content types and size, public reads, and deletion permissions; they do not upload to your real bucket.
+
 ### Public proposals and owner listings
 
 Select **List a Space** in the public-site header, or open `/list-a-space` directly. This public proposal form does not require an owner account and collects no submitter contact details. If authenticated, only the Firebase UID is attached; otherwise the callable generates a random anonymous submission identifier. Proposals go to `space_submissions`, never directly to public `spaces`. Exact addresses, coordinates, and evidence links are only available to authorized reviewers.
@@ -38,6 +53,34 @@ Select **List a Space** in the public-site header, or open `/list-a-space` direc
 The admin proposal review is at `/admin/submissions` and uses the existing administrator custom claim. Approval runs in a trusted Cloud Function, validates criteria, records review history, and publishes a public-safe listing once. App Check and server-side daily submission limits provide abuse controls. Reviewers must independently verify evidence and eligibility; automated checks do not establish occupancy, safety, or legal rights.
 
 The separate owner portal remains at `/owner` and `/owner/list-space`. Owners manage their own authenticated property submissions and availability in that portal.
+
+### Seed real listings with your own photos
+
+The seed script creates approved public listings using stable slug document IDs. It does not approve owner submissions; use it only for listings you are authorized to publish.
+
+1. Copy `data/real-spaces.example.json` to `data/real-spaces.json`, then replace both example entries with accurate listing details. Keep each unique `slug` lowercase with hyphens; it becomes the Firestore document ID.
+2. Create `data/photos/<slug>/` for each entry and put up to six JPEG, PNG, or WebP photos in that folder. The folder name must exactly match the entry's slug. The script resizes each image to fit within 1600 × 1600 pixels and re-encodes it as JPEG to remove metadata before upload. Entries without a photo folder are seeded without photos.
+3. **Only use photos you took yourself or have written permission to use. Never copy photos from Google Maps or Instagram.** Do not put service-account keys or private credentials in `data/`.
+4. Run a dry check first; it validates listing fields and image files but does not contact Firebase:
+
+   ```bash
+   node scripts/seed-real-data.mjs --dry-run
+   ```
+
+5. For a real upload, create or select a trusted Firebase service account with Firestore write and Storage object permissions. Save its JSON key outside the repository in a secure location. In PowerShell, set the path and bucket in that terminal (do not paste the key into a command or commit it):
+
+   ```powershell
+   $env:FIREBASE_SERVICE_ACCOUNT_PATH = 'C:\secure\firebase-service-account.json'
+   $env:FIREBASE_STORAGE_BUCKET = 'your-project.firebasestorage.app'
+   node scripts/seed-real-data.mjs
+   ```
+
+   Use the exact bucket shown in your Firebase project settings. The script does not print the service-account path or key. Do not share the key; remove/revoke it when no longer needed. Firebase Storage may require the Blaze plan, so check billing before running a live upload.
+
+6. Confirm each slug appears once under **Firebase Console → Firestore Database → Data → spaces**, with `status` set to `approved`, `isDemo` set to `false`, a `photos` list and `photoUrl` set to its first image (or an empty string if no photos were added). Check the objects under **Storage → `spaces/seed/<slug>/`**.
+7. To remove a test listing, delete its `spaces/<slug>` document in Firestore and the matching `spaces/seed/<slug>/` folder in Storage. Deleting only the Firestore document does not delete uploaded files.
+
+`data/real-spaces.json`, `data/photos/`, and common service-account key filenames are gitignored. The example JSON is a template, not real listing data.
 
 For regular emulator development, add `VITE_USE_FIREBASE_EMULATORS=true` to `.env.local`, use non-empty placeholder Firebase web-app settings, and start the Auth, Firestore, Functions, and Storage emulators before running `npm run dev`.
 
@@ -54,6 +97,8 @@ Do not deploy `firestore.demo.rules` or enable demo mode in a production build. 
 - **Administrator:** `/admin` and `/admin/submissions`. No public admin registration or public admin link exists. The route checks the Firebase ID token's `admin` custom claim, and Firestore rules separately enforce that claim. The dashboard reviews public proposals and owner submissions, imports/removes OSM records, reviews flags, and reads protected verification records. Publication uses trusted Cloud Functions; client SDK writes to approved `spaces` are denied.
 
 The route checks are only a user-interface convenience. The actual boundaries are in `firestore.rules`; an owner cannot assign claims, approve their own listing, write public listing data, or access another owner's records.
+
+If an owner sees a sign-in or submission problem, first verify the email and use **Resend verification email** or **I have verified, refresh** on `/owner`. Owners can still read their own existing submissions while unverified, but only verified accounts can create a new submission. If the dashboard still reports a permissions error, confirm the deployed rules in **Firebase Console → Firestore Database → Rules** match `firestore.rules` and that the signed-in Firebase project is the intended project. If Firestore App Check enforcement is enabled, verify the web app is initialized with a valid App Check provider and that your local debug token is registered in the Firebase Console; a debug-token flag by itself does not initialize App Check.
 
 ## Grant the first administrator securely
 

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  reload,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -374,7 +375,6 @@ function OwnerPropertyForm({ user, onSubmitted }) {
 
   return <section className="portal-card">
     <div className="portal-section-heading"><div><span className="eyebrow">PRIVATE PROPERTY SUBMISSION</span><h2>List a space for review</h2></div><span className="pending-pill">Pending until approved</span></div>
-    {!user.emailVerified && <div className="portal-notice"><strong>Verify your email first.</strong><span>Firebase sent a verification link when you registered. Refresh this page after verifying your address.</span></div>}
     <p className="portal-muted">Your owner account is identified by Firebase UID <code>{user.uid}</code>. Enter coordinates copied from a map pin; they are stored with your private submission and are not published. Your exact address also remains private. Owner-provided features are not treated as verified.</p>
     <form className="owner-property-form" onSubmit={submit}>
       <div className="portal-form-grid">
@@ -398,7 +398,7 @@ function OwnerPropertyForm({ user, onSubmitted }) {
         <label className="portal-photo-picker">Choose photos<input type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={addPhotos} disabled={busy || photos.length >= MAX_SPACE_PHOTOS} /></label>
         {photos.length > 0 && <div className="portal-photo-grid">{photos.map((photo) => <article className="portal-photo-item" key={photo.id}>
           <img src={photo.previewUrl} alt={`Preview of ${photo.file.name}`} />
-          <div><strong>{photo.file.name}</strong><span>{photo.status === 'checking' ? 'Checking file…' : photo.status === 'uploading' ? `Uploading ${Math.round(photo.progress * 100)}%` : photo.status === 'uploaded' ? 'Uploaded and ready' : photo.status === 'removing' ? 'Removing…' : photo.status === 'error' ? photo.error : 'Ready to upload'}</span></div>
+          <div><strong>{photo.file.name}</strong><span>{photo.status === 'checking' ? 'Checking file…' : photo.status === 'uploading' ? `Uploading ${Math.round(photo.progress * 100)}%` : photo.status === 'uploaded' ? 'Uploaded and ready' : photo.status === 'removing' ? 'Removing…' : photo.status === 'error' ? photo.error : 'Ready to upload'}{photo.status === 'uploading' && <progress max="1" value={photo.progress} aria-label={`Uploading ${photo.file.name}`} />}</span></div>
           <button type="button" className="portal-text-button" onClick={() => removePhoto(photo)} disabled={busy || photo.status === 'checking' || photo.status === 'uploading' || photo.status === 'removing'}>Remove</button>
         </article>)}</div>}
         {photoError && <p className="portal-error" role="alert">{photoError}</p>}
@@ -437,6 +437,8 @@ export function OwnerPortal() {
   const [submissions, setSubmissions] = useState([])
   const [loading, setLoading] = useState(true)
   const [portalError, setPortalError] = useState('')
+  const [verificationBusy, setVerificationBusy] = useState('')
+  const [verificationFeedback, setVerificationFeedback] = useState(null)
 
   useEffect(() => {
     if (!auth) {
@@ -467,11 +469,59 @@ export function OwnerPortal() {
     try {
       setSubmissions(await getOwnSubmissions(user.uid))
     } catch (loadError) {
-      setPortalError(loadError.message || 'Your properties could not be loaded.')
+      setPortalError(firebaseErrorMessage(loadError, 'Your submissions could not be loaded. Try refreshing, or contact the project administrator if this continues.'))
     } finally {
       setLoading(false)
     }
   }, [user])
+
+  async function resendVerification() {
+    setVerificationBusy('resend')
+    setVerificationFeedback(null)
+    try {
+      await sendEmailVerification(user)
+      setVerificationFeedback({
+        type: 'success',
+        message: 'A new verification email was sent. Check your inbox and spam folder.',
+      })
+    } catch (verificationError) {
+      setVerificationFeedback({
+        type: 'error',
+        message: firebaseErrorMessage(verificationError, 'Firebase could not send a verification email. Try again.'),
+      })
+    } finally {
+      setVerificationBusy('')
+    }
+  }
+
+  async function refreshEmailVerification() {
+    setVerificationBusy('refresh')
+    setVerificationFeedback(null)
+    try {
+      await reload(user)
+      await user.getIdToken(true)
+      setUser(auth?.currentUser || user)
+      if (user.emailVerified) {
+        setVerificationFeedback({
+          type: 'success',
+          message: 'Your email is verified. Your owner dashboard has been refreshed.',
+        })
+        await refresh()
+      } else {
+        setVerificationFeedback({
+          type: 'error',
+          message: 'Firebase still shows your email as unverified. Open the verification link, then try again.',
+        })
+      }
+    } catch (verificationError) {
+      setVerificationFeedback({
+        type: 'error',
+        message: firebaseErrorMessage(verificationError, 'Firebase could not refresh your verification status. Try again.'),
+      })
+    } finally {
+      setVerificationBusy('')
+    }
+  }
 
   useEffect(() => {
     if (!user) return undefined
@@ -507,6 +557,19 @@ export function OwnerPortal() {
     {!firebaseConfigured && <FirebaseNotice />}
     {error && <p className={error.startsWith('Account created') ? 'portal-success' : 'portal-error'} role="status">{error}</p>}
     {portalError && <p className="portal-error" role="alert">{portalError}</p>}
+    {!user.emailVerified && <div className="portal-notice" role="status">
+      <strong>Verify your email before submitting a space.</strong>
+      <span>You can still view your own submissions. Check your inbox for the verification link, then return here and refresh your status.</span>
+      <div className="portal-header-actions">
+        <button className="outline-button" type="button" onClick={resendVerification} disabled={Boolean(verificationBusy)}>
+          {verificationBusy === 'resend' ? 'Sending email…' : 'Resend verification email'}
+        </button>
+        <button className="outline-button" type="button" onClick={refreshEmailVerification} disabled={Boolean(verificationBusy)}>
+          {verificationBusy === 'refresh' ? 'Refreshing…' : 'I have verified, refresh'}
+        </button>
+      </div>
+    </div>}
+    {verificationFeedback && <p className={verificationFeedback.type === 'success' ? 'portal-success' : 'portal-error'} role={verificationFeedback.type === 'success' ? 'status' : 'alert'}>{verificationFeedback.message}</p>}
     <OwnerPropertyForm user={user} onSubmitted={refresh} />
     <section className="portal-card">
       <div className="portal-section-heading"><div><span className="eyebrow">YOUR OWNER RECORDS</span><h2>My submissions</h2></div><button className="outline-button" onClick={refresh} disabled={loading}><RefreshCw size={14} /> Refresh</button></div>

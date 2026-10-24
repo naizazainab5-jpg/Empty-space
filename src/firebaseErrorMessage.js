@@ -13,7 +13,11 @@ const knownMessages = {
   'functions/unavailable': 'The submission service is temporarily unavailable. Check your connection and try again.',
   'functions/failed-precondition': 'Firebase security verification is not ready. Check the App Check setup and try again.',
   'functions/permission-denied': 'Firebase security rules did not allow this request. Check the account permissions and try again.',
+  'functions/unauthenticated': 'Your sign-in has expired. Sign in again, then retry.',
+  'unauthenticated': 'Your sign-in has expired. Sign in again, then retry.',
   'permission-denied': 'Firebase security rules did not allow this request. Check the account permissions and try again.',
+  'firestore/unavailable': 'Firestore is temporarily unavailable. Check your connection and try again.',
+  'unavailable': 'Firebase is temporarily unavailable. Check your connection and try again.',
   'storage/unauthorized': 'Firebase Storage denied this photo upload. Check that Storage is enabled and the secure Storage rules are deployed.',
   'storage/canceled': 'The photo upload was cancelled. Try again when you are ready.',
   'storage/retry-limit-exceeded': 'The photo upload could not finish because of a connection problem. Check your internet and retry.',
@@ -22,6 +26,12 @@ const knownMessages = {
 
 export function firebaseErrorMessage(error, fallback) {
   const code = typeof error?.code === 'string' ? error.code : ''
+  if (code.startsWith('appCheck/') || code.startsWith('app-check/')) {
+    return 'Firebase App Check rejected this request. Check the local debug-token setup and the App Check enforcement settings in Firebase Console.'
+  }
+  if (/app.?check/i.test(error?.message || '')) {
+    return 'Firebase App Check rejected this request. Check the local debug-token setup and the App Check enforcement settings in Firebase Console.'
+  }
   if (knownMessages[code]) return knownMessages[code]
   if (code.includes('network') || code === 'unavailable' || error instanceof TypeError) {
     return 'Firebase could not connect. Check your internet connection and try again.'

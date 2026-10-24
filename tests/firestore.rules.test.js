@@ -10,6 +10,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
   serverTimestamp,
   setDoc,
@@ -119,6 +120,7 @@ test('an authenticated owner can submit a verified-email pending listing, not ap
   }).firestore()
   const submissionRef = doc(ownerDb, 'owner_submissions', 'owner-listing')
   await assertSucceeds(setDoc(submissionRef, validSubmission('owner-1', 'owner@example.com')))
+  await assertSucceeds(getDoc(submissionRef))
   await assertFails(updateDoc(submissionRef, {
     status: 'approved',
     updatedAt: serverTimestamp(),
@@ -264,6 +266,7 @@ test('owners can only read and edit their own permitted pending fields', async (
   await assertSucceeds(getDocs(query(
     collection(ownerDb, 'owner_submissions'),
     where('ownerUid', '==', 'owner-1'),
+    orderBy('submittedAt', 'desc'),
   )))
 })
 

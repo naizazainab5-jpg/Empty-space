@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 .cache/
 node_modules/
+/data/real-spaces.json
+/data/photos/
+/.env.seed.local
+**/*service-account*.json
+**/*serviceAccount*.json
+**/*firebase-adminsdk*.json

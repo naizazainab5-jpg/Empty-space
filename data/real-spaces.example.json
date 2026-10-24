@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "replace-with-first-space",
+    "name": "Replace with your space name",
+    "description": "Replace with an accurate description of this space.",
+    "spaceType": "private",
+    "category": "Room",
+    "state": "Kerala",
+    "district": "Kozhikode",
+    "locality": "Replace with locality",
+    "address": "Replace with the verified address",
+    "latitude": 11.2588,
+    "longitude": 75.7804,
+    "capacity": 8,
+    "pricePerHour": 250,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": false,
+      "fans": true,
+      "projector": false,
+      "whiteboard": true,
+      "stepFreeAccess": false
+    },
+    "resources": {
+      "desks": 8,
+      "powerSockets": 8,
+      "wifiSpeed": "Unknown",
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": false
+    },
+    "availability": {
+      "Monday": ["9am-5pm"],
+      "Wednesday": ["9am-5pm"]
+    },
+    "openingHours": "9am-5pm",
+    "permittedActivities": ["Study session", "Group study"],
+    "seatingType": "Classroom",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "Indoor",
+    "safety": {
+      "cctv": false,
+      "wellLit": true,
+      "securedEntry": false,
+      "femaleHostOrStaff": false,
+      "womenOnlyHours": "",
+      "busyArea": false,
+      "nearPublicTransport": false,
+      "ownerIdVerified": false
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": false,
+      "accessible": false,
+      "cleanlinessRating": null
+    }
+  },
+  {
+    "slug": "replace-with-second-space",
+    "name": "Replace with another space name",
+    "description": "Replace with verified details about the space and permitted use.",
+    "spaceType": "private",
+    "category": "Studio",
+    "state": "Kerala",
+    "district": "Ernakulam",
+    "locality": "Replace with locality",
+    "address": "Replace with the verified address",
+    "latitude": 9.9816,
+    "longitude": 76.2999,
+    "capacity": 12,
+    "pricePerHour": 400,
+    "amenities": {
+      "wifi": true,
+      "charging": true,
+      "ac": true,
+      "fans": true,
+      "projector": false,
+      "whiteboard": false,
+      "stepFreeAccess": false
+    },
+    "resources": {
+      "desks": 4,
+      "powerSockets": 12,
+      "wifiSpeed": "Unknown",
+      "printerAccess": false,
+      "powerBackup": false,
+      "soundproof": false,
+      "lockers": false,
+      "drinkingWater": true,
+      "teaCoffee": true
+    },
+    "availability": {
+      "Tuesday": ["10am-4pm"],
+      "Thursday": ["10am-4pm"]
+    },
+    "openingHours": "10am-4pm",
+    "permittedActivities": ["Study session", "Team meetings"],
+    "seatingType": "Flexible",
+    "atmosphere": "quiet",
+    "indoorOutdoor": "Indoor",
+    "safety": {
+      "cctv": false,
+      "wellLit": true,
+      "securedEntry": false,
+      "femaleHostOrStaff": false,
+      "womenOnlyHours": "",
+      "busyArea": false,
+      "nearPublicTransport": false,
+      "ownerIdVerified": false
+    },
+    "washroom": {
+      "onSite": true,
+      "separateForWomen": false,
+      "accessible": false,
+      "cleanlinessRating": null
+    }
+  }
+]
