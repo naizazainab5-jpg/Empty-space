@@ -54,6 +54,35 @@ The admin proposal review is at `/admin/submissions` and uses the existing admin
 
 The separate owner portal remains at `/owner` and `/owner/list-space`. Owners manage their own authenticated property submissions and availability in that portal.
 
+### Seed the 10 illustrative demo spaces
+
+The committed `data/demo-spaces.json` contains ten fictional Kerala listings. Their details and generated images are marked as illustrative; the records use `status: "approved"` only so they can exercise the existing public listing query, and all have `isDemo: true` and `verified: false`. The app labels them **Demo listing** and shows a demo notice on the detail page. These are not real places or genuine availability claims.
+
+1. Generate the matching local JPEG illustrations:
+
+   ```powershell
+   npm run generate:demo-images
+   ```
+
+   The files are written to `public/images/` and their URLs are `/images/<slug>.jpg`.
+2. In Firebase Console, create a narrowly scoped service account with Firestore write access for the target project. Download its JSON key and save it as `secrets/firebase-service-account.json`. This location is in `.gitignore`; never commit, paste, or share the key.
+3. Validate the seed records and images without connecting to Firebase:
+
+   ```powershell
+   npm run test:demo-spaces
+   npm run seed:demo-spaces -- --dry-run
+   ```
+4. To write/upsert the ten stable `spaces/<slug>` documents into the Firebase project named in the service account:
+
+   ```powershell
+   npm run seed:demo-spaces
+   ```
+
+   The script writes only these ten deterministic document IDs. Re-running updates those same documents. It does not upload images to Storage; deploy the app's `public/images/` assets with the website. Confirm the Firebase project ID before running. The service account uses the Admin SDK, so this does not require or alter `firestore.rules`.
+5. Start the app with its normal Firebase configuration. The homepage and Find a Space results query approved records from `spaces`; public and private filters determine which demo records appear. Remove the ten `spaces/demo-...` documents in Firestore when finished testing.
+
+   For the app to read the same cloud project, set its normal `VITE_FIREBASE_*` web config to that service account's Firebase project, and set `VITE_DEMO_MODE=false` and `VITE_USE_FIREBASE_EMULATORS=false` in `.env.local`, then restart Vite. If demo mode is left on, the app reads the local emulator instead of the cloud records.
+
 ### Seed real listings with your own photos
 
 The seed script creates approved public listings using stable slug document IDs. It does not approve owner submissions; use it only for listings you are authorized to publish.

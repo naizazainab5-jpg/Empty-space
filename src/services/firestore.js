@@ -85,7 +85,7 @@ export function normalizeSpace(id, data) {
     rating: data.rating ?? null,
     safetyRating: data.safetyRating ?? null,
     lastUpdated: valueOfDate(data.lastUpdated) || new Date().toISOString(),
-    isDemo: false,
+    isDemo: data.isDemo === true,
   }
 }
 

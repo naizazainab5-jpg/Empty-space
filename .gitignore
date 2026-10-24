@@ -30,3 +30,4 @@ node_modules/
 **/*service-account*.json
 **/*serviceAccount*.json
 **/*firebase-adminsdk*.json
+/secrets/firebase-service-account.json
