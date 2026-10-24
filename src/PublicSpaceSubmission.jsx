@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, MapPin, ShieldCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { appCheckConfigured, firebaseConfigured, firebaseEmulatorsEnabled, firebaseMissingConfig } from './firebase.js'
+import { appCheckConfigured, demoMode, firebaseConfigured, firebaseEmulatorsEnabled, firebaseMissingConfig } from './firebase.js'
 import { firebaseErrorMessage } from './firebaseErrorMessage.js'
 import { submitSpaceProposal } from './services/spaceProposals.js'
 import { evaluateSpaceSubmission } from './services/submissionCriteria.js'
@@ -75,12 +75,12 @@ export default function PublicSpaceSubmission() {
   const [confirmation, setConfirmation] = useState(null)
   const [spaceType, setSpaceType] = useState('private')
   const [privateBooking, setPrivateBooking] = useState(true)
-  const submissionDisabled = busy || !firebaseConfigured || (!appCheckConfigured && !firebaseEmulatorsEnabled)
+  const submissionDisabled = busy || !firebaseConfigured || (!demoMode && !appCheckConfigured && !firebaseEmulatorsEnabled)
   const submissionDisabledReason = busy
     ? 'Your proposal is being sent.'
     : !firebaseConfigured
       ? `Add the missing Firebase settings to the project-root .env.local file: ${firebaseMissingConfig.join(', ')}.`
-      : !appCheckConfigured && !firebaseEmulatorsEnabled
+      : !demoMode && !appCheckConfigured && !firebaseEmulatorsEnabled
         ? 'Configure Firebase App Check with VITE_FIREBASE_APP_CHECK_SITE_KEY, or use the Firebase emulators for local development.'
         : ''
 
@@ -120,11 +120,12 @@ export default function PublicSpaceSubmission() {
       <Link className="portal-back-link" to="/"><ArrowLeft size={14} /> Back to EmptySpace</Link>
       <div className="portal-heading"><span className="eyebrow">SHARE A PLACE WITH THE COMMUNITY</span><h1>Suggest a space</h1></div>
       <div className="portal-notice"><ShieldCheck size={18} /><span><strong>A proposal is not a vacancy confirmation.</strong> Every submission is reviewed before it can appear in public search. Submitting does not prove that a place exists, is empty, safe, or legally available for use.</span></div>
+      {demoMode && <div className="portal-notice"><strong>Demo mode is on.</strong><span>App Check and Cloud Functions are disabled. Submissions use local Firestore when available; otherwise they are saved in this browser only.</span></div>}
       {!firebaseConfigured && <div className="portal-notice" role="alert"><strong>Firebase settings are missing.</strong><span>Add {firebaseMissingConfig.map((name) => <code key={name}>{name} </code>)} to <code>.env.local</code> in the project root, then restart Vite.</span></div>}
-      {firebaseConfigured && !appCheckConfigured && !firebaseEmulatorsEnabled && <div className="portal-notice" role="alert"><strong>Submission protection needs setup.</strong><span>Public proposals are blocked until Firebase App Check is configured. Add the App Check reCAPTCHA v3 site key as <code>VITE_FIREBASE_APP_CHECK_SITE_KEY</code> in the root <code>.env.local</code>, then restart Vite. Local emulator testing is also supported.</span></div>}
+      {firebaseConfigured && !demoMode && !appCheckConfigured && !firebaseEmulatorsEnabled && <div className="portal-notice" role="alert"><strong>Submission protection needs setup.</strong><span>Public proposals are blocked until Firebase App Check is configured. Add the App Check reCAPTCHA v3 site key as <code>VITE_FIREBASE_APP_CHECK_SITE_KEY</code> in the root <code>.env.local</code>, then restart Vite. Local emulator testing is also supported.</span></div>}
       {failure && <p className="portal-error" role="alert">{failure}</p>}
       {errors.length > 0 && <div className="portal-error" role="alert"><strong>Please fix the following:</strong><ul>{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
-      {confirmation && <div className="portal-success" role="status"><strong>Proposal received for review.</strong><p>Reference: <code>{confirmation.submissionId}</code></p><p>Status: pending. No listing has been published or marked vacant.</p>{confirmation.criteriaCheck?.warnings?.map((warning) => <p key={warning}>{warning}</p>)}</div>}
+      {confirmation && <div className="portal-success" role="status"><strong>{confirmation.localOnly ? 'Demo proposal saved in this browser.' : demoMode ? 'Demo proposal saved successfully.' : 'Proposal received for review.'}</strong><p>Reference: <code>{confirmation.submissionId}</code></p><p>{demoMode ? 'This demo proposal is not sent for administrator review.' : 'Status: pending. No listing has been published or marked vacant.'}</p>{confirmation.criteriaCheck?.warnings?.map((warning) => <p key={warning}>{warning}</p>)}</div>}
 
       <form className="portal-card proposal-form" onSubmit={submit}>
         <fieldset className="proposal-section">

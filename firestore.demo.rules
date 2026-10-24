@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedInAs(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    match /users/{userId} {
+      allow read: if signedInAs(userId);
+      allow create: if signedInAs(userId)
+        && request.resource.data.uid == userId
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.accountType == 'owner';
+      allow update: if signedInAs(userId)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName', 'updatedAt']);
+    }
+
+    match /demo_space_submissions/{submissionId} {
+      allow create: if request.resource.data.reviewStatus == 'pending'
+        && request.resource.data.submittedAt == request.time
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 3
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 1000;
+      allow read, update, delete: if false;
+    }
+
+    match /spaces/{spaceId} {
+      allow read: if resource.data.status == 'approved';
+      allow write: if false;
+    }
+  }
+}

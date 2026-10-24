@@ -17,7 +17,7 @@ import {
   writeBatch,
 } from 'firebase/firestore'
 import { httpsCallable } from 'firebase/functions'
-import { requireFirebase } from '../firebase.js'
+import { requireFirebase, requireFunctions } from '../firebase.js'
 
 const collections = {
   users: 'users',
@@ -248,7 +248,7 @@ export async function getSpaceSubmissionReviewHistory(submissionId) {
 }
 
 export async function reviewSpaceSubmission(submissionId, decision, reviewNotes, duplicateAcknowledged) {
-  const { functions } = requireFirebase()
+  const functions = requireFunctions()
   const review = httpsCallable(functions, 'reviewSpaceProposal')
   return (await review({ submissionId, decision, reviewNotes, duplicateAcknowledged })).data
 }
@@ -303,7 +303,7 @@ export async function reviewReportFlag(flagId, reviewerNote = '') {
 }
 
 export async function reviewSubmission(submissionId, decision, reviewerNote = '') {
-  const { functions } = requireFirebase()
+  const functions = requireFunctions()
   const review = httpsCallable(functions, 'reviewOwnerSubmission')
   return (await review({ submissionId, decision, reviewerNote })).data
 }

@@ -39,7 +39,13 @@ The admin proposal review is at `/admin/submissions` and uses the existing admin
 
 The separate owner portal remains at `/owner` and `/owner/list-space`. Owners manage their own authenticated property submissions and availability in that portal.
 
-For local emulator development, add `VITE_USE_FIREBASE_EMULATORS=true` to `.env.local`, use non-empty placeholder Firebase web-app settings, and start the Auth, Firestore, Functions, and Storage emulators before running `npm run dev`. The Storage emulator uses port `9199`. Do not enable the emulator flag when using a production Firebase project.
+For regular emulator development, add `VITE_USE_FIREBASE_EMULATORS=true` to `.env.local`, use non-empty placeholder Firebase web-app settings, and start the Auth, Firestore, Functions, and Storage emulators before running `npm run dev`.
+
+### Local demo mode
+
+Set `VITE_DEMO_MODE=true` in `.env.local`, then restart Vite. Demo mode automatically connects Firebase Authentication and Firestore to local emulators, skips App Check, and does not initialize or call Cloud Functions. Run `npm run demo:emulators` in one terminal and `npm run dev` in another. It uses the separate `firebase.demo.json` and `firestore.demo.rules` configuration, so it does not change production Firestore rules. Demo proposals are written to the emulator-only `demo_space_submissions` collection. If that local Firestore emulator is unavailable, the proposal is saved in this browser's local storage and is not sent for administrator review. Owner accounts created in demo mode exist only in the local Auth emulator.
+
+Do not deploy `firestore.demo.rules` or enable demo mode in a production build. The regular Cloud Functions/App Check flow remains unchanged when `VITE_DEMO_MODE` is not `true`.
 
 ## Roles and routes
 

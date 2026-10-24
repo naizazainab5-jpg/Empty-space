@@ -27,18 +27,18 @@ export const firebaseMissingConfig = Object.entries(environmentConfig)
   .filter(([, value]) => typeof value !== 'string' || !value.trim())
   .map(([name]) => name)
 export const firebaseConfigured = firebaseMissingConfig.length === 0
-if (import.meta.env.DEV) self.FIREBASE_APPCHECK_DEBUG_TOKEN = true
+export const demoMode = import.meta.env.VITE_DEMO_MODE === 'true'
+export const firebaseEmulatorsEnabled = demoMode || import.meta.env.VITE_USE_FIREBASE_EMULATORS === 'true'
+if (import.meta.env.DEV && !demoMode) self.FIREBASE_APPCHECK_DEBUG_TOKEN = true
 const appCheckSiteKey = import.meta.env.VITE_FIREBASE_APP_CHECK_SITE_KEY
-  || (import.meta.env.DEV ? 'local-debug-placeholder' : '')
 export const firebaseApp = firebaseConfigured
   ? getApps().length ? getApp() : initializeApp(config)
   : null
 export const auth = firebaseApp ? getAuth(firebaseApp) : null
 export const db = firebaseApp ? getFirestore(firebaseApp) : null
-export const functions = firebaseApp ? getFunctions(firebaseApp) : null
+export const functions = firebaseApp && !demoMode ? getFunctions(firebaseApp) : null
 export const storage = firebaseApp ? getStorage(firebaseApp) : null
-export const firebaseEmulatorsEnabled = import.meta.env.VITE_USE_FIREBASE_EMULATORS === 'true'
-export const appCheck = firebaseApp && appCheckSiteKey
+export const appCheck = firebaseApp && !demoMode && appCheckSiteKey
   ? initializeAppCheck(firebaseApp, {
     provider: new ReCaptchaV3Provider(appCheckSiteKey),
     isTokenAutoRefreshEnabled: true,
@@ -49,14 +49,21 @@ export const appCheckConfigured = Boolean(appCheck)
 if (firebaseConfigured && firebaseEmulatorsEnabled) {
   connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
   connectFirestoreEmulator(db, '127.0.0.1', 8080)
-  connectFunctionsEmulator(functions, '127.0.0.1', 5001)
+  if (functions) connectFunctionsEmulator(functions, '127.0.0.1', 5001)
 }
 
 export function requireFirebase() {
-  if (!firebaseConfigured || !auth || !db || !functions) {
+  if (!firebaseConfigured || !auth || !db) {
     throw new Error('Firebase is not configured. Copy .env.example to .env.local, add your Firebase web app settings, then restart Vite.')
   }
-  return { auth, db, functions }
+  return { auth, db }
+}
+
+export function requireFunctions() {
+  if (demoMode || !functions) {
+    throw new Error('Cloud Functions are disabled in demo mode.')
+  }
+  return functions
 }
 
 export function requireStorage() {

@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "demo:emulators": "firebase emulators:start --config firebase.demo.json --project demo-emptyspace --only auth,firestore",
+    "test:demo": "firebase emulators:exec --config firebase.demo.json --project demo-emptyspace --only auth,firestore \"node --test tests/demo-mode.integration.test.js\"",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
