@@ -27,7 +27,9 @@ export const firebaseMissingConfig = Object.entries(environmentConfig)
   .filter(([, value]) => typeof value !== 'string' || !value.trim())
   .map(([name]) => name)
 export const firebaseConfigured = firebaseMissingConfig.length === 0
+if (import.meta.env.DEV) self.FIREBASE_APPCHECK_DEBUG_TOKEN = true
 const appCheckSiteKey = import.meta.env.VITE_FIREBASE_APP_CHECK_SITE_KEY
+  || (import.meta.env.DEV ? 'local-debug-placeholder' : '')
 export const firebaseApp = firebaseConfigured
   ? getApps().length ? getApp() : initializeApp(config)
   : null
