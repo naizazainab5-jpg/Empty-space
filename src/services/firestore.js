@@ -16,6 +16,7 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore'
+import { httpsCallable } from 'firebase/functions'
 import { requireFirebase } from '../firebase.js'
 
 const collections = {
@@ -38,7 +39,12 @@ function valueOfDate(value) {
 
 export function normalizeSpace(id, data) {
   const coordinates = data.coordinates || {}
-  const photoUrl = data.photoUrl || data.images?.[0] || ''
+  const gallery = [...new Set([
+    ...(Array.isArray(data.photos) ? data.photos : []),
+    ...(Array.isArray(data.images) ? data.images : []),
+    data.photoUrl,
+  ].filter((photo) => typeof photo === 'string' && photo))]
+  const photoUrl = data.photoUrl || gallery[0] || ''
   return {
     ...data,
     id,
@@ -53,7 +59,8 @@ export function normalizeSpace(id, data) {
       longitude: data.longitude ?? coordinates.longitude ?? null,
     },
     photoUrl,
-    gallery: data.images?.length ? data.images : [photoUrl, photoUrl],
+    photos: gallery,
+    gallery,
     amenities: {
       wifi: false, charging: false, ac: false, fans: false, projector: false,
       whiteboard: false, stepFreeAccess: false, ...(data.amenities || {}),
@@ -124,10 +131,12 @@ export async function createOwnerProfile(user) {
   })
 }
 
-export async function submitOwnerProperty(user, listing) {
+export async function submitOwnerProperty(user, listing, submissionId) {
   const { db } = requireFirebase()
   if (!user?.emailVerified) throw new Error('Verify your email address before submitting a property.')
-  const submissionRef = doc(collection(db, collections.submissions))
+  const submissionRef = submissionId
+    ? doc(db, collections.submissions, submissionId)
+    : doc(collection(db, collections.submissions))
   const submission = {
     ...listing,
     ownerUid: user.uid,
@@ -159,6 +168,18 @@ export async function updatePendingSubmission(userId, submissionId, listing) {
       throw new Error('Only your pending submission can be edited.')
     }
     transaction.update(reference, { ...listing, updatedAt: serverTimestamp() })
+  })
+}
+
+export async function updatePendingSubmissionPhotos(userId, submissionId, photoUrls) {
+  if (!Array.isArray(photoUrls) || photoUrls.length > 6
+    || photoUrls.some((url) => typeof url !== 'string' || !url.trim() || url.length > 2048)) {
+    throw new Error('Choose up to six valid uploaded photos.')
+  }
+  await updatePendingSubmission(userId, submissionId, {
+    photos: photoUrls,
+    images: photoUrls,
+    photoUrl: photoUrls[0] || '',
   })
 }
 
@@ -203,6 +224,33 @@ export async function getPendingSubmissions() {
     limit(100),
   ))
   return snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+}
+
+export async function getSpaceSubmissionsForReview() {
+  const { db } = requireFirebase()
+  const snapshot = await getDocs(query(
+    collection(db, 'space_submissions'),
+    orderBy('submittedAt', 'desc'),
+    limit(100),
+  ))
+  return snapshot.docs
+    .map((item) => ({ id: item.id, ...item.data() }))
+}
+
+export async function getSpaceSubmissionReviewHistory(submissionId) {
+  const { db } = requireFirebase()
+  const snapshot = await getDocs(query(
+    collection(db, 'space_submissions', submissionId, 'review_history'),
+    orderBy('createdAt', 'desc'),
+    limit(20),
+  ))
+  return snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+}
+
+export async function reviewSpaceSubmission(submissionId, decision, reviewNotes, duplicateAcknowledged) {
+  const { functions } = requireFirebase()
+  const review = httpsCallable(functions, 'reviewSpaceProposal')
+  return (await review({ submissionId, decision, reviewNotes, duplicateAcknowledged })).data
 }
 
 export async function getAdminApprovedSpaces() {
@@ -255,43 +303,9 @@ export async function reviewReportFlag(flagId, reviewerNote = '') {
 }
 
 export async function reviewSubmission(submissionId, decision, reviewerNote = '') {
-  const { db } = requireFirebase()
-  if (!['approved', 'rejected'].includes(decision)) throw new Error('Choose approve or reject.')
-  const submissionRef = doc(db, collections.submissions, submissionId)
-  const spaceRef = doc(db, collections.spaces, submissionId)
-  await runTransaction(db, async (transaction) => {
-    const snapshot = await transaction.get(submissionRef)
-    if (!snapshot.exists() || snapshot.data().status !== 'pending') {
-      throw new Error('This submission is no longer pending review.')
-    }
-    const submission = snapshot.data()
-    transaction.update(submissionRef, {
-      status: decision,
-      reviewerNote: reviewerNote.trim(),
-      reviewedAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-    })
-    if (decision === 'approved') {
-      const privateFields = new Set([
-        'ownerUid', 'ownerEmail', 'submittedAt', 'updatedAt', 'reviewerNote',
-        'reviewedAt', 'address', 'latitude', 'longitude', 'coordinates',
-      ])
-      const publicListing = Object.fromEntries(
-        Object.entries(submission).filter(([key]) => !privateFields.has(key)),
-      )
-      transaction.set(spaceRef, {
-        ...publicListing,
-        id: submissionId,
-        spaceType: 'private',
-        status: 'approved',
-        verified: false,
-        rating: null,
-        safetyRating: null,
-        availabilitySource: 'owner-declared',
-        lastUpdated: serverTimestamp(),
-      })
-    }
-  })
+  const { functions } = requireFirebase()
+  const review = httpsCallable(functions, 'reviewOwnerSubmission')
+  return (await review({ submissionId, decision, reviewerNote })).data
 }
 
 export async function submitCrowdReport(user, spaceId, observation) {

@@ -7,7 +7,7 @@ service cloud.firestore {
     }
 
     function isAdmin() {
-      return signedIn() && request.auth.token.admin == true;
+      return signedIn() && 'admin' in request.auth.token && request.auth.token.admin == true;
     }
 
     function ownsSubmission(submissionId) {
@@ -31,10 +31,39 @@ service cloud.firestore {
         'name', 'description', 'spaceType', 'category', 'permittedActivities',
         'state', 'district', 'locality', 'address', 'latitude', 'longitude',
         'capacity', 'pricePerHour', 'amenities', 'resources', 'seatingType',
-        'atmosphere', 'indoorOutdoor', 'images', 'photoUrl', 'openingHours',
+        'atmosphere', 'indoorOutdoor', 'images', 'photos', 'photoUrl', 'openingHours',
         'availability', 'safety', 'washroom', 'ownerUid', 'ownerEmail',
         'status', 'submittedAt', 'updatedAt', 'reviewerNote', 'reviewedAt'
       ]);
+    }
+
+    function validPhotoAt(photos, index) {
+      return photos.size() <= index
+        || (photos[index] is string && photos[index].size() <= 2048);
+    }
+
+    function validPhotoList(photos) {
+      return photos is list
+        && photos.size() <= 6
+        && validPhotoAt(photos, 0)
+        && validPhotoAt(photos, 1)
+        && validPhotoAt(photos, 2)
+        && validPhotoAt(photos, 3)
+        && validPhotoAt(photos, 4)
+        && validPhotoAt(photos, 5);
+    }
+
+    function validPhotos(data) {
+      return (!data.keys().hasAny(['photos']) || validPhotoList(data.photos))
+        && (!data.keys().hasAny(['images']) || validPhotoList(data.images))
+        && (!data.keys().hasAny(['photos', 'images'])
+          || !data.keys().hasAll(['photos', 'images'])
+          || data.images == data.photos)
+        && (!data.keys().hasAny(['photos', 'images'])
+          || (data.photoUrl is string
+            && (data.keys().hasAny(['photos'])
+              ? (data.photos.size() == 0 ? data.photoUrl == '' : data.photoUrl == data.photos[0])
+              : (data.images.size() == 0 ? data.photoUrl == '' : data.photoUrl == data.images[0]))));
     }
 
     match /users/{userId} {
@@ -57,12 +86,11 @@ service cloud.firestore {
 
     match /spaces/{spaceId} {
       allow read: if resource.data.status == 'approved';
-      allow create, delete: if isAdmin();
-      allow update: if isAdmin()
-        || (ownsApprovedSpace(spaceId)
+      allow create, delete: if false;
+      allow update: if ownsApprovedSpace(spaceId)
           && request.resource.data.diff(resource.data).affectedKeys()
             .hasOnly(['availability', 'availabilitySource', 'availabilityUpdatedAt', 'lastUpdated'])
-          && request.resource.data.status == resource.data.status);
+          && request.resource.data.status == resource.data.status;
     }
 
     match /owner_submissions/{submissionId} {
@@ -98,11 +126,20 @@ service cloud.firestore {
         && request.resource.data.availability is map
         && request.resource.data.safety is map
         && request.resource.data.washroom is map
+        && request.resource.data.keys().hasAll(['photos'])
+        && validPhotoList(request.resource.data.photos)
+        && validPhotos(request.resource.data)
         && request.resource.data.submittedAt == request.time
         && request.resource.data.updatedAt == request.time;
-      allow update: if (isAdmin()
-        && !(resource.data.ownerUid == request.auth.uid && request.resource.data.status == 'approved'))
-        || (signedIn()
+      allow update: if isAdmin()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+            'photos', 'images', 'photoUrl', 'updatedAt'
+          ])
+          && request.resource.data.diff(resource.data).affectedKeys()
+            .hasAny(['photos', 'images', 'photoUrl'])
+          && validPhotos(request.resource.data)
+          && request.resource.data.updatedAt == request.time;
+      allow update: if signedIn()
           && resource.data.ownerUid == request.auth.uid
           && resource.data.status in ['pending', 'approved']
           && request.resource.data.status == resource.data.status
@@ -110,10 +147,34 @@ service cloud.firestore {
           && request.resource.data.ownerEmail == resource.data.ownerEmail
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
             'name', 'description', 'pricePerHour', 'openingHours',
-            'availability', 'updatedAt'
+            'availability', 'photos', 'images', 'photoUrl', 'updatedAt'
           ])
-          && request.resource.data.updatedAt == request.time);
-      allow delete: if isAdmin();
+          && (!request.resource.data.diff(resource.data).affectedKeys()
+            .hasAny(['photos', 'images', 'photoUrl']) || resource.data.status == 'pending')
+          && validPhotos(request.resource.data)
+          && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+      match /review_history/{reviewId} {
+        allow read: if isAdmin();
+        allow write: if false;
+      }
+    }
+
+    match /space_submissions/{submissionId} {
+      allow read: if isAdmin();
+      allow create, update, delete: if false;
+      match /review_history/{reviewId} {
+        allow read: if isAdmin();
+        allow write: if false;
+      }
+    }
+
+    match /space_submission_limits/{limitId} {
+      allow read, write: if false;
+    }
+
+    match /space_submission_dedupe/{dedupeId} {
+      allow read, write: if false;
     }
 
     match /bookings/{bookingId} {

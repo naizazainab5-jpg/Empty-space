@@ -38,6 +38,7 @@ const validSubmission = (uid, email) => ({
   seatingType: 'Classroom',
   atmosphere: 'quiet',
   indoorOutdoor: 'Indoor',
+  photos: [],
   images: [],
   photoUrl: '',
   openingHours: '9am-6pm',
@@ -131,6 +132,116 @@ test('an authenticated owner can submit a verified-email pending listing, not ap
     doc(unverifiedDb, 'owner_submissions', 'unverified-listing'),
     validSubmission('unverified-owner', 'unverified@example.com'),
   ))
+
+  await assertFails(setDoc(
+    doc(environment.unauthenticatedContext().firestore(), 'owner_submissions', 'visitor-listing'),
+    validSubmission('owner-1', 'owner@example.com'),
+  ))
+})
+
+test('owner submissions accept at most six string photo URLs and keep the first as photoUrl', async () => {
+  const ownerDb = environment.authenticatedContext('photo-owner', {
+    email: 'photos@example.com',
+    email_verified: true,
+  }).firestore()
+  const submissionRef = doc(ownerDb, 'owner_submissions', 'photo-listing')
+  const photoUrls = ['https://storage.example/photo-1.jpg', 'https://storage.example/photo-2.jpg']
+  await assertSucceeds(setDoc(submissionRef, {
+    ...validSubmission('photo-owner', 'photos@example.com'),
+    images: photoUrls,
+    photos: photoUrls,
+    photoUrl: photoUrls[0],
+  }))
+  await assertSucceeds(updateDoc(submissionRef, {
+    images: [photoUrls[1]],
+    photos: [photoUrls[1]],
+    photoUrl: photoUrls[1],
+    updatedAt: serverTimestamp(),
+  }))
+  const tooManyPhotoUrls = Array.from({ length: 7 }, (_, index) => `https://storage.example/${index}.jpg`)
+  await assertFails(updateDoc(submissionRef, {
+    images: tooManyPhotoUrls,
+    photos: tooManyPhotoUrls,
+    photoUrl: 'https://storage.example/0.jpg',
+    updatedAt: serverTimestamp(),
+  }))
+  const invalidPhotoUrls = ['https://storage.example/photo.jpg', 42]
+  await assertFails(updateDoc(submissionRef, {
+    images: invalidPhotoUrls,
+    photos: invalidPhotoUrls,
+    photoUrl: 'https://storage.example/photo.jpg',
+    updatedAt: serverTimestamp(),
+  }))
+  await assertFails(updateDoc(submissionRef, {
+    photos: [photoUrls[0]],
+    photoUrl: photoUrls[1],
+    updatedAt: serverTimestamp(),
+  }))
+  const legacySubmissionRef = doc(ownerDb, 'owner_submissions', 'legacy-photo-listing')
+  await environment.withSecurityRulesDisabled(async (context) => {
+    const legacySubmission = validSubmission('photo-owner', 'photos@example.com')
+    delete legacySubmission.photos
+    legacySubmission.images = photoUrls
+    legacySubmission.photoUrl = photoUrls[0]
+    await setDoc(doc(context.firestore(), 'owner_submissions', 'legacy-photo-listing'), {
+      ...legacySubmission,
+    })
+  })
+  await assertFails(updateDoc(legacySubmissionRef, {
+    images: tooManyPhotoUrls,
+    photoUrl: tooManyPhotoUrls[0],
+    updatedAt: serverTimestamp(),
+  }))
+
+  await environment.withSecurityRulesDisabled(async (context) => {
+    await setDoc(doc(context.firestore(), 'owner_submissions', 'approved-photo-listing'), {
+      ...validSubmission('photo-owner', 'photos@example.com'),
+      status: 'approved',
+      images: photoUrls,
+      photos: photoUrls,
+      photoUrl: photoUrls[0],
+    })
+  })
+  await assertFails(updateDoc(doc(ownerDb, 'owner_submissions', 'approved-photo-listing'), {
+    images: [photoUrls[1]],
+    photos: [photoUrls[1]],
+    photoUrl: photoUrls[1],
+    updatedAt: serverTimestamp(),
+  }))
+})
+
+test('admins can update photos without changing owner submission review fields', async () => {
+  const photoUrls = ['https://storage.example/old.jpg']
+  await environment.withSecurityRulesDisabled(async (context) => {
+    await setDoc(doc(context.firestore(), 'owner_submissions', 'admin-photo-listing'), {
+      ...validSubmission('photo-owner', 'photos@example.com'),
+      status: 'approved',
+      photos: photoUrls,
+      images: photoUrls,
+      photoUrl: photoUrls[0],
+    })
+  })
+
+  const adminDb = environment.authenticatedContext('photo-admin', { admin: true }).firestore()
+  const submissionRef = doc(adminDb, 'owner_submissions', 'admin-photo-listing')
+  const replacementPhotos = ['https://storage.example/new-1.jpg', 'https://storage.example/new-2.jpg']
+  await assertSucceeds(updateDoc(submissionRef, {
+    photos: replacementPhotos,
+    images: replacementPhotos,
+    photoUrl: replacementPhotos[0],
+    updatedAt: serverTimestamp(),
+  }))
+  await assertFails(updateDoc(submissionRef, {
+    status: 'pending',
+    updatedAt: serverTimestamp(),
+  }))
+  const tooManyPhotoUrls = Array.from({ length: 7 }, (_, index) => `https://storage.example/${index}.jpg`)
+  await assertFails(updateDoc(submissionRef, {
+    photos: tooManyPhotoUrls,
+    images: tooManyPhotoUrls,
+    photoUrl: tooManyPhotoUrls[0],
+    updatedAt: serverTimestamp(),
+  }))
 })
 
 test('owners can only read and edit their own permitted pending fields', async () => {
@@ -260,7 +371,7 @@ test('private records, including flags, bookings, and verification notes, stay r
   await assertSucceeds(getDoc(doc(adminDb, 'space_verification_records', 'private-verification')))
 })
 
-test('administrators can approve another owner submission but not their own', async () => {
+test('admins cannot approve submissions or write approved listings directly from the client', async () => {
   await environment.withSecurityRulesDisabled(async (context) => {
     await setDoc(doc(context.firestore(), 'owner_submissions', 'admin-owned'), {
       ...validSubmission('admin-1', 'admin@example.com'),
@@ -277,12 +388,25 @@ test('administrators can approve another owner submission but not their own', as
     status: 'approved',
     updatedAt: serverTimestamp(),
   }))
-  await assertSucceeds(updateDoc(doc(adminDb, 'owner_submissions', 'owner-owned'), {
+  await assertFails(updateDoc(doc(adminDb, 'owner_submissions', 'owner-owned'), {
     status: 'approved',
     updatedAt: serverTimestamp(),
   }))
-  await assertSucceeds(setDoc(doc(adminDb, 'spaces', 'owner-owned'), {
+  await assertFails(setDoc(doc(adminDb, 'spaces', 'owner-owned'), {
     status: 'approved',
     name: 'Public-safe listing',
   }))
+})
+
+test('public proposals are private and clients cannot create, change, or publish them', async () => {
+  const visitorDb = environment.unauthenticatedContext().firestore()
+  const ordinaryDb = environment.authenticatedContext('ordinary', { email_verified: true }).firestore()
+  const adminDb = environment.authenticatedContext('reviewer', { admin: true }).firestore()
+  const submission = { name: 'Community studio', reviewStatus: 'pending' }
+  await assertFails(setDoc(doc(visitorDb, 'space_submissions', 'visitor-proposal'), submission))
+  await assertFails(setDoc(doc(ordinaryDb, 'space_submissions', 'owner-proposal'), submission))
+  await assertFails(setDoc(doc(adminDb, 'space_submissions', 'admin-proposal'), submission))
+  await assertFails(getDoc(doc(visitorDb, 'space_submissions', 'private-proposal')))
+  await assertFails(setDoc(doc(adminDb, 'spaces', 'client-published-space'), { status: 'approved' }))
+  await assertFails(setDoc(doc(visitorDb, 'space_submission_limits', 'visitor-ip'), { count: 1 }))
 })
